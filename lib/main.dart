@@ -1,4 +1,5 @@
 import 'package:cinemix_ui/core/res/theme/theme.dart';
+import 'package:cinemix_ui/core/services/injection_container.dart';
 import 'package:cinemix_ui/core/services/router.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize the dependency injection container
-  // await init();
+  await init();
 
   await initializeDateFormatting().then((_) => runApp(const App()));
 }
