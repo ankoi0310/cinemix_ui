@@ -6,13 +6,8 @@ class KIconTheme {
 
   static const double size = 24;
 
-  static const lightIconTheme = IconThemeData(
+  static const iconTheme = IconThemeData(
     size: size,
-    color: KAppColor.lightTextColor,
-  );
-
-  static const darkIconTheme = IconThemeData(
-    size: size,
-    color: KAppColor.darkTextColor,
+    color: KAppColor.textColor,
   );
 }
