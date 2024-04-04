@@ -1,3 +1,4 @@
+import 'package:cinemix_ui/core/common/widgets/button_builder.dart';
 import 'package:cinemix_ui/core/common/widgets/form_builder.dart';
 import 'package:cinemix_ui/core/shared/enums/message_type.dart';
 import 'package:cinemix_ui/src/authentication/presentation/widgets/sign_up/confirm_sign_up_widget.dart';
@@ -214,6 +215,29 @@ class _SignUpFormState extends State<SignUpForm> {
                 controller: _phoneController,
                 focusNode: _phoneFocusNode,
               ),
+              const SizedBox(height: 20),
+              ButtonBuilder.submitButton(
+                context: context,
+                onPressed: () {
+                  setState(() {
+                    currentStep += 1;
+                  });
+                  // if (_infoFormKey.currentState!.validate()) {
+                  //   setState(() {
+                  //     currentStep += 1;
+                  //   });
+                  // } else {
+                  //   _showToast(
+                  //     'Vui lòng điền đầy đủ thông tin',
+                  //     MessageType.error,
+                  //   );
+                  //   setState(() {
+                  //     errorStep = currentStep;
+                  //   });
+                  // }
+                },
+                child: const Text('Tiếp tục'),
+              ),
             ],
           ),
         ),
@@ -251,6 +275,43 @@ class _SignUpFormState extends State<SignUpForm> {
                 passwordController: _passwordController,
                 confirmPasswordController: _confirmPasswordController,
                 focusNode: _confirmPasswordFocusNode,
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: ButtonBuilder.outlineSecondaryButton(
+                      context: context,
+                      onPressed: () {},
+                      child: const Text('Quay lại'),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: ButtonBuilder.submitButton(
+                      context: context,
+                      onPressed: () {
+                        setState(() {
+                          currentStep += 1;
+                        });
+                        // if (_infoFormKey.currentState!.validate()) {
+                        //   setState(() {
+                        //     currentStep += 1;
+                        //   });
+                        // } else {
+                        //   _showToast(
+                        //     'Vui lòng điền đầy đủ thông tin',
+                        //     MessageType.error,
+                        //   );
+                        //   setState(() {
+                        //     errorStep = currentStep;
+                        //   });
+                        // }
+                      },
+                      child: const Text('Tiếp tục'),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

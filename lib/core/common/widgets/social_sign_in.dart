@@ -23,7 +23,7 @@ class SocialSignIn extends StatelessWidget {
               ),
             ),
             Text(
-              'Or continue with',
+              'Hoặc tiếp tục với',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Expanded(

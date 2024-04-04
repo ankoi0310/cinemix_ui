@@ -1,3 +1,4 @@
+import 'package:cinemix_ui/core/common/widgets/button_builder.dart';
 import 'package:cinemix_ui/core/res/theme/custom/pin_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
@@ -24,7 +25,7 @@ class _ConfirmSignUpState extends State<ConfirmSignUp> {
               ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 25),
+          padding: const EdgeInsets.symmetric(vertical: 32),
           child: Pinput(
             defaultPinTheme: defaultPinTheme,
             focusedPinTheme: focusedPinTheme,
@@ -59,10 +60,17 @@ class _ConfirmSignUpState extends State<ConfirmSignUp> {
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 20),
-        ElevatedButton(
+        const SizedBox(height: 24),
+        ButtonBuilder.submitButton(
+          context: context,
           onPressed: () {},
           child: const Text('Xác nhận'),
+        ),
+        const SizedBox(height: 16),
+        ButtonBuilder.outlineButton(
+          context: context,
+          onPressed: () {},
+          child: const Text('Quay lại'),
         ),
       ],
     );

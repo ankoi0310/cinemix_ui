@@ -1,6 +1,5 @@
 import 'package:cinemix_ui/core/common/widgets/button_builder.dart';
 import 'package:cinemix_ui/core/common/widgets/form_builder.dart';
-import 'package:cinemix_ui/core/res/theme/custom/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -120,16 +119,11 @@ class _SignInFormState extends State<SignInForm> {
                 ),
                 const SizedBox(height: 10),
                 ButtonBuilder.submitButton(
+                  context: context,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {}
                   },
-                  child: const Text(
-                    'Đăng nhập',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: KTextTheme.titleLarge,
-                    ),
-                  ),
+                  child: const Text('Đăng nhập'),
                 ),
               ],
             ),
