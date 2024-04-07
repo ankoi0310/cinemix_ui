@@ -1,8 +1,9 @@
 import 'package:cinemix_ui/core/res/theme/theme.dart';
 import 'package:cinemix_ui/core/services/injection_container.dart';
 import 'package:cinemix_ui/core/services/router.dart';
-import 'package:cinemix_ui/src/onboarding/presentation/views/onboarding_screen.dart';
+import 'package:cinemix_ui/src/authentication/presentation/views/sign_up_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
@@ -17,16 +18,18 @@ Future<void> main() async {
 class App extends StatelessWidget {
   const App({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final navigatorKey = GlobalKey<NavigatorState>();
+
     return MaterialApp(
       title: 'Cinemix',
       debugShowCheckedModeBanner: false,
-      theme: KAppTheme.light,
-      darkTheme: KAppTheme.dark,
+      theme: KAppTheme.theme,
+      builder: FToastBuilder(),
+      navigatorKey: navigatorKey,
       onGenerateRoute: generateRoute,
-      initialRoute: OnboardingScreen.routeName,
+      initialRoute: SignUpScreen.routeName,
     );
   }
 }

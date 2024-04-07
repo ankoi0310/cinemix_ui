@@ -1,7 +1,11 @@
 import 'package:cinemix_ui/core/common/views/page_under_construction.dart';
 import 'package:cinemix_ui/core/services/injection_container.dart';
+import 'package:cinemix_ui/src/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:cinemix_ui/src/authentication/presentation/views/sign_in_screen.dart';
+import 'package:cinemix_ui/src/authentication/presentation/views/sign_up_screen.dart';
+import 'package:cinemix_ui/src/authentication/presentation/views/welcome_screen.dart';
 // import 'package:cinemix_ui/src/authentication/presentation/cubit/authentication_cubit.dart';
-// import 'package:cinemix_ui/src/authentication/presentation/views/login_screen.dart';
+// import 'package:cinemix_ui/src/authentication/presentation/views/sign_in_screen.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +21,27 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         ),
         settings: settings,
       );
-    // case LoginScreen.routeName:
-    //   return _pageBuilder(
-    //     pageBuilder: (context) => BlocProvider(
-    //       create: (_) => sl<AuthenticationCubit>(),
-    //       child: const LoginScreen(),
-    //     ),
-    //     settings: settings,
-    //   );
+    case WelcomeScreen.routeName:
+      return _pageBuilder(
+        pageBuilder: (context) => const WelcomeScreen(),
+        settings: settings,
+      );
+    case SignUpScreen.routeName:
+      return _pageBuilder(
+        pageBuilder: (context) => BlocProvider(
+          create: (_) => sl<AuthenticationCubit>(),
+          child: const SignUpScreen(),
+        ),
+        settings: settings,
+      );
+    case SignInScreen.routeName:
+      return _pageBuilder(
+        pageBuilder: (context) => BlocProvider(
+          create: (_) => sl<AuthenticationCubit>(),
+          child: const SignInScreen(),
+        ),
+        settings: settings,
+      );
     default:
       return _pageBuilder(
         pageBuilder: (context) => const PageUnderConstruction(),

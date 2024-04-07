@@ -5,15 +5,17 @@ import 'package:flutter/material.dart';
 class KTextFormFieldTheme {
   KTextFormFieldTheme._();
 
-  static InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
+  static InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     errorMaxLines: 3,
     prefixIconColor: Colors.grey,
     suffixIconColor: Colors.grey,
-    labelStyle: KTextTheme.lightTextTheme.bodyMedium,
-    hintStyle: KTextTheme.lightTextTheme.bodyMedium,
-    errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
+    labelStyle: KTextTheme.textTheme.bodyMedium,
+    hintStyle: KTextTheme.textTheme.bodyMedium,
+    errorStyle: KTextTheme.textTheme.bodyMedium,
     floatingLabelStyle: const TextStyle().copyWith(
-      color: KAppColor.lightTextColor.withOpacity(0.8),
+      fontSize: KTextTheme.titleSmall,
+      fontWeight: FontWeight.bold,
+      color: KAppColor.primaryColor.withOpacity(0.8),
     ),
     border: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(14),
@@ -25,51 +27,19 @@ class KTextFormFieldTheme {
     ),
     focusedBorder: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(14),
-      borderSide: const BorderSide(color: Colors.black12),
-    ),
-    errorBorder: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
-      borderSide: const BorderSide(color: KAppColor.lightErrorColor),
-    ),
-    focusedErrorBorder: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
-      borderSide: BorderSide(
-        color: KAppColor.lightErrorColor.withOpacity(0.8),
+      borderSide: const BorderSide(
+        color: KAppColor.primaryColor,
         width: 2,
       ),
     ),
-  );
-
-  static InputDecorationTheme darInputDecorationTheme = InputDecorationTheme(
-    errorMaxLines: 3,
-    prefixIconColor: Colors.grey,
-    suffixIconColor: Colors.grey,
-    labelStyle: KTextTheme.darkTextTheme.bodyMedium,
-    hintStyle: KTextTheme.darkTextTheme.bodyMedium,
-    errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
-    floatingLabelStyle: const TextStyle().copyWith(
-      color: KAppColor.darkTextColor.withOpacity(0.8),
-    ),
-    border: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
-      borderSide: const BorderSide(color: Colors.grey),
-    ),
-    enabledBorder: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
-      borderSide: const BorderSide(color: Colors.grey),
-    ),
-    focusedBorder: const OutlineInputBorder().copyWith(
-      borderRadius: BorderRadius.circular(14),
-      borderSide: const BorderSide(color: Colors.white12),
-    ),
     errorBorder: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(14),
-      borderSide: const BorderSide(color: KAppColor.darkErrorColor),
+      borderSide: const BorderSide(color: KAppColor.errorColor),
     ),
     focusedErrorBorder: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(14),
       borderSide: BorderSide(
-        color: KAppColor.darkErrorColor.withOpacity(0.8),
+        color: KAppColor.errorColor.withOpacity(0.8),
         width: 2,
       ),
     ),
