@@ -26,4 +26,11 @@ class SignInParams extends Equatable {
 
   @override
   List<Object?> get props => [username, password];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'username': username,
+      'password': password,
+    };
+  }
 }

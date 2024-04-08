@@ -15,8 +15,13 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   final AuthenticationRemoteDataSource _remoteDataSource;
 
   @override
-  ResultFuture<SignUpResponse> signUp(SignUpParams params) {
-    throw UnimplementedError();
+  ResultFuture<SignUpResponse> signUp(SignUpParams params) async {
+    try {
+      final result = await _remoteDataSource.signUp(params);
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
   }
 
   @override

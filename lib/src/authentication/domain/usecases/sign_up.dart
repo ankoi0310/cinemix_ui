@@ -4,6 +4,7 @@ import 'package:cinemix_ui/src/authentication/data/models/sign_up_response.dart'
 import 'package:cinemix_ui/src/authentication/domain/repositories/authentication_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class SignUp extends UsecaseWithParams<SignUpResponse, SignUpParams> {
   const SignUp(this._repository);
@@ -40,4 +41,14 @@ class SignUpParams extends Equatable {
 
   @override
   List<Object?> get props => [fullName, email, phone, birthday, password];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'fullName': fullName,
+      'email': email,
+      'phone': phone,
+      'birthday': DateFormat('dd-MM-yyyy').format(birthday),
+      'password': password,
+    };
+  }
 }

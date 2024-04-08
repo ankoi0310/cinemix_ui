@@ -1,61 +1,45 @@
-import 'package:cinemix_ui/core/common/model/base_model.dart';
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
+import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 
-class UserModel extends BaseModel {
-  const UserModel({
+class UserProfile extends Equatable {
+  const UserProfile({
     required this.fullName,
-    required super.id,
-    required super.createdDate,
-    required super.modifiedDate,
+    required this.email,
+    required this.phone,
+    // required this.gender,
+    required this.birthday,
   });
 
-  UserModel.fromMap(DataMap map)
+  UserProfile.fromMap(DataMap map)
       : fullName = map['fullName'] as String,
-        super(
-          id: map['id'] as int,
-          createdDate: map['createdDate'] as DateTime,
-          modifiedDate: map['modifiedDate'] as DateTime,
-        );
+        email = map['email'] as String,
+        phone = map['phone'] as String,
+        // gender = map['gender'] as String,
+        birthday = DateFormat('dd-MM-yyyy').parse(map['birthday'] as String);
 
-  UserModel.empty()
+  UserProfile.empty()
       : fullName = '',
-        super(id: 0, createdDate: DateTime.now(), modifiedDate: DateTime.now());
+        email = '',
+        phone = '',
+        // gender = '',
+        birthday = DateTime.now();
 
   final String fullName;
+  final String email;
+  final String phone;
+  // final String gender;
+  final DateTime birthday;
 
-  @override
-  List<Object?> get props => [id, fullName, createdDate, modifiedDate];
-
-  @override
-  Map<String, dynamic> toMap() {
+  DataMap toMap() {
     return {
-      'id': id,
       'fullName': fullName,
-      'createdDate': createdDate,
-      'modifiedDate': modifiedDate,
+      'email': email,
+      'phone': phone,
+      'birthday': DateFormat('dd-MM-yyyy').format(birthday),
     };
   }
 
   @override
-  UserModel copyWith({
-    int? id,
-    String? fullName,
-    DateTime? createdDate,
-    DateTime? modifiedDate,
-  }) {
-    return UserModel(
-      fullName: fullName ?? this.fullName,
-      id: id ?? this.id,
-      createdDate: createdDate ?? this.createdDate,
-      modifiedDate: modifiedDate ?? this.modifiedDate,
-    );
-  }
-}
-
-class UserProfile {
-  const UserProfile({
-    required this.email,
-  });
-
-  final String email;
+  List<Object?> get props => [fullName, email, phone, birthday];
 }
