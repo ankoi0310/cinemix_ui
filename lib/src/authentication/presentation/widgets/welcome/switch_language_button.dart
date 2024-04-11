@@ -1,8 +1,7 @@
 import 'package:cinemix_ui/core/shared/enums/language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
-import 'package:iconify_flutter_plus/icons/zondicons.dart';
+import 'package:iconsax/iconsax.dart';
 
 class SwitchLanguageButton extends StatefulWidget {
   const SwitchLanguageButton({super.key});
@@ -12,12 +11,13 @@ class SwitchLanguageButton extends StatefulWidget {
 }
 
 class _SwitchLanguageButtonState extends State<SwitchLanguageButton> {
-  String currentFlag = Language.vi.flag;
+  String currentFlag = AppLanguage.vi.flag;
 
   void switchLanguage() {
     setState(() {
-      currentFlag =
-          currentFlag == Language.vi.flag ? Language.en.flag : Language.vi.flag;
+      currentFlag = currentFlag == AppLanguage.vi.flag
+          ? AppLanguage.en.flag
+          : AppLanguage.vi.flag;
     });
   }
 
@@ -44,8 +44,8 @@ class _SwitchLanguageButtonState extends State<SwitchLanguageButton> {
               width: 24,
             ),
             const SizedBox(width: 4),
-            const Iconify(
-              Zondicons.cheveron_right,
+            const Icon(
+              Iconsax.arrow_right1,
               size: 16,
               color: Colors.white,
             ),

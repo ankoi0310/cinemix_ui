@@ -1,10 +1,10 @@
 import 'package:cinemix_ui/core/res/media/media.dart';
 
-enum Language {
+enum AppLanguage {
   vi(KAppMedia.vietnamFlag),
   en(KAppMedia.englishFlag);
 
-  const Language(this._flag);
+  const AppLanguage(this._flag);
 
   String get flag => _flag;
 
