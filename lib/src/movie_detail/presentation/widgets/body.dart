@@ -16,15 +16,12 @@ class _MovieDetailBodyState extends State<MovieDetailBody> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Stack(
       children: [
         MovieBackgroundBanner(banner: movie.banner),
         Positioned.fill(
           left: 16,
           right: 16,
-          bottom: 16,
           child: MovieDetailInfo(movie: movie),
         ),
         const FloatingBackButton(),

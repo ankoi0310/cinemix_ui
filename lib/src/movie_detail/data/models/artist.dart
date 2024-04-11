@@ -32,4 +32,22 @@ const demoActors = <Artist>[
     avatar: 'assets/images/actors/robert_downey_jr.png',
     type: ArtistType.actor,
   ),
+  Artist(
+    id: 2,
+    name: 'Robert Downey Jr.',
+    avatar: 'assets/images/actors/robert_downey_jr.png',
+    type: ArtistType.actor,
+  ),
+  Artist(
+    id: 3,
+    name: 'Robert Downey Jr.',
+    avatar: 'assets/images/actors/robert_downey_jr.png',
+    type: ArtistType.actor,
+  ),
+  Artist(
+    id: 4,
+    name: 'Robert Downey Jr.',
+    avatar: 'assets/images/actors/robert_downey_jr.png',
+    type: ArtistType.actor,
+  ),
 ];
