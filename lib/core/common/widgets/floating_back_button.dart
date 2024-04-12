@@ -12,11 +12,7 @@ class FloatingBackButton extends StatelessWidget {
       top: 40,
       left: 16,
       child: IconButton(
-        icon: const Icon(
-          IconsaxPlusBold.arrow_circle_left,
-          color: Colors.white,
-          size: 32,
-        ),
+        icon: const Icon(IconsaxPlusLinear.arrow_circle_left, size: 32),
         onPressed: () {
           Navigator.pop(context);
         },
