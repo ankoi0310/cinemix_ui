@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class FloatingBackButton extends StatelessWidget {
   const FloatingBackButton({
@@ -13,7 +13,7 @@ class FloatingBackButton extends StatelessWidget {
       left: 16,
       child: IconButton(
         icon: const Icon(
-          Iconsax.arrow_circle_left,
+          IconsaxPlusBold.arrow_circle_left,
           color: Colors.white,
           size: 32,
         ),

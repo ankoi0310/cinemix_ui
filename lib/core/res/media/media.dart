@@ -17,6 +17,8 @@ class KAppMedia {
   static const comingSoon = '$baseImage/movies/coming_soon.jpg';
   static const playingNow = '$baseImage/movies/playing_now.jpg';
 
+  static const loading = '$baseLottie/loading.json';
+  static const bookNow = '$baseLottie/book_now.json';
   static const pageUnderConstruction =
       '$baseLottie/page_under_construction.json';
 }

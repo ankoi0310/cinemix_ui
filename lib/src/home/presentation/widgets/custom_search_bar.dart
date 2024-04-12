@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({
@@ -15,10 +15,10 @@ class CustomSearchBar extends StatelessWidget {
         ),
       ),
       leading: const Icon(
-        Iconsax.search_normal,
+        IconsaxPlusLinear.search_normal_1,
         color: Colors.grey,
       ),
-      hintText: 'Search',
+      hintText: 'Tìm kiếm phim, diễn viên, đạo diễn...',
       hintStyle: MaterialStatePropertyAll(
         TextStyle(
           color: Colors.grey[600],

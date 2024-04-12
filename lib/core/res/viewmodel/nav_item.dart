@@ -1,37 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class NavItem {
-  final String label;
-  final IconData icon;
-  final String route;
-
   NavItem({
     required this.label,
     required this.icon,
+    required this.activeIcon,
     required this.route,
   });
+
+  final String label;
+  final IconData icon;
+  final IconData activeIcon;
+  final String route;
 }
 
-final List<NavItem> botNavItems = [
+final List<NavItem> bottomNavItems = [
   NavItem(
-    label: 'Home',
-    icon: SolarIconsBold.home,
+    label: 'Trang chủ',
+    icon: IconsaxPlusLinear.home,
+    activeIcon: IconsaxPlusBold.home,
     route: '/home',
   ),
   NavItem(
-    label: 'Calendar',
-    icon: SolarIconsBold.calendarMinimalistic,
-    route: '/calendar',
+    label: 'Phim',
+    icon: IconsaxPlusLinear.video,
+    activeIcon: IconsaxPlusBold.video,
+    route: '/movie',
   ),
   NavItem(
-    label: 'Transcript',
-    icon: SolarIconsBold.checklistMinimalistic,
-    route: '/transcript',
+    label: 'Lịch sử',
+    icon: IconsaxPlusLinear.clock_1,
+    activeIcon: IconsaxPlusBold.clock,
+    route: '/history',
   ),
   NavItem(
-    label: 'Settings',
-    icon: SolarIconsBold.settings,
-    route: '/settings',
+    label: 'Tôi',
+    icon: IconsaxPlusLinear.user,
+    activeIcon: IconsaxPlusBold.user,
+    route: '/me',
   ),
 ];

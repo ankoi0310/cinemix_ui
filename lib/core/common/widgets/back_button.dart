@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
-import 'package:iconify_flutter_plus/icons/zondicons.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class KBackButton extends StatefulWidget {
   const KBackButton({super.key});
@@ -13,8 +12,8 @@ class _KBackButtonState extends State<KBackButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Iconify(
-        Zondicons.cheveron_outline_left,
+      icon: const Icon(
+        IconsaxPlusBold.arrow_circle_left,
         color: Colors.white,
       ),
       onPressed: () {
