@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class WelcomeHeader extends StatelessWidget {
   const WelcomeHeader({super.key});
@@ -42,7 +43,7 @@ class WelcomeHeader extends StatelessWidget {
           ],
         ),
         const Icon(
-          Icons.notifications,
+          IconsaxPlusBold.notification,
           size: 36,
         ),
       ],

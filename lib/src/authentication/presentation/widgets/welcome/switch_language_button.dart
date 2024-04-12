@@ -1,7 +1,7 @@
 import 'package:cinemix_ui/core/shared/enums/language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class SwitchLanguageButton extends StatefulWidget {
   const SwitchLanguageButton({super.key});
@@ -45,7 +45,7 @@ class _SwitchLanguageButtonState extends State<SwitchLanguageButton> {
             ),
             const SizedBox(width: 4),
             const Icon(
-              Iconsax.arrow_right1,
+              IconsaxPlusBold.arrow_right,
               size: 16,
               color: Colors.white,
             ),

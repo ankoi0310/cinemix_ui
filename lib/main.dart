@@ -1,7 +1,7 @@
 import 'package:cinemix_ui/core/res/theme/theme.dart';
 import 'package:cinemix_ui/core/services/injection_container.dart';
 import 'package:cinemix_ui/core/services/router.dart';
-import 'package:cinemix_ui/src/movie_detail/presentation/views/movie_detail_screen.dart';
+import 'package:cinemix_ui/src/home/presentation/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -29,7 +29,7 @@ class App extends StatelessWidget {
       builder: FToastBuilder(),
       navigatorKey: navigatorKey,
       onGenerateRoute: generateRoute,
-      initialRoute: MovieDetailScreen.routeName,
+      initialRoute: HomeScreen.routeName,
     );
   }
 }

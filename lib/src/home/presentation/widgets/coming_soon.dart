@@ -1,9 +1,7 @@
-import 'package:cinemix_ui/core/common/widgets/image_container.dart';
-import 'package:cinemix_ui/core/res/media/media.dart';
-import 'package:cinemix_ui/core/shared/enums/image_orientation.dart';
 import 'package:cinemix_ui/src/home/presentation/widgets/collection_title.dart';
+import 'package:cinemix_ui/src/home/presentation/widgets/movie_card.dart';
+import 'package:cinemix_ui/src/movie_detail/data/models/movie.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 class ComingSoon extends StatelessWidget {
   const ComingSoon({super.key});
@@ -20,68 +18,17 @@ class ComingSoon extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: List.generate(
-              5,
-              (index) => SizedBox(
+            children: demoMovies.map((movie) {
+              return Container(
                 width: 160,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const ImageContainer(
-                        image: KAppMedia.comingSoon,
-                        orientation: ImageOrientation.portrait,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Movie Title',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      const SizedBox(height: 12),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Icon(
-                            Iconsax.video,
-                            size: 16,
-                          ),
-                          const SizedBox(width: 8),
-                          Flexible(
-                            child: Text(
-                              'Phiêu lưu, Hành động',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Icon(
-                            Iconsax.calendar,
-                            size: 16,
-                          ),
-                          const SizedBox(width: 8),
-                          Flexible(
-                            child: Text(
-                              '12.04.2024',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                margin: EdgeInsets.only(
+                  right: demoMovies.last == movie ? 0 : 12,
                 ),
-              ),
-            ),
+                child: MovieCard(movie: movie),
+              );
+            }).toList(),
           ),
-        )
+        ),
       ],
     );
   }
