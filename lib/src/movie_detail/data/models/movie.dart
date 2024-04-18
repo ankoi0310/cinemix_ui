@@ -7,6 +7,7 @@ import 'package:equatable/equatable.dart';
 
 class Movie extends Equatable {
   const Movie({
+    required this.id,
     required this.title,
     required this.storyline,
     required this.duration,
@@ -17,11 +18,13 @@ class Movie extends Equatable {
     required this.releaseDate,
     required this.rating,
     required this.reviewCount,
+    required this.poster,
     required this.banner,
     required this.genres,
     required this.state,
   });
 
+  final int id;
   final String title;
   final String storyline;
   final String duration;
@@ -32,6 +35,7 @@ class Movie extends Equatable {
   final String releaseDate;
   final double rating;
   final int reviewCount;
+  final String poster;
   final String banner;
   final List<Genre> genres;
   final MovieState state;
@@ -54,6 +58,28 @@ class Movie extends Equatable {
 }
 
 const demoMovie = Movie(
+  id: 1,
+  title: 'The Batman basfbasgfasfgv fafafafastgfvas',
+  storyline:
+      'In his second year of fighting crime, Batman uncovers corruption in '
+      'Gotham City that connects to his own family while facing a serial '
+      'killer known as the Riddler.',
+  duration: '2h 55min',
+  director: demoDirector,
+  actors: demoActors,
+  censorship: Censorship.C13,
+  language: MovieLanguage.subtitle,
+  releaseDate: '2022',
+  rating: 8.7,
+  reviewCount: 1234,
+  poster: 'assets/images/movies/poster.jpg',
+  banner: 'assets/images/movies/banner.png',
+  genres: demoGenres,
+  state: MovieState.nowPlaying,
+);
+
+const demoMovie1 = Movie(
+  id: 2,
   title: 'The Batman',
   storyline:
       'In his second year of fighting crime, Batman uncovers corruption in '
@@ -67,7 +93,35 @@ const demoMovie = Movie(
   releaseDate: '2022',
   rating: 8.7,
   reviewCount: 1234,
-  banner: 'assets/images/movies/movie_detail_banner.png',
+  poster: 'assets/images/movies/poster.jpg',
+  banner: 'assets/images/movies/banner.png',
   genres: demoGenres,
   state: MovieState.nowPlaying,
 );
+
+const demoMovie2 = Movie(
+  id: 3,
+  title: 'The Batman',
+  storyline:
+      'In his second year of fighting crime, Batman uncovers corruption in '
+      'Gotham City that connects to his own family while facing a serial '
+      'killer known as the Riddler.',
+  duration: '2h 55min',
+  director: demoDirector,
+  actors: demoActors,
+  censorship: Censorship.C13,
+  language: MovieLanguage.subtitle,
+  releaseDate: '2022',
+  rating: 8.7,
+  reviewCount: 1234,
+  poster: 'assets/images/movies/poster.jpg',
+  banner: 'assets/images/movies/banner.png',
+  genres: demoGenres,
+  state: MovieState.nowPlaying,
+);
+
+const demoMovies = <Movie>[
+  demoMovie,
+  demoMovie1,
+  demoMovie2,
+];
