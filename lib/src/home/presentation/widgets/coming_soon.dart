@@ -1,6 +1,6 @@
+import 'package:cinemix_ui/core/shared/constants/app_constant.dart';
 import 'package:cinemix_ui/src/home/presentation/widgets/collection_title.dart';
 import 'package:cinemix_ui/src/home/presentation/widgets/movie_card.dart';
-import 'package:cinemix_ui/src/movie_detail/data/models/movie.dart';
 import 'package:flutter/material.dart';
 
 class ComingSoon extends StatelessWidget {
