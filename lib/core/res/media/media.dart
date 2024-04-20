@@ -5,10 +5,12 @@ class KAppMedia {
   static const baseImage = 'assets/images';
   static const baseLottie = 'assets/lottie';
 
-  static const vietnamFlag = 'icons/flags/svg/vn.svg';
-  static const englishFlag = 'icons/flags/svg/gb.svg';
-  static const facebookIcon = '$baseIcon/facebook.svg';
-  static const googleIcon = '$baseIcon/google.svg';
+  // package: 'country_icons'
+  static const flagVN = 'icons/flags/svg/vn.svg';
+  static const flagEN = 'icons/flags/svg/gb.svg';
+
+  static const iconFacebook = '$baseIcon/facebook.svg';
+  static const iconGoogle = '$baseIcon/google.svg';
 
   static const logo = '$baseImage/logo.png';
   static const welcomeBanner1 = '$baseImage/welcome_banner_1.jpg';

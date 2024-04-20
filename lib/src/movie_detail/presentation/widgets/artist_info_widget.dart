@@ -1,4 +1,4 @@
-import 'package:cinemix_ui/src/movie_detail/data/models/artist.dart';
+import 'package:cinemix_ui/src/movie_detail/domain/entities/artist.dart';
 import 'package:flutter/material.dart';
 
 class ArtistInfoWidget extends StatelessWidget {

@@ -35,13 +35,13 @@ class SocialSignIn extends StatelessWidget {
           ],
         ),
         SocialButton(
-          icon: KAppMedia.facebookIcon,
+          icon: KAppMedia.iconFacebook,
           text: 'Facebook',
           onPressed: () {},
         ),
         const SizedBox(height: 10),
         SocialButton(
-          icon: KAppMedia.googleIcon,
+          icon: KAppMedia.iconGoogle,
           text: 'Google',
           onPressed: () {},
         ),

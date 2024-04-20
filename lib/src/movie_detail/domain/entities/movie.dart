@@ -3,8 +3,9 @@ import 'package:cinemix_ui/core/shared/enums/language.dart';
 import 'package:cinemix_ui/core/shared/enums/movie_state.dart';
 import 'package:cinemix_ui/src/movie_detail/data/models/artist.dart';
 import 'package:cinemix_ui/src/movie_detail/data/models/genre.dart';
+import 'package:equatable/equatable.dart';
 
-class Movie {
+class Movie extends Equatable {
   const Movie({
     required this.id,
     required this.title,
@@ -38,4 +39,20 @@ class Movie {
   final String banner;
   final List<Genre> genres;
   final MovieState state;
+
+  @override
+  List<Object?> get props => [
+        title,
+        storyline,
+        duration,
+        director,
+        actors,
+        censorship,
+        language,
+        releaseDate,
+        rating,
+        reviewCount,
+        genres,
+        state,
+      ];
 }

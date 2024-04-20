@@ -1,8 +1,8 @@
 import 'package:cinemix_ui/core/res/media/media.dart';
 
 enum AppLanguage {
-  vi(KAppMedia.vietnamFlag),
-  en(KAppMedia.englishFlag);
+  vi(KAppMedia.flagVN),
+  en(KAppMedia.flagEN);
 
   const AppLanguage(this._flag);
 

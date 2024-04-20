@@ -17,7 +17,7 @@ class _MovieDetailBodyState extends State<MovieDetailBody> {
     return Stack(
       children: [
         MovieBackgroundBanner(banner: demoMovie.banner),
-        const Positioned.fill(
+        Positioned.fill(
           left: 16,
           right: 16,
           child: MovieDetailInfo(movie: demoMovie),

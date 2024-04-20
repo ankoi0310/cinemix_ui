@@ -19,4 +19,15 @@ enum ArtistType {
   final String value;
   final String nameVN;
   final String nameEN;
+
+  static ArtistType? fromValue(String value) {
+    switch (value.toLowerCase()) {
+      case 'director':
+        return director;
+      case 'actor':
+        return actor;
+      default:
+        return null;
+    }
+  }
 }

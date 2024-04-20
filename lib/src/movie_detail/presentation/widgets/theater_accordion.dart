@@ -54,11 +54,11 @@ class TheaterAccordion extends StatelessWidget {
               spacing: 8,
               runSpacing: 8,
               children: [
-                Showtimes(time: '07:00'),
-                Showtimes(time: '09:00'),
-                Showtimes(time: '09:00'),
-                Showtimes(time: '09:00'),
-                Showtimes(time: '09:00'),
+                ShowtimesContainer(time: '07:00'),
+                ShowtimesContainer(time: '09:00'),
+                ShowtimesContainer(time: '09:00'),
+                ShowtimesContainer(time: '09:00'),
+                ShowtimesContainer(time: '09:00'),
               ],
             ),
           ),
@@ -68,8 +68,8 @@ class TheaterAccordion extends StatelessWidget {
   }
 }
 
-class Showtimes extends StatelessWidget {
-  const Showtimes({
+class ShowtimesContainer extends StatelessWidget {
+  const ShowtimesContainer({
     required this.time,
     super.key,
   });
