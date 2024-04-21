@@ -1,4 +1,5 @@
 import 'package:accordion/accordion.dart';
+import 'package:cinemix_ui/core/common/widgets/showtime_item.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
@@ -54,42 +55,15 @@ class TheaterAccordion extends StatelessWidget {
               spacing: 8,
               runSpacing: 8,
               children: [
-                ShowtimesContainer(time: '07:00'),
-                ShowtimesContainer(time: '09:00'),
-                ShowtimesContainer(time: '09:00'),
-                ShowtimesContainer(time: '09:00'),
-                ShowtimesContainer(time: '09:00'),
+                ShowtimeItem(time: '07:00', isSelected: true),
+                ShowtimeItem(time: '09:00'),
+                ShowtimeItem(time: '09:00'),
+                ShowtimeItem(time: '09:00'),
+                ShowtimeItem(time: '09:00'),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class ShowtimesContainer extends StatelessWidget {
-  const ShowtimesContainer({
-    required this.time,
-    super.key,
-  });
-
-  final String time;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).colorScheme.onBackground),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Text(
-        time,
-        style: Theme.of(context)
-            .textTheme
-            .titleSmall!
-            .copyWith(color: Theme.of(context).colorScheme.onBackground),
       ),
     );
   }
