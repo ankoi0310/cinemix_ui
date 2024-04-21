@@ -40,7 +40,7 @@ class _ScheduleState extends State<Schedule> {
                   ),
                   decoration: BoxDecoration(
                     color: _selectedIndex == index
-                        ? Color(0xFF261D08)
+                        ? Theme.of(context).colorScheme.surface
                         : Theme.of(context).cardColor,
                     border: Border.all(
                       color: _selectedIndex == index

@@ -1,7 +1,7 @@
 import 'package:cinemix_ui/core/res/theme/theme.dart';
 import 'package:cinemix_ui/core/services/injection_container.dart';
 import 'package:cinemix_ui/core/services/router.dart';
-import 'package:cinemix_ui/src/room/presentation/views/seat_selection_screen.dart';
+import 'package:cinemix_ui/src/checkout/presentation/views/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -29,7 +29,7 @@ class App extends StatelessWidget {
       builder: FToastBuilder(),
       navigatorKey: navigatorKey,
       onGenerateRoute: generateRoute,
-      initialRoute: SeatSelectionScreen.routeName,
+      initialRoute: CheckoutScreen.routeName,
     );
   }
 }

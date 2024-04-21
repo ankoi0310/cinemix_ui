@@ -1,15 +1,18 @@
 import 'dart:math';
 
+import 'package:cinemix_ui/core/res/media/media.dart';
 import 'package:cinemix_ui/core/shared/enums/artist_type.dart';
 import 'package:cinemix_ui/core/shared/enums/censorship.dart';
 import 'package:cinemix_ui/core/shared/enums/language.dart';
 import 'package:cinemix_ui/core/shared/enums/movie_state.dart';
+import 'package:cinemix_ui/src/checkout/domain/entities/payment_method.dart';
 import 'package:cinemix_ui/src/movie_detail/domain/entities/artist.dart';
 import 'package:cinemix_ui/src/movie_detail/domain/entities/genre.dart';
 import 'package:cinemix_ui/src/movie_detail/domain/entities/movie.dart';
 import 'package:cinemix_ui/src/movie_detail/domain/entities/showtime.dart';
 import 'package:cinemix_ui/src/room/domain/entities/room.dart';
 import 'package:cinemix_ui/src/room/domain/entities/seat.dart';
+import 'package:cinemix_ui/src/room/domain/entities/theater.dart';
 
 const kBaseUrl = 'localhost:8080/api';
 const kAccessTokenKey = 'access_token';
@@ -332,6 +335,14 @@ final demoSeats = [
   ],
 ];
 
+const demoTheater = Theater(
+  id: 1,
+  name: 'Theater 1',
+  address: '123 Street, City, Country',
+  phone: '0123456789',
+  image: 'assets/images/theaters/theater_1.jpg',
+);
+
 final demoRoom = Room(
   id: 1,
   createdDate: now,
@@ -342,4 +353,45 @@ final demoRoom = Room(
   totalSeats: demoSeats.expand((element) => element).length,
   seats: demoSeats.expand((element) => element).toList(),
   state: RoomState.available,
+  theater: demoTheater,
 );
+
+final demoShowtime = Showtime(
+  id: 1,
+  createdDate: now,
+  modifiedDate: now,
+  movie: demoMovie,
+  room: demoRoom,
+  startTime: now,
+  endTime: now.add(const Duration(hours: 3)),
+);
+
+const demoPaymentMethods = [
+  PaymentMethod(
+    id: 1,
+    imagePath: KAppMedia.zaloPay,
+    title: 'ZaloPay',
+  ),
+  PaymentMethod(
+    id: 2,
+    imagePath: KAppMedia.momo,
+    title: 'MoMo',
+  ),
+  PaymentMethod(
+    id: 3,
+    imagePath: KAppMedia.shopeePay,
+    title: 'ShopeePay',
+    isDefault: true,
+  ),
+  PaymentMethod(
+    id: 4,
+    imagePath: KAppMedia.atm,
+    title: 'Thẻ ATM',
+  ),
+  PaymentMethod(
+    id: 5,
+    imagePath: KAppMedia.international,
+    title: 'Thanh toán quốc tế',
+    subtitle: '(Visa, MasterCard, JCB, Amex...)',
+  ),
+];

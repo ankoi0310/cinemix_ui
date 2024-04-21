@@ -15,8 +15,7 @@ class SeatSelectionBody extends StatelessWidget {
 
     return Stack(
       children: [
-        Positioned(
-          top: 0,
+        Positioned.fill(
           bottom: 120,
           left: 16,
           right: 16,

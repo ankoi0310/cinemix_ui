@@ -60,4 +60,5 @@ flutter:
     - assets/images/actors/
     - assets/images/directors/
     - assets/images/movies/
+    - assets/images/payments/
     - assets/lottie/
