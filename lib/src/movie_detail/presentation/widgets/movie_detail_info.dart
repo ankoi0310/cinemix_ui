@@ -1,4 +1,4 @@
-import 'package:cinemix_ui/src/movie_detail/data/models/movie.dart';
+import 'package:cinemix_ui/src/movie_detail/domain/entities/movie.dart';
 import 'package:cinemix_ui/src/movie_detail/presentation/widgets/artist_info_widget.dart';
 import 'package:cinemix_ui/src/movie_detail/presentation/widgets/movie_detail_card.dart';
 import 'package:cinemix_ui/src/movie_detail/presentation/widgets/schedule.dart';

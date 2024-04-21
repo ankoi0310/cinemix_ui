@@ -1,8 +1,8 @@
 import 'package:cinemix_ui/core/shared/enums/censorship.dart';
 import 'package:cinemix_ui/core/shared/enums/language.dart';
 import 'package:cinemix_ui/core/shared/enums/movie_state.dart';
-import 'package:cinemix_ui/src/movie_detail/data/models/artist.dart';
-import 'package:cinemix_ui/src/movie_detail/data/models/genre.dart';
+import 'package:cinemix_ui/src/movie_detail/domain/entities/artist.dart';
+import 'package:cinemix_ui/src/movie_detail/domain/entities/genre.dart';
 import 'package:equatable/equatable.dart';
 
 class Movie extends Equatable {

@@ -1,7 +1,7 @@
 import 'package:cinemix_ui/core/common/widgets/image_container.dart';
 import 'package:cinemix_ui/core/res/media/media.dart';
 import 'package:cinemix_ui/core/shared/enums/image_orientation.dart';
-import 'package:cinemix_ui/src/movie_detail/data/models/movie.dart';
+import 'package:cinemix_ui/src/movie_detail/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 

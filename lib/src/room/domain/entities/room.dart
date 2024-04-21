@@ -1,5 +1,6 @@
 import 'package:cinemix_ui/core/common/entity/base_entity.dart';
 import 'package:cinemix_ui/src/room/domain/entities/seat.dart';
+import 'package:cinemix_ui/src/room/domain/entities/theater.dart';
 
 enum RoomState {
   available(
@@ -52,6 +53,7 @@ class Room extends BaseEntity {
     required this.totalSeats,
     required this.seats,
     required this.state,
+    required this.theater,
   });
 
   final String name;
@@ -60,6 +62,7 @@ class Room extends BaseEntity {
   final int totalSeats;
   final List<Seat> seats;
   final RoomState state;
+  final Theater theater;
 
   @override
   List<Object?> get props => [
@@ -70,5 +73,6 @@ class Room extends BaseEntity {
         totalSeats,
         seats,
         state,
+        theater,
       ];
 }

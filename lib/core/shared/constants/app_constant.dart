@@ -4,9 +4,10 @@ import 'package:cinemix_ui/core/shared/enums/artist_type.dart';
 import 'package:cinemix_ui/core/shared/enums/censorship.dart';
 import 'package:cinemix_ui/core/shared/enums/language.dart';
 import 'package:cinemix_ui/core/shared/enums/movie_state.dart';
-import 'package:cinemix_ui/src/movie_detail/data/models/artist.dart';
-import 'package:cinemix_ui/src/movie_detail/data/models/genre.dart';
-import 'package:cinemix_ui/src/movie_detail/data/models/movie.dart';
+import 'package:cinemix_ui/src/movie_detail/domain/entities/artist.dart';
+import 'package:cinemix_ui/src/movie_detail/domain/entities/genre.dart';
+import 'package:cinemix_ui/src/movie_detail/domain/entities/movie.dart';
+import 'package:cinemix_ui/src/movie_detail/domain/entities/showtime.dart';
 import 'package:cinemix_ui/src/room/domain/entities/room.dart';
 import 'package:cinemix_ui/src/room/domain/entities/seat.dart';
 
@@ -28,7 +29,7 @@ const demoGenres = [
   ),
 ];
 
-final demoDirector = Artist(
+const demoDirector = Artist(
   id: 1,
   name: 'Matt Reeves',
   avatar: 'assets/images/directors/anthony_russo.png',
@@ -36,25 +37,25 @@ final demoDirector = Artist(
 );
 
 final demoActors = <Artist>[
-  Artist(
+  const Artist(
     id: 1,
     name: 'Robert Downey Jr.',
     avatar: 'assets/images/actors/robert_downey_jr.png',
     type: ArtistType.actor,
   ),
-  Artist(
+  const Artist(
     id: 2,
     name: 'Robert Downey Jr.',
     avatar: 'assets/images/actors/robert_downey_jr.png',
     type: ArtistType.actor,
   ),
-  Artist(
+  const Artist(
     id: 3,
     name: 'Robert Downey Jr.',
     avatar: 'assets/images/actors/robert_downey_jr.png',
     type: ArtistType.actor,
   ),
-  Artist(
+  const Artist(
     id: 4,
     name: 'Robert Downey Jr.',
     avatar: 'assets/images/actors/robert_downey_jr.png',
