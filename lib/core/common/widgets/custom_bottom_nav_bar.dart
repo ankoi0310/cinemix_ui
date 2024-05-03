@@ -29,7 +29,6 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           children: [
             buildItem(item: bottomNavItems[0]),
             buildItem(item: bottomNavItems[1]),
-            const SizedBox(width: 100),
             buildItem(item: bottomNavItems[2]),
             buildItem(item: bottomNavItems[3]),
           ],

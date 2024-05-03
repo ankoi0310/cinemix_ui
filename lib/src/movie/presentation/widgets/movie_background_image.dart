@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MovieBackgroundBanner extends StatelessWidget {
-  const MovieBackgroundBanner({
-    required this.banner,
+class MovieBackgroundImage extends StatelessWidget {
+  const MovieBackgroundImage({
+    required this.image,
     super.key,
   });
 
-  final String banner;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class MovieBackgroundBanner extends StatelessWidget {
             height: 250,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(banner),
+                image: NetworkImage(image),
                 fit: BoxFit.cover,
               ),
             ),

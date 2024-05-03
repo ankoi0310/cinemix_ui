@@ -1,9 +1,9 @@
 import 'package:cinemix_ui/core/common/widgets/image_container.dart';
-import 'package:cinemix_ui/core/res/media/media.dart';
 import 'package:cinemix_ui/core/shared/enums/image_orientation.dart';
-import 'package:cinemix_ui/src/movie_detail/domain/entities/movie.dart';
+import 'package:cinemix_ui/src/movie/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:intl/intl.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard({
@@ -18,13 +18,13 @@ class MovieCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const ImageContainer(
-          image: KAppMedia.comingSoon,
+        ImageContainer(
+          image: movie.posterUrl,
           orientation: ImageOrientation.portrait,
         ),
         const SizedBox(height: 16),
         Text(
-          movie.title,
+          movie.name,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
@@ -56,7 +56,7 @@ class MovieCard extends StatelessWidget {
             const SizedBox(width: 8),
             Flexible(
               child: Text(
-                movie.releaseDate,
+                DateFormat.yMMMd().format(movie.releasedDate),
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ),

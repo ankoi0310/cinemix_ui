@@ -1,5 +1,5 @@
 import 'package:cinemix_ui/core/shared/utils/date_util.dart';
-import 'package:cinemix_ui/src/movie_detail/presentation/widgets/theater_accordion.dart';
+import 'package:cinemix_ui/src/movie/presentation/widgets/theater_accordion.dart';
 import 'package:flutter/material.dart';
 
 class Schedule extends StatefulWidget {

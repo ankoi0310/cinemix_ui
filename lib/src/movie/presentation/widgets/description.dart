@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 
-class StorylineWidget extends StatelessWidget {
-  const StorylineWidget({
+class Description extends StatelessWidget {
+  const Description({
     required this.storyline,
     super.key,
   });
@@ -12,13 +12,13 @@ class StorylineWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style =
-        Theme.of(context).textTheme.titleSmall!.copyWith(inherit: true);
+        Theme.of(context).textTheme.bodyMedium!.copyWith(inherit: true);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Cốt truyện', style: Theme.of(context).textTheme.headlineMedium),
-        const SizedBox(height: 24),
+        const SizedBox(height: 8),
         ReadMoreText(
           storyline,
           trimLength: 200,

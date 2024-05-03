@@ -1,5 +1,4 @@
 import 'package:cinemix_ui/core/common/widgets/custom_bottom_nav_bar.dart';
-import 'package:cinemix_ui/core/common/widgets/custom_fab.dart';
 import 'package:cinemix_ui/src/home/presentation/widgets/body.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +16,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SafeArea(child: Body()),
-      floatingActionButton: CustomFAB(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: CustomBottomNavBar(),
     );
   }
