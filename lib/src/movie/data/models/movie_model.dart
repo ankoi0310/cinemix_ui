@@ -53,25 +53,6 @@ class MovieModel extends Movie {
     );
   }
 
-  MovieModel.empty()
-      : this(
-          name: '',
-          description: '',
-          directors: '',
-          actors: '',
-          genres: [],
-          releasedDate: DateTime.now(),
-          duration: 0,
-          country: '',
-          language: '',
-          localizations: '',
-          format: '',
-          rating: '',
-          posterUrl: '',
-          trailerUrl: '',
-          state: '',
-        );
-
   DataMap toMap() {
     return {
       'name': name,

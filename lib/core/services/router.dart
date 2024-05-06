@@ -12,7 +12,9 @@ import 'package:cinemix_ui/src/movie/presentation/cubit/movie_cubit.dart';
 import 'package:cinemix_ui/src/movie/presentation/views/movie_detail_screen.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/views/onboarding_screen.dart';
-import 'package:cinemix_ui/src/room/presentation/views/seat_selection_screen.dart';
+import 'package:cinemix_ui/src/seat/presentation/views/seat_selection_screen.dart';
+import 'package:cinemix_ui/src/showtime/domain/entities/showtime.dart';
+import 'package:cinemix_ui/src/showtime/presentation/cubit/showtime_cubit.dart';
 import 'package:cinemix_ui/src/ticket/presentation/views/ticket_detail_screen.dart';
 import 'package:cinemix_ui/src/ticket/presentation/views/ticket_screen.dart';
 import 'package:flutter/material.dart';
@@ -68,6 +70,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
             BlocProvider(
               create: (_) => sl<MovieCubit>(),
             ),
+            BlocProvider(
+              create: (_) => sl<ShowtimeCubit>(),
+            ),
           ],
           child: MovieDetailScreen(movieId: settings.arguments! as int),
         ),
@@ -75,7 +80,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case SeatSelectionScreen.routeName:
       return _pageBuilder(
-        pageBuilder: (context) => const SeatSelectionScreen(),
+        pageBuilder: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) => sl<ShowtimeCubit>(),
+            ),
+          ],
+          child: SeatSelectionScreen(showtime: settings.arguments! as Showtime),
+        ),
         settings: settings,
       );
     case CheckoutScreen.routeName:

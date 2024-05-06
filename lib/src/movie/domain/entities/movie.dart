@@ -24,7 +24,7 @@ class Movie extends BaseEntity {
     super.modifiedDate,
   });
 
-  Movie.demo(int id)
+  Movie.empty(int id)
       : this(
           id: id,
           name: 'The Shawshank Redemption',

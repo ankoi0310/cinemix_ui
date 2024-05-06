@@ -31,6 +31,7 @@ class KAppMedia {
   static const zaloPay = '$baseImage/payments/zalo_pay.png';
 
   static const loading = '$baseLottie/loading.json';
+  static const loadingDots = '$baseLottie/loading_dots.json';
   static const bookNow = '$baseLottie/book_now.json';
   static const pageUnderConstruction =
       '$baseLottie/page_under_construction.json';

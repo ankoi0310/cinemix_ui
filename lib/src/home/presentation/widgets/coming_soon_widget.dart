@@ -17,8 +17,9 @@ class _ComingSoonWidgetState extends State<ComingSoonWidget> {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CollectionTitle(title: 'Sắp chiếu'),
+          CollectionTitle(title: 'Sắp chiếu'.toUpperCase()),
           const SizedBox(height: 12),
           BlocConsumer<MovieCubit, MovieState>(
             listener: (context, state) {},

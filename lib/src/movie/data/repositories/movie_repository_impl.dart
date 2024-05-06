@@ -15,7 +15,7 @@ class MovieRepositoryImpl implements MovieRepository {
   @override
   ResultFuture<List<Movie>> searchMovie(MovieSearchParams params) async {
     try {
-      final result = await _remoteDataSource.searchMovie(params);
+      final result = await _remoteDataSource.search(params);
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure.fromException(e));

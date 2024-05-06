@@ -1,4 +1,4 @@
-import 'package:cinemix_ui/core/shared/enums/movie_rating.dart';
+import 'package:cinemix_ui/core/shared/enums/movie_enum.dart' as movie_enum;
 import 'package:cinemix_ui/src/movie/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
@@ -75,10 +75,10 @@ class MovieDetailCard extends StatelessWidget {
                     maxLines: 2,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          height: 1.2,
+                        ),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -119,7 +119,7 @@ class MovieDetailCard extends StatelessWidget {
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: MovieRating.fromValue(
+                          color: movie_enum.MovieRating.fromValue(
                             movie.rating,
                           ).backgroundColor,
                           borderRadius: BorderRadius.circular(4),
@@ -129,7 +129,7 @@ class MovieDetailCard extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style:
                               Theme.of(context).textTheme.bodySmall!.copyWith(
-                                    color: MovieRating.fromValue(
+                                    color: movie_enum.MovieRating.fromValue(
                                       movie.rating,
                                     ).textColor,
                                     fontWeight: FontWeight.bold,
@@ -138,7 +138,6 @@ class MovieDetailCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
                 ],
               ),
             ),

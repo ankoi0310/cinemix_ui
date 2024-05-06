@@ -1,5 +1,5 @@
 import 'package:cinemix_ui/core/shared/utils/date_util.dart';
-import 'package:cinemix_ui/src/movie/presentation/widgets/theater_accordion.dart';
+import 'package:cinemix_ui/src/theater/presentation/widgets/theater_accordion.dart';
 import 'package:flutter/material.dart';
 
 class Schedule extends StatefulWidget {
@@ -33,6 +33,7 @@ class _ScheduleState extends State<Schedule> {
                   });
                 },
                 splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
                 child: Container(
                   width: 100,
                   margin: EdgeInsets.only(
@@ -40,19 +41,19 @@ class _ScheduleState extends State<Schedule> {
                   ),
                   decoration: BoxDecoration(
                     color: _selectedIndex == index
-                        ? Theme.of(context).colorScheme.surface
-                        : Theme.of(context).cardColor,
+                        ? Theme.of(context).primaryColor
+                        : Theme.of(context).colorScheme.surface,
                     border: Border.all(
                       color: _selectedIndex == index
-                          ? Theme.of(context).primaryColor
+                          ? Colors.white
                           : Colors.transparent,
                     ),
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
+                      horizontal: 4,
+                      vertical: 4,
                     ),
                     child: Column(
                       children: [
@@ -62,18 +63,18 @@ class _ScheduleState extends State<Schedule> {
                               Theme.of(context).textTheme.titleSmall!.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: _selectedIndex == index
-                                        ? Colors.white
+                                        ? Colors.black
                                         : Colors.white54,
                                   ),
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          entry.value,
+                          entry.value.format(format: 'dd/MM'),
                           style:
                               Theme.of(context).textTheme.titleSmall!.copyWith(
                                     fontWeight: FontWeight.w600,
                                     color: _selectedIndex == index
-                                        ? Colors.white
+                                        ? Colors.black
                                         : Colors.white54,
                                   ),
                         ),
@@ -85,7 +86,9 @@ class _ScheduleState extends State<Schedule> {
             }).toList(),
           ),
         ),
-        const TheaterAccordion(),
+        TheaterAccordion(
+          date: dates.values.toList()[_selectedIndex],
+        ),
       ],
     );
   }

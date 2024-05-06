@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:cinemix_ui/core/shared/enums/movie_state_enum.dart';
+import 'package:cinemix_ui/core/shared/enums/movie_enum.dart' as movie_enum;
 import 'package:cinemix_ui/src/movie/domain/entities/movie.dart';
 import 'package:cinemix_ui/src/movie/domain/usecases/get_movie_by_id.dart';
 import 'package:cinemix_ui/src/movie/domain/usecases/search_movie.dart';

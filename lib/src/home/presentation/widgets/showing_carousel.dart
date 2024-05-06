@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cinemix_ui/core/shared/enums/movie_rating.dart';
+import 'package:cinemix_ui/core/shared/enums/movie_enum.dart' as movie_enum;
 import 'package:cinemix_ui/src/movie/presentation/cubit/movie_cubit.dart';
 import 'package:cinemix_ui/src/movie/presentation/views/movie_detail_screen.dart';
 import 'package:flutter/material.dart';
@@ -134,7 +134,7 @@ class _ShowingCarouselState extends State<ShowingCarousel> {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: MovieRating.fromValue(
+                                color: movie_enum.MovieRating.fromValue(
                                   movies[_current].rating,
                                 ).backgroundColor,
                                 borderRadius: BorderRadius.circular(4),
@@ -146,7 +146,7 @@ class _ShowingCarouselState extends State<ShowingCarousel> {
                                     .textTheme
                                     .bodySmall!
                                     .copyWith(
-                                      color: MovieRating.fromValue(
+                                      color: movie_enum.MovieRating.fromValue(
                                         movies[_current].rating,
                                       ).textColor,
                                       fontWeight: FontWeight.bold,

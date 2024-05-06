@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 abstract class MovieRemoteDataSource {
   const MovieRemoteDataSource();
 
-  Future<List<MovieModel>> searchMovie(MovieSearchParams params);
+  Future<List<MovieModel>> search(MovieSearchParams params);
   Future<MovieModel> getMovieById(int id);
 }
 
@@ -22,7 +22,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   final http.Client _client;
 
   @override
-  Future<List<MovieModel>> searchMovie(MovieSearchParams params) async {
+  Future<List<MovieModel>> search(MovieSearchParams params) async {
     try {
       final query = 'name=${params.name ?? ''}&state=${params.state ?? ''}';
       final response = await _client.get(

@@ -21,11 +21,11 @@ final class MovieListLoaded extends MovieState {
   final List<Movie> movies;
 
   List<Movie> get showingMovies => movies
-      .where((movie) => movie.state == MovieStateEnum.showing.value)
+      .where((movie) => movie.state == movie_enum.MovieState.showing.value)
       .toList();
 
   List<Movie> get comingSoonMovies => movies
-      .where((movie) => movie.state == MovieStateEnum.comingSoon.value)
+      .where((movie) => movie.state == movie_enum.MovieState.comingSoon.value)
       .toList();
 
   @override
