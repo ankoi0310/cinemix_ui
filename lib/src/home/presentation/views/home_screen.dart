@@ -1,6 +1,5 @@
 import 'package:cinemix_ui/core/common/widgets/custom_bottom_nav_bar.dart';
-import 'package:cinemix_ui/core/common/widgets/custom_fab.dart';
-import 'package:cinemix_ui/src/home/presentation/widgets/body.dart';
+import 'package:cinemix_ui/src/home/presentation/widgets/home_body.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,9 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: SafeArea(child: Body()),
-      floatingActionButton: CustomFAB(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: SafeArea(child: HomeBody()),
       bottomNavigationBar: CustomBottomNavBar(),
     );
   }

@@ -1,14 +1,15 @@
+import 'package:cinemix_ui/core/res/media/media.dart';
 import 'package:cinemix_ui/core/shared/enums/image_orientation.dart';
 import 'package:flutter/material.dart';
 
 class ImageContainer extends StatelessWidget {
   const ImageContainer({
-    required this.image,
     required this.orientation,
+    this.image,
     super.key,
   });
 
-  final String image;
+  final String? image;
   final ImageOrientation orientation;
 
   @override
@@ -18,24 +19,22 @@ class ImageContainer extends StatelessWidget {
         return Container(
           height: 244,
           width: 173,
-          decoration: BoxDecoration(
+          child: ClipRRect(
             borderRadius: BorderRadius.circular(16),
-            image: DecorationImage(
-              image: AssetImage(image),
-              fit: BoxFit.cover,
-            ),
+            child: image == null
+                ? Image.asset(KAppMedia.comingSoon, fit: BoxFit.cover)
+                : Image.network(image!, fit: BoxFit.cover),
           ),
         );
       case ImageOrientation.landscape:
-        return Container(
+        return SizedBox(
           height: 150,
           width: 200,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            image: DecorationImage(
-              image: AssetImage(image),
-              fit: BoxFit.cover,
-            ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: image == null
+                ? Image.asset(KAppMedia.comingSoon, fit: BoxFit.cover)
+                : Image.network(image!, fit: BoxFit.cover),
           ),
         );
     }

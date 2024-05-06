@@ -1,4 +1,3 @@
-import 'package:cinemix_ui/core/extensions/context_extentsion.dart';
 import 'package:flutter/material.dart';
 
 class LoadingView extends StatelessWidget {
@@ -6,14 +5,10 @@ class LoadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return const Material(
       type: MaterialType.transparency,
       child: Center(
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(
-            context.theme.colorScheme.secondary,
-          ),
-        ),
+        child: CircularProgressIndicator(),
       ),
     );
   }
