@@ -1,9 +1,9 @@
+import 'package:cinemix_ui/core/shared/utils/date_util.dart';
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
 import 'package:cinemix_ui/src/movie/data/models/movie_model.dart';
 import 'package:cinemix_ui/src/seat/data/models/room_model.dart';
 import 'package:cinemix_ui/src/seat/data/models/seat_model.dart';
 import 'package:cinemix_ui/src/showtime/domain/entities/showtime.dart';
-import 'package:intl/intl.dart';
 
 class ShowtimeModel extends Showtime {
   const ShowtimeModel({
@@ -29,21 +29,22 @@ class ShowtimeModel extends Showtime {
       bookedSeats: (map['bookedSeats'] as List)
           .map((e) => SeatModel.fromMap(e as DataMap))
           .toList(),
-      createdDate:
-          DateFormat('dd/MM/yyyy HH:mm:ss').parse(map['createdDate'] as String),
-      modifiedDate: DateFormat('dd/MM/yyyy HH:mm:ss')
-          .parse(map['modifiedDate'] as String),
+      createdDate: (map['createdDate'] as String).toDateTime(),
+      modifiedDate: (map['modifiedDate'] as String).toDateTime(),
     );
   }
 
   DataMap toMap() {
     return {
+      'id': id,
       'movie': (movie as MovieModel).toMap(),
       'room': (room as RoomModel).toMap(),
-      'start_time': startTime,
-      'end_time': endTime,
+      'startTime': startTime,
+      'endTime': endTime,
       'date': date,
-      'booked_seats': bookedSeats.map((e) => (e as SeatModel).toMap()).toList(),
+      'bookedSeats': bookedSeats.map((e) => (e as SeatModel).toMap()).toList(),
+      'createdDate': createdDate?.format(),
+      'modifiedDate': modifiedDate?.format(),
     };
   }
 

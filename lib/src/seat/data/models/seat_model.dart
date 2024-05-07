@@ -1,7 +1,7 @@
 import 'package:cinemix_ui/core/shared/enums/seat_enum.dart';
+import 'package:cinemix_ui/core/shared/utils/date_util.dart';
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
 import 'package:cinemix_ui/src/seat/domain/entities/seat.dart';
-import 'package:intl/intl.dart';
 
 class SeatModel extends Seat {
   const SeatModel({
@@ -24,20 +24,21 @@ class SeatModel extends Seat {
       isSeat: map['isSeat'] as bool,
       style:
           map['style'] != null ? (map['style'] as String).toSeatStyle() : null,
-      createdDate:
-          DateFormat('dd/MM/yyyy HH:mm:ss').parse(map['createdDate'] as String),
-      modifiedDate: DateFormat('dd/MM/yyyy HH:mm:ss')
-          .parse(map['modifiedDate'] as String),
+      createdDate: (map['createdDate'] as String).toDateTime(),
+      modifiedDate: (map['modifiedDate'] as String).toDateTime(),
     );
   }
 
   DataMap toMap() {
     return {
+      'id': id,
       'name': name,
       'columnIndex': columnIndex,
       'seatIndex': seatIndex,
       'isSeat': isSeat,
-      'style': style.toString(),
+      'style': style?.name,
+      'createdDate': createdDate?.format(),
+      'modifiedDate': modifiedDate?.format(),
     };
   }
 

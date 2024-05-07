@@ -86,7 +86,7 @@ class SeatSelectionBody extends StatelessWidget {
           ),
         ),
         BottomPriceBooking(
-          price: 120000,
+          ticketPrices: showtime.room.theater!.ticketPrices,
           title: 'Tiếp tục',
           onPressed: () {},
         ),

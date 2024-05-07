@@ -6,8 +6,6 @@ class GenreModel extends Genre {
     required super.name,
   });
 
-  const GenreModel.empty() : this(name: '');
-
   factory GenreModel.fromMap(DataMap map) {
     return GenreModel(
       name: map['name'] as String,
@@ -18,7 +16,7 @@ class GenreModel extends Genre {
     String? name,
   }) {
     return GenreModel(
-      name: name ?? super.name,
+      name: name ?? this.name,
     );
   }
 

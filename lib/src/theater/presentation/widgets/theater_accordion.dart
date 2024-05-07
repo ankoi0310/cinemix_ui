@@ -1,6 +1,6 @@
 import 'package:accordion/accordion.dart';
 import 'package:cinemix_ui/core/common/widgets/showtime_item.dart';
-import 'package:cinemix_ui/src/seat/presentation/views/seat_selection_screen.dart';
+import 'package:cinemix_ui/src/seat/presentation/views/seat_option_screen.dart';
 import 'package:cinemix_ui/src/showtime/domain/entities/showtime.dart';
 import 'package:cinemix_ui/src/showtime/presentation/cubit/showtime_cubit.dart';
 import 'package:cinemix_ui/src/theater/domain/entities/theater.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
-class TheaterAccordion extends StatelessWidget {
+class TheaterAccordion extends StatefulWidget {
   const TheaterAccordion({
     required this.date,
     super.key,
@@ -17,34 +17,44 @@ class TheaterAccordion extends StatelessWidget {
   final DateTime date;
 
   @override
-  Widget build(BuildContext context) {
+  State<TheaterAccordion> createState() => _TheaterAccordionState();
+}
+
+class _TheaterAccordionState extends State<TheaterAccordion> {
+  Map<Theater, List<Showtime>> showtimesByTheater = {};
+
+  @override
+  void initState() {
+    super.initState();
     context.read<ShowtimeCubit>().searchShowtime();
+  }
 
-    return BlocBuilder<ShowtimeCubit, ShowtimeState>(
-      builder: (context, state) {
-        if (state is ShowtimeLoading) {
-          return const Center(child: CircularProgressIndicator());
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<ShowtimeCubit, ShowtimeState>(
+      listener: (context, state) {
+        if (state is ShowtimeListLoaded) {
+          setState(() {
+            showtimesByTheater = state.showtimesByTheater;
+          });
         }
-
-        final showtimesByTheater =
-            (state as ShowtimeListLoaded).showtimesByTheater;
-        return Accordion(
-          scaleWhenAnimating: false,
-          paddingListHorizontal: 0,
-          disableScrolling: true,
-          paddingListBottom: 0,
-          children: showtimesByTheater.entries
-              .map(
-                (entry) => buildAccordionSection(
-                  context,
-                  isOpen: true,
-                  theater: entry.key,
-                  showtimes: entry.value,
-                ),
-              )
-              .toList(),
-        );
       },
+      child: Accordion(
+        scaleWhenAnimating: false,
+        paddingListHorizontal: 0,
+        disableScrolling: true,
+        paddingListBottom: 0,
+        children: showtimesByTheater.entries
+            .map(
+              (entry) => buildAccordionSection(
+                context,
+                isOpen: true,
+                theater: entry.key,
+                showtimes: entry.value,
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 
@@ -85,11 +95,13 @@ class TheaterAccordion extends StatelessWidget {
                     (showtime) => ShowtimeItem(
                       time: showtime.startTime,
                       onTap: () {
-                        // TODO(showtime): Save to local datasource
-                        Navigator.of(context).pushNamed(
-                          SeatSelectionScreen.routeName,
-                          arguments: showtime,
-                        );
+                        context
+                            .read<ShowtimeCubit>()
+                            .cacheSelectedShowtime(showtime)
+                            .then((_) {
+                          Navigator.of(context)
+                              .pushNamed(SeatOptionScreen.routeName);
+                        });
                       },
                     ),
                   )

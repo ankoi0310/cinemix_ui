@@ -1,3 +1,4 @@
+import 'package:cinemix_ui/core/shared/utils/date_util.dart';
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
 import 'package:cinemix_ui/src/movie/data/models/genre_model.dart';
 import 'package:cinemix_ui/src/movie/domain/entities/movie.dart';
@@ -46,22 +47,22 @@ class MovieModel extends Movie {
       posterUrl: map['posterUrl'] as String,
       trailerUrl: map['trailerUrl'] as String,
       state: map['state'] as String,
-      createdDate:
-          DateFormat('dd/MM/yyyy HH:mm:ss').parse(map['createdDate'] as String),
-      modifiedDate: DateFormat('dd/MM/yyyy HH:mm:ss')
-          .parse(map['modifiedDate'] as String),
+      createdDate: (map['createdDate'] as String).toDateTime(),
+      modifiedDate: (map['modifiedDate'] as String).toDateTime(),
     );
   }
 
   DataMap toMap() {
     return {
+      'id': id,
       'name': name,
       'description': description,
       'directors': directors,
       'actors': actors,
-      'genres': (genres as List<GenreModel>).map((e) => e.toMap()).toList(),
-      'releasedDate': releasedDate,
+      'genres': genres.map((e) => (e as GenreModel).toMap()).toList(),
+      'releasedDate': releasedDate.format('dd/MM/yyyy'),
       'duration': duration,
+      'country': country,
       'language': language,
       'localizations': localizations,
       'format': format,
@@ -69,6 +70,8 @@ class MovieModel extends Movie {
       'posterUrl': posterUrl,
       'trailerUrl': trailerUrl,
       'state': state,
+      'createdDate': createdDate?.format(),
+      'modifiedDate': modifiedDate?.format(),
     };
   }
 

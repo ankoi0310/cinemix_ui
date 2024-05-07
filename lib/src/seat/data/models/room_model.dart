@@ -1,8 +1,8 @@
+import 'package:cinemix_ui/core/shared/utils/date_util.dart';
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
 import 'package:cinemix_ui/src/seat/data/models/seat_row_model.dart';
 import 'package:cinemix_ui/src/seat/domain/entities/room.dart';
 import 'package:cinemix_ui/src/theater/data/models/theater_model.dart';
-import 'package:intl/intl.dart';
 
 class RoomModel extends Room {
   const RoomModel({
@@ -26,14 +26,14 @@ class RoomModel extends Room {
       maxColumn: map['maxColumn'] as int,
       seatCount: map['seatCount'] as int,
       available: map['available'] as bool,
-      theater: TheaterModel.fromMap(map['theater'] as DataMap),
+      theater: map['theater'] != null
+          ? TheaterModel.fromMap(map['theater'] as DataMap)
+          : null,
       rows: (map['rows'] as List)
           .map((e) => SeatRowModel.fromMap(e as DataMap))
           .toList(),
-      createdDate:
-          DateFormat('dd/MM/yyyy HH:mm:ss').parse(map['createdDate'] as String),
-      modifiedDate: DateFormat('dd/MM/yyyy HH:mm:ss')
-          .parse(map['modifiedDate'] as String),
+      createdDate: (map['createdDate'] as String).toDateTime(),
+      modifiedDate: (map['modifiedDate'] as String).toDateTime(),
     );
   }
 
@@ -45,10 +45,10 @@ class RoomModel extends Room {
       'maxColumn': maxColumn,
       'seatCount': seatCount,
       'available': available,
-      'theater': (theater as TheaterModel).toMap(),
-      'rows': (rows as List<SeatRowModel>).map((e) => e.toMap()).toList(),
-      'createdDate': createdDate,
-      'modifiedDate': modifiedDate,
+      'theater': (theater! as TheaterModel).toMap(),
+      'rows': rows.map((e) => (e as SeatRowModel).toMap()).toList(),
+      'createdDate': createdDate?.format(),
+      'modifiedDate': modifiedDate?.format(),
     };
   }
 

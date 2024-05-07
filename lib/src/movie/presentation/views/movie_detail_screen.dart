@@ -1,4 +1,4 @@
-import 'package:cinemix_ui/src/movie/presentation/widgets/body.dart';
+import 'package:cinemix_ui/src/movie/presentation/widgets/movie_detail_body.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetailScreen extends StatelessWidget {
