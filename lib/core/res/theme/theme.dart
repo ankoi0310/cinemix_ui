@@ -8,50 +8,36 @@ import 'package:cinemix_ui/core/res/theme/custom/outline_button_theme.dart';
 import 'package:cinemix_ui/core/res/theme/custom/text_field_theme.dart';
 import 'package:cinemix_ui/core/res/theme/custom/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class KAppTheme {
   KAppTheme._();
 
-  static ThemeData light = ThemeData(
-    useMaterial3: true,
-    brightness: Brightness.light,
-    primaryColor: KAppColor.lightPrimaryColor,
-    scaffoldBackgroundColor: Colors.white,
-    colorScheme: const ColorScheme.light().copyWith(
-      primary: KAppColor.lightPrimaryColor,
-      onPrimary: KAppColor.lightOnPrimaryColor,
-      secondary: KAppColor.lightSecondaryColor,
-      onSecondary: KAppColor.lightOnSecondaryColor,
-      tertiary: KAppColor.lightTertiaryColor,
-      surface: KAppColor.lightBackgroundColor,
-      background: KAppColor.lightBackgroundColor,
-      onBackground: KAppColor.lightOnBackgroundColor,
-      error: KAppColor.lightErrorColor,
-      onError: KAppColor.lightOnErrorColor,
-    ),
-    textTheme: KTextTheme.lightTextTheme,
-    appBarTheme: KAppBarTheme.lightAppBarTheme,
-    iconTheme: KIconTheme.lightIconTheme,
-    bottomNavigationBarTheme:
-        KBottomNavigationBarTheme.lightBottomNavigationBar,
-    bottomSheetTheme: KBottomSheetTheme.lightBottomSheetTheme,
-    elevatedButtonTheme: KElevatedButtonTheme.lightElevatedButtonTheme,
-    outlinedButtonTheme: KOutlineButtonThemeData.lightOutlineButtonTheme,
-    inputDecorationTheme: KTextFormFieldTheme.lightInputDecorationTheme,
-  );
+  static final ralewayTextTheme = GoogleFonts.ralewayTextTheme();
 
-  static ThemeData dark = ThemeData(
+  static ThemeData theme = ThemeData(
     useMaterial3: true,
-    brightness: Brightness.dark,
-    primaryColor: KAppColor.darkPrimaryColor,
-    scaffoldBackgroundColor: KAppColor.darkBackgroundColor,
-    textTheme: KTextTheme.darkTextTheme,
-    appBarTheme: KAppBarTheme.darkAppBarTheme,
-    iconTheme: KIconTheme.darkIconTheme,
-    bottomNavigationBarTheme: KBottomNavigationBarTheme.darkBottomNavigationBar,
-    bottomSheetTheme: KBottomSheetTheme.darkBottomSheetTheme,
-    elevatedButtonTheme: KElevatedButtonTheme.darkElevatedButtonTheme,
-    outlinedButtonTheme: KOutlineButtonThemeData.darkOutlineButtonTheme,
-    inputDecorationTheme: KTextFormFieldTheme.darInputDecorationTheme,
+    primaryColor: KAppColor.primaryColor,
+    scaffoldBackgroundColor: KAppColor.backgroundColor,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: KAppColor.primaryColor,
+      primary: KAppColor.primaryColor,
+      onPrimary: KAppColor.onPrimaryColor,
+      secondary: KAppColor.secondaryColor,
+      onSecondary: KAppColor.onSecondaryColor,
+      surface: KAppColor.surfaceColor,
+      background: KAppColor.backgroundColor,
+      onBackground: KAppColor.onBackgroundColor,
+      error: KAppColor.errorColor,
+      onError: KAppColor.onErrorColor,
+    ),
+    textTheme: ralewayTextTheme.merge(KTextTheme.textTheme),
+    appBarTheme: KAppBarTheme.appBarTheme,
+    iconTheme: KIconTheme.iconTheme,
+    bottomNavigationBarTheme: KBottomNavigationBarTheme.bottomNavigationBar,
+    bottomSheetTheme: KBottomSheetTheme.bottomSheetTheme,
+    elevatedButtonTheme: KElevatedButtonTheme.elevatedButtonTheme,
+    outlinedButtonTheme: KOutlineButtonThemeData.outlineButtonTheme,
+    inputDecorationTheme: KTextFormFieldTheme.inputDecorationTheme,
   );
 }
