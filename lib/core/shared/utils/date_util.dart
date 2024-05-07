@@ -16,9 +16,15 @@ class DateUtil {
 }
 
 extension DateTimeExtension on DateTime {
-  String format({
+  String format([String format = 'dd/MM/yyyy HH:mm:ss']) {
+    return DateFormat(format).format(this);
+  }
+}
+
+extension StringExtension on String {
+  DateTime toDateTime({
     String format = 'dd/MM/yyyy HH:mm:ss',
   }) {
-    return DateFormat(format).format(this);
+    return DateFormat(format).parse(this);
   }
 }

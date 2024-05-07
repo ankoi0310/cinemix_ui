@@ -1,7 +1,9 @@
 import 'package:cinemix_ui/core/shared/enums/theater_enum.dart';
+import 'package:cinemix_ui/core/shared/utils/date_util.dart';
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
+import 'package:cinemix_ui/src/seat/data/models/room_model.dart';
+import 'package:cinemix_ui/src/seat/data/models/ticket_price_model.dart';
 import 'package:cinemix_ui/src/theater/domain/entities/theater.dart';
-import 'package:intl/intl.dart';
 
 class TheaterModel extends Theater {
   const TheaterModel({
@@ -10,6 +12,8 @@ class TheaterModel extends Theater {
     required super.hotline,
     required super.image,
     required super.state,
+    required super.rooms,
+    required super.ticketPrices,
     super.id,
     super.createdDate,
     super.modifiedDate,
@@ -23,10 +27,16 @@ class TheaterModel extends Theater {
       hotline: map['hotline'] as String,
       image: map['image'] as String,
       state: (map['state'] as String).toTheaterState(),
-      createdDate:
-          DateFormat('dd/MM/yyyy HH:mm:ss').parse(map['createdDate'] as String),
-      modifiedDate: DateFormat('dd/MM/yyyy HH:mm:ss')
-          .parse(map['modifiedDate'] as String),
+      rooms: map['rooms'] != null
+          ? (map['rooms'] as List)
+              .map((e) => RoomModel.fromMap(e as DataMap))
+              .toList()
+          : [],
+      ticketPrices: (map['ticketPrices'] as List)
+          .map((e) => TicketPriceModel.fromMap(e as DataMap))
+          .toList(),
+      createdDate: (map['createdDate'] as String).toDateTime(),
+      modifiedDate: (map['modifiedDate'] as String).toDateTime(),
     );
   }
 
@@ -37,9 +47,13 @@ class TheaterModel extends Theater {
       'address': address,
       'hotline': hotline,
       'image': image,
-      'state': state.toString(),
-      'createdDate': createdDate,
-      'modifiedDate': modifiedDate,
+      'state': state.name,
+      'rooms': rooms.map((room) => (room as RoomModel).toMap()).toList(),
+      'ticketPrices': ticketPrices
+          .map((ticketPrice) => (ticketPrice as TicketPriceModel).toMap())
+          .toList(),
+      'createdDate': createdDate?.format(),
+      'modifiedDate': modifiedDate?.format(),
     };
   }
 
@@ -50,6 +64,8 @@ class TheaterModel extends Theater {
     String? hotline,
     String? image,
     TheaterState? state,
+    List<RoomModel>? rooms,
+    List<TicketPriceModel>? ticketPrices,
     DateTime? createdDate,
     DateTime? modifiedDate,
   }) {
@@ -60,6 +76,8 @@ class TheaterModel extends Theater {
       hotline: hotline ?? this.hotline,
       image: image ?? this.image,
       state: state ?? this.state,
+      rooms: rooms ?? this.rooms,
+      ticketPrices: ticketPrices ?? this.ticketPrices,
       createdDate: createdDate ?? this.createdDate,
       modifiedDate: modifiedDate ?? this.modifiedDate,
     );

@@ -23,7 +23,7 @@ class MovieCard extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          movie.releasedDate.format(format: 'dd/MM/yyyy'),
+          movie.releasedDate.format('dd/MM/yyyy'),
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 color: KAppColor.primaryColor,
                 fontWeight: FontWeight.bold,

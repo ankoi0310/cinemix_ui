@@ -1,7 +1,15 @@
 import 'package:cinemix_ui/core/res/color/color.dart';
 import 'package:flutter/material.dart';
 
-enum SeatStyle { single, couple, bed }
+enum SeatStyle {
+  single('Đơn'),
+  couple('Đôi'),
+  bed('Giường');
+
+  const SeatStyle(this.title);
+
+  final String title;
+}
 
 enum SeatColor {
   single(title: 'Ghế đơn', color: KAppColor.primaryColor),

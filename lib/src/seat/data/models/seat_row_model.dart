@@ -1,7 +1,7 @@
+import 'package:cinemix_ui/core/shared/utils/date_util.dart';
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
 import 'package:cinemix_ui/src/seat/data/models/seat_model.dart';
 import 'package:cinemix_ui/src/seat/domain/entities/seat_row.dart';
-import 'package:intl/intl.dart';
 
 class SeatRowModel extends SeatRow {
   const SeatRowModel({
@@ -19,10 +19,8 @@ class SeatRowModel extends SeatRow {
       seats: (map['seats'] as List)
           .map((e) => SeatModel.fromMap(e as DataMap))
           .toList(),
-      createdDate:
-          DateFormat('dd/MM/yyyy HH:mm:ss').parse(map['createdDate'] as String),
-      modifiedDate: DateFormat('dd/MM/yyyy HH:mm:ss')
-          .parse(map['modifiedDate'] as String),
+      createdDate: (map['createdDate'] as String).toDateTime(),
+      modifiedDate: (map['modifiedDate'] as String).toDateTime(),
     );
   }
 
@@ -30,9 +28,9 @@ class SeatRowModel extends SeatRow {
     return {
       'id': id,
       'name': name,
-      'seats': (seats as List<SeatModel>).map((e) => e.toMap()).toList(),
-      'createdDate': createdDate,
-      'modifiedDate': modifiedDate,
+      'seats': seats.map((e) => (e as SeatModel).toMap()).toList(),
+      'createdDate': createdDate?.format(),
+      'modifiedDate': modifiedDate?.format(),
     };
   }
 

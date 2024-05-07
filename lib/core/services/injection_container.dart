@@ -16,9 +16,19 @@ import 'package:cinemix_ui/src/onboarding/domain/repositories/onbroading_reposit
 import 'package:cinemix_ui/src/onboarding/domain/usecases/cache_first_time.dart';
 import 'package:cinemix_ui/src/onboarding/domain/usecases/is_first_time.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/cubit/onboarding_cubit.dart';
+import 'package:cinemix_ui/src/seat/data/datasouce/ticket_price_local_data_source.dart';
+import 'package:cinemix_ui/src/seat/data/repositories/ticket_price_repository_impl.dart';
+import 'package:cinemix_ui/src/seat/domain/repositories/ticket_price_repository.dart';
+import 'package:cinemix_ui/src/seat/domain/usecases/cache_selected_options.dart';
+import 'package:cinemix_ui/src/seat/domain/usecases/clear_selected_options.dart';
+import 'package:cinemix_ui/src/seat/domain/usecases/get_selected_options.dart';
+import 'package:cinemix_ui/src/seat/presentation/cubit/seat_option_cubit.dart';
+import 'package:cinemix_ui/src/showtime/data/datasource/showtime_local_data_source.dart';
 import 'package:cinemix_ui/src/showtime/data/datasource/showtime_remote_data_source.dart';
 import 'package:cinemix_ui/src/showtime/data/repositories/showtime_repository_impl.dart';
 import 'package:cinemix_ui/src/showtime/domain/repositories/showtime_repository.dart';
+import 'package:cinemix_ui/src/showtime/domain/usecases/cache_selected_showtime.dart';
+import 'package:cinemix_ui/src/showtime/domain/usecases/get_selected_showtime.dart';
 import 'package:cinemix_ui/src/showtime/domain/usecases/search_showtime.dart';
 import 'package:cinemix_ui/src/showtime/presentation/cubit/showtime_cubit.dart';
 import 'package:flutter/cupertino.dart';
@@ -52,7 +62,20 @@ Future<void> init() async {
         searchMovie: sl(),
       ),
     )
-    ..registerFactory(() => ShowtimeCubit(searchShowtime: sl()))
+    ..registerFactory(
+      () => ShowtimeCubit(
+        searchShowtime: sl(),
+        cacheSelectedShowtime: sl(),
+        getSelectedShowtime: sl(),
+      ),
+    )
+    ..registerFactory(
+      () => SeatOptionCubit(
+        cacheSelectedOptions: sl(),
+        getSelectedOptions: sl(),
+        clearSelectedOptions: sl(),
+      ),
+    )
 
     // Use cases
     ..registerLazySingleton(() => CacheFirstTime(sl()))
@@ -62,6 +85,11 @@ Future<void> init() async {
     ..registerLazySingleton(() => GetMovieById(sl()))
     ..registerLazySingleton(() => SearchMovie(sl()))
     ..registerLazySingleton(() => SearchShowtime(sl()))
+    ..registerLazySingleton(() => CacheSelectedShowtime(sl()))
+    ..registerLazySingleton(() => GetSelectedShowtime(sl()))
+    ..registerLazySingleton(() => CacheSelectedOptions(sl()))
+    ..registerLazySingleton(() => GetSelectedOptions(sl()))
+    ..registerLazySingleton(() => ClearSelectedOptions(sl()))
 
     // Repository
     ..registerLazySingleton<OnboardingRepository>(
@@ -74,7 +102,10 @@ Future<void> init() async {
       () => MovieRepositoryImpl(sl()),
     )
     ..registerLazySingleton<ShowtimeRepository>(
-      () => ShowtimeRepositoryImpl(sl()),
+      () => ShowtimeRepositoryImpl(sl(), sl()),
+    )
+    ..registerLazySingleton<TicketPriceRepository>(
+      () => TicketPriceRepositoryImpl(sl()),
     )
 
     // Data sources
@@ -89,6 +120,12 @@ Future<void> init() async {
     )
     ..registerLazySingleton<ShowtimeRemoteDataSource>(
       () => ShowtimeRemoteDataSourceImpl(client: sl()),
+    )
+    ..registerLazySingleton<ShowtimeLocalDataSource>(
+      () => ShowtimeLocalDataSourceImpl(sl()),
+    )
+    ..registerLazySingleton<TicketPriceLocalDataSource>(
+      () => TicketPriceLocalDataSourceImpl(sl()),
     )
 
     // External

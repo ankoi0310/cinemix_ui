@@ -6,4 +6,8 @@ abstract class ShowtimeRepository {
   const ShowtimeRepository();
 
   ResultFuture<List<Showtime>> search(ShowtimeSearchParams params);
+
+  VoidFuture cacheSelectedShowtime(Showtime params);
+
+  ResultFuture<Showtime?> getSelectedShowtime();
 }

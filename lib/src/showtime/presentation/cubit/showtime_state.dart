@@ -24,7 +24,7 @@ final class ShowtimeListLoaded extends ShowtimeState {
         <Theater, List<Showtime>>{},
         (Map<Theater, List<Showtime>> acc, showtime) {
           final theater = showtime.room.theater;
-          (acc[theater] ??= <Showtime>[]).add(showtime);
+          (acc[theater!] ??= <Showtime>[]).add(showtime);
           return acc;
         },
       );
@@ -40,4 +40,25 @@ final class ShowtimeError extends ShowtimeState {
 
   @override
   List<Object> get props => [message];
+}
+
+final class CachingSelectedShowtime extends ShowtimeState {
+  const CachingSelectedShowtime();
+}
+
+final class CacheSelectedShowtimeSuccess extends ShowtimeState {
+  const CacheSelectedShowtimeSuccess();
+}
+
+final class GettingSelectedShowtime extends ShowtimeState {
+  const GettingSelectedShowtime();
+}
+
+final class GetSelectedShowtimeSuccess extends ShowtimeState {
+  const GetSelectedShowtimeSuccess(this.showtime);
+
+  final Showtime showtime;
+
+  @override
+  List<Object> get props => [showtime];
 }

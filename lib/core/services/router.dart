@@ -12,6 +12,8 @@ import 'package:cinemix_ui/src/movie/presentation/cubit/movie_cubit.dart';
 import 'package:cinemix_ui/src/movie/presentation/views/movie_detail_screen.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/views/onboarding_screen.dart';
+import 'package:cinemix_ui/src/seat/presentation/cubit/seat_option_cubit.dart';
+import 'package:cinemix_ui/src/seat/presentation/views/seat_option_screen.dart';
 import 'package:cinemix_ui/src/seat/presentation/views/seat_selection_screen.dart';
 import 'package:cinemix_ui/src/showtime/domain/entities/showtime.dart';
 import 'package:cinemix_ui/src/showtime/presentation/cubit/showtime_cubit.dart';
@@ -75,6 +77,21 @@ Route<dynamic> generateRoute(RouteSettings settings) {
             ),
           ],
           child: MovieDetailScreen(movieId: settings.arguments! as int),
+        ),
+        settings: settings,
+      );
+    case SeatOptionScreen.routeName:
+      return _pageBuilder(
+        pageBuilder: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) => sl<ShowtimeCubit>(),
+            ),
+            BlocProvider(
+              create: (_) => sl<SeatOptionCubit>(),
+            ),
+          ],
+          child: const SeatOptionScreen(),
         ),
         settings: settings,
       );

@@ -2,12 +2,12 @@ import 'package:equatable/equatable.dart';
 
 class BaseEntity extends Equatable {
   const BaseEntity({
+    this.id = 0,
     this.createdDate,
     this.modifiedDate,
-    this.id,
   });
 
-  final int? id;
+  final int id;
   final DateTime? createdDate;
   final DateTime? modifiedDate;
 

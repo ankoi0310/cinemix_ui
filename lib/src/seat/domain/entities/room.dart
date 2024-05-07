@@ -21,7 +21,7 @@ class Room extends BaseEntity {
   final int maxColumn;
   final int seatCount;
   final bool available;
-  final Theater theater;
+  final Theater? theater;
   final List<SeatRow> rows;
 
   @override

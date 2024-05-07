@@ -69,7 +69,7 @@ class _ScheduleState extends State<Schedule> {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          entry.value.format(format: 'dd/MM'),
+                          entry.value.format('dd/MM'),
                           style:
                               Theme.of(context).textTheme.titleSmall!.copyWith(
                                     fontWeight: FontWeight.w600,

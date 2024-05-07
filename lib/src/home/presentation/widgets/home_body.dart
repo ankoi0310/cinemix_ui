@@ -26,17 +26,19 @@ class HomeBody extends StatelessWidget {
           return const LoadingView();
         }
 
-        return const SingleChildScrollView(
+        final showingMovies = (state as MovieListLoaded).showingMovies;
+        final comingSoonMovies = state.comingSoonMovies;
+        return SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              WelcomeHeader(),
-              SizedBox(height: 12),
-              CustomSearchBar(),
-              SizedBox(height: 24),
-              ShowingWidget(),
-              SizedBox(height: 24),
-              ComingSoonWidget(),
+              const WelcomeHeader(),
+              const SizedBox(height: 12),
+              const CustomSearchBar(),
+              const SizedBox(height: 24),
+              ShowingWidget(movies: showingMovies),
+              const SizedBox(height: 24),
+              ComingSoonWidget(movies: comingSoonMovies),
             ],
           ),
         );
