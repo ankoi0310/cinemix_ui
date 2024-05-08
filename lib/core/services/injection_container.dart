@@ -28,6 +28,7 @@ import 'package:cinemix_ui/src/showtime/data/datasource/showtime_remote_data_sou
 import 'package:cinemix_ui/src/showtime/data/repositories/showtime_repository_impl.dart';
 import 'package:cinemix_ui/src/showtime/domain/repositories/showtime_repository.dart';
 import 'package:cinemix_ui/src/showtime/domain/usecases/cache_selected_showtime.dart';
+import 'package:cinemix_ui/src/showtime/domain/usecases/clear_selected_showtime.dart';
 import 'package:cinemix_ui/src/showtime/domain/usecases/get_selected_showtime.dart';
 import 'package:cinemix_ui/src/showtime/domain/usecases/search_showtime.dart';
 import 'package:cinemix_ui/src/showtime/presentation/cubit/showtime_cubit.dart';
@@ -67,6 +68,7 @@ Future<void> init() async {
         searchShowtime: sl(),
         cacheSelectedShowtime: sl(),
         getSelectedShowtime: sl(),
+        clearSelectedShowtime: sl(),
       ),
     )
     ..registerFactory(
@@ -87,6 +89,7 @@ Future<void> init() async {
     ..registerLazySingleton(() => SearchShowtime(sl()))
     ..registerLazySingleton(() => CacheSelectedShowtime(sl()))
     ..registerLazySingleton(() => GetSelectedShowtime(sl()))
+    ..registerLazySingleton(() => ClearCachedShowtime(sl()))
     ..registerLazySingleton(() => CacheSelectedOptions(sl()))
     ..registerLazySingleton(() => GetSelectedOptions(sl()))
     ..registerLazySingleton(() => ClearSelectedOptions(sl()))

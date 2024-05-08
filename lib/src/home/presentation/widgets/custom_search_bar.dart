@@ -8,20 +8,23 @@ class CustomSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SearchBar(
-      padding: const MaterialStatePropertyAll(
-        EdgeInsets.symmetric(
-          horizontal: 12,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: SearchBar(
+        padding: const MaterialStatePropertyAll(
+          EdgeInsets.symmetric(
+            horizontal: 12,
+          ),
         ),
-      ),
-      leading: const Icon(
-        IconsaxPlusLinear.search_normal_1,
-        color: Colors.grey,
-      ),
-      hintText: 'Tìm kiếm phim, diễn viên, đạo diễn...',
-      hintStyle: MaterialStatePropertyAll(
-        TextStyle(
-          color: Colors.grey[600],
+        leading: const Icon(
+          IconsaxPlusLinear.search_normal_1,
+          color: Colors.grey,
+        ),
+        hintText: 'Tìm kiếm phim, diễn viên, đạo diễn...',
+        hintStyle: MaterialStatePropertyAll(
+          TextStyle(
+            color: Colors.grey[600],
+          ),
         ),
       ),
     );

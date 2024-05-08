@@ -46,7 +46,6 @@ class SeatOptionCubit extends Cubit<SeatOptionState> {
   }
 
   Future<void> clearSelectedOptions() async {
-    emit(const SeatOptionLoading());
     final result = await _clearSelectedOptions();
 
     result.fold(

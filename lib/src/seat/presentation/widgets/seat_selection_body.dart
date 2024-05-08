@@ -3,13 +3,19 @@ import 'package:cinemix_ui/core/common/widgets/floating_back_button.dart';
 import 'package:cinemix_ui/core/res/color/color.dart';
 import 'package:cinemix_ui/src/seat/presentation/widgets/seat_status_list.dart';
 import 'package:cinemix_ui/src/seat/presentation/widgets/seat_table.dart';
+import 'package:cinemix_ui/src/seat/presentation/widgets/showtime_list.dart';
 import 'package:cinemix_ui/src/showtime/domain/entities/showtime.dart';
 import 'package:flutter/material.dart';
 
 class SeatSelectionBody extends StatelessWidget {
-  const SeatSelectionBody({required this.showtime, super.key});
+  const SeatSelectionBody({
+    required this.showtime,
+    required this.selectedOptions,
+    super.key,
+  });
 
   final Showtime showtime;
+  final Map<int, int> selectedOptions;
 
   @override
   Widget build(BuildContext context) {
@@ -64,20 +70,9 @@ class SeatSelectionBody extends StatelessWidget {
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 16),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 20,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: [],
-                      ),
+                    ShowtimeList(
+                      movie: showtime.movie.id,
+                      date: showtime.date,
                     ),
                   ],
                 ),
@@ -87,6 +82,7 @@ class SeatSelectionBody extends StatelessWidget {
         ),
         BottomPriceBooking(
           ticketPrices: showtime.room.theater!.ticketPrices,
+          selectedOptions: selectedOptions,
           title: 'Tiếp tục',
           onPressed: () {},
         ),

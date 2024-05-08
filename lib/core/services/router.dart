@@ -1,5 +1,6 @@
 import 'package:cinemix_ui/core/common/views/page_under_construction.dart';
 import 'package:cinemix_ui/core/services/injection_container.dart';
+import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
 import 'package:cinemix_ui/src/authentication/presentation/cubit/authentication_cubit.dart';
 import 'package:cinemix_ui/src/authentication/presentation/views/sign_in_screen.dart';
 import 'package:cinemix_ui/src/authentication/presentation/views/sign_up_screen.dart';
@@ -75,6 +76,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
             BlocProvider(
               create: (_) => sl<ShowtimeCubit>(),
             ),
+            BlocProvider(
+              create: (_) => sl<SeatOptionCubit>(),
+            ),
           ],
           child: MovieDetailScreen(movieId: settings.arguments! as int),
         ),
@@ -91,19 +95,28 @@ Route<dynamic> generateRoute(RouteSettings settings) {
               create: (_) => sl<SeatOptionCubit>(),
             ),
           ],
-          child: const SeatOptionScreen(),
+          child: SeatOptionScreen(showtime: settings.arguments! as Showtime),
         ),
         settings: settings,
       );
     case SeatSelectionScreen.routeName:
+      final arguments = settings.arguments! as DataMap;
+      final showtime = arguments['showtime'] as Showtime;
+      final selectedOptions = arguments['selectedOptions'] as Map<int, int>;
       return _pageBuilder(
         pageBuilder: (context) => MultiBlocProvider(
           providers: [
             BlocProvider(
               create: (_) => sl<ShowtimeCubit>(),
             ),
+            BlocProvider(
+              create: (_) => sl<SeatOptionCubit>(),
+            ),
           ],
-          child: SeatSelectionScreen(showtime: settings.arguments! as Showtime),
+          child: SeatSelectionScreen(
+            showtime: showtime,
+            selectedOptions: selectedOptions,
+          ),
         ),
         settings: settings,
       );

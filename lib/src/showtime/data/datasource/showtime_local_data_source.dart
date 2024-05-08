@@ -11,6 +11,8 @@ abstract class ShowtimeLocalDataSource {
   Future<void> cacheSelectedShowtime(ShowtimeModel params);
 
   Future<ShowtimeModel?> getSelectedShowtime();
+
+  Future<void> clearCachedShowtime();
 }
 
 class ShowtimeLocalDataSourceImpl implements ShowtimeLocalDataSource {
@@ -38,6 +40,15 @@ class ShowtimeLocalDataSourceImpl implements ShowtimeLocalDataSource {
       } else {
         return Future.value();
       }
+    } catch (e) {
+      throw CacheException(message: e.toString());
+    }
+  }
+
+  @override
+  Future<void> clearCachedShowtime() async {
+    try {
+      await _prefs.remove('selected_showtime');
     } catch (e) {
       throw CacheException(message: e.toString());
     }
