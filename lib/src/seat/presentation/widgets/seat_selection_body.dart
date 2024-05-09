@@ -1,11 +1,13 @@
 import 'package:cinemix_ui/core/common/widgets/bottom_price_booking.dart';
 import 'package:cinemix_ui/core/common/widgets/floating_back_button.dart';
 import 'package:cinemix_ui/core/res/color/color.dart';
+import 'package:cinemix_ui/src/seat/presentation/cubit/seat/seat_cubit.dart';
 import 'package:cinemix_ui/src/seat/presentation/widgets/seat_status_list.dart';
 import 'package:cinemix_ui/src/seat/presentation/widgets/seat_table.dart';
 import 'package:cinemix_ui/src/seat/presentation/widgets/showtime_list.dart';
 import 'package:cinemix_ui/src/showtime/domain/entities/showtime.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SeatSelectionBody extends StatelessWidget {
   const SeatSelectionBody({
@@ -80,11 +82,36 @@ class SeatSelectionBody extends StatelessWidget {
             ),
           ),
         ),
-        BottomPriceBooking(
-          ticketPrices: showtime.room.theater!.ticketPrices,
-          selectedOptions: selectedOptions,
-          title: 'Tiếp tục',
-          onPressed: () {},
+        BlocBuilder<SeatCubit, SeatState>(
+          builder: (context, state) {
+            if (state is SeatLoaded) {
+              final selectedSeats = state.selectedSeats;
+              return BottomPriceBooking(
+                ticketPrices: showtime.room.theater!.ticketPrices,
+                selectedOptions: selectedOptions,
+                selectedSeats: selectedSeats,
+                title: 'Tiếp tục',
+                onPressed: () {
+                  // TODO(checkout): navigate to checkout screen
+                  Navigator.of(context).pushNamed(
+                    '/checkout',
+                    arguments: {
+                      'showtime': showtime,
+                      'selectedSeats': selectedSeats,
+                      'selectedOptions': selectedOptions,
+                    },
+                  );
+                },
+              );
+            }
+
+            return BottomPriceBooking(
+              ticketPrices: showtime.room.theater!.ticketPrices,
+              selectedOptions: selectedOptions,
+              title: 'Tiếp tục',
+              onPressed: () {},
+            );
+          },
         ),
         const FloatingBackButton(),
       ],

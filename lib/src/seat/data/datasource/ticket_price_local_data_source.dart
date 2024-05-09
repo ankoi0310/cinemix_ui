@@ -13,7 +13,7 @@ abstract class TicketPriceLocalDataSource {
 
   Future<Map<int, int>> getSelectedOptions();
 
-  Future<void> clearSelectedOptions();
+  Future<void> clearCachedOptions();
 }
 
 class TicketPriceLocalDataSourceImpl implements TicketPriceLocalDataSource {
@@ -65,7 +65,7 @@ class TicketPriceLocalDataSourceImpl implements TicketPriceLocalDataSource {
   }
 
   @override
-  Future<void> clearSelectedOptions() {
+  Future<void> clearCachedOptions() {
     try {
       return _prefs.remove('selected_options');
     } catch (e) {

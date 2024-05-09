@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:cinemix_ui/src/seat/domain/usecases/cache_selected_options.dart';
-import 'package:cinemix_ui/src/seat/domain/usecases/clear_selected_options.dart';
-import 'package:cinemix_ui/src/seat/domain/usecases/get_selected_options.dart';
+import 'package:cinemix_ui/src/seat/domain/usecases/seat_option/cache_selected_options.dart';
+import 'package:cinemix_ui/src/seat/domain/usecases/seat_option/clear_cached_options.dart';
+import 'package:cinemix_ui/src/seat/domain/usecases/seat_option/get_selected_options.dart';
 import 'package:equatable/equatable.dart';
 
 part 'seat_option_state.dart';
@@ -10,15 +10,15 @@ class SeatOptionCubit extends Cubit<SeatOptionState> {
   SeatOptionCubit(
       {required CacheSelectedOptions cacheSelectedOptions,
       required GetSelectedOptions getSelectedOptions,
-      required ClearSelectedOptions clearSelectedOptions})
+      required ClearCachedOptions clearCachedOptions})
       : _cacheSelectedOptions = cacheSelectedOptions,
         _getSelectedOptions = getSelectedOptions,
-        _clearSelectedOptions = clearSelectedOptions,
+        _clearCachedOptions = clearCachedOptions,
         super(const SeatOptionInitial());
 
   final CacheSelectedOptions _cacheSelectedOptions;
   final GetSelectedOptions _getSelectedOptions;
-  final ClearSelectedOptions _clearSelectedOptions;
+  final ClearCachedOptions _clearCachedOptions;
 
   Future<void> cacheSelectedOptions({
     required int ticketPriceId,
@@ -45,8 +45,8 @@ class SeatOptionCubit extends Cubit<SeatOptionState> {
     );
   }
 
-  Future<void> clearSelectedOptions() async {
-    final result = await _clearSelectedOptions();
+  Future<void> clearCachedOptions() async {
+    final result = await _clearCachedOptions();
 
     result.fold(
       (l) => emit(SeatOptionError(l.message)),

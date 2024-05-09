@@ -1,7 +1,6 @@
-import 'package:cinemix_ui/src/movie_detail/domain/entities/showtime.dart';
+import 'package:cinemix_ui/src/showtime/domain/entities/showtime.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:intl/intl.dart';
 
 class ShowtimeInfoCard extends StatelessWidget {
   const ShowtimeInfoCard({
@@ -28,7 +27,7 @@ class ShowtimeInfoCard extends StatelessWidget {
                 topLeft: Radius.circular(16),
                 bottomLeft: Radius.circular(16),
               ),
-              child: Image.asset(showtime.movie.poster),
+              child: Image.network(showtime.movie.posterUrl),
             ),
           ),
           Expanded(
@@ -39,9 +38,10 @@ class ShowtimeInfoCard extends StatelessWidget {
                 vertical: 12,
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    showtime.movie.title,
+                    showtime.movie.name,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -53,33 +53,45 @@ class ShowtimeInfoCard extends StatelessWidget {
                   Column(
                     children: [
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Icon(IconsaxPlusLinear.video_play, size: 16),
                           const SizedBox(width: 8),
-                          Text(
-                            showtime.movie.genres.map((e) => e.name).join(', '),
-                            style: Theme.of(context).textTheme.bodySmall,
+                          Flexible(
+                            child: Text(
+                              showtime.movie.genres
+                                  .map((e) => e.name)
+                                  .join(', '),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 8),
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Icon(IconsaxPlusLinear.location, size: 16),
                           const SizedBox(width: 8),
-                          Text(
-                            showtime.room.theater.name,
-                            style: Theme.of(context).textTheme.bodySmall,
+                          Flexible(
+                            child: Text(
+                              showtime.room.theater!.name,
+                              maxLines: 2,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 8),
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Icon(IconsaxPlusLinear.clock_1, size: 16),
                           const SizedBox(width: 8),
                           Text(
-                            DateFormat('hh:mm a').format(showtime.startTime),
+                            '${showtime.startTime} - ${showtime.date}',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],

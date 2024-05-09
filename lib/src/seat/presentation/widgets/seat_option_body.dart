@@ -1,7 +1,7 @@
 import 'package:cinemix_ui/core/common/widgets/bottom_price_booking.dart';
 import 'package:cinemix_ui/core/common/widgets/floating_back_button.dart';
 import 'package:cinemix_ui/src/movie/presentation/widgets/movie_detail_card.dart';
-import 'package:cinemix_ui/src/seat/presentation/cubit/seat_option_cubit.dart';
+import 'package:cinemix_ui/src/seat/presentation/cubit/seat_option/seat_option_cubit.dart';
 import 'package:cinemix_ui/src/seat/presentation/views/seat_selection_screen.dart';
 import 'package:cinemix_ui/src/seat/presentation/widgets/seat_option_list.dart';
 import 'package:cinemix_ui/src/showtime/domain/entities/showtime.dart';

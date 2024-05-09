@@ -1,6 +1,6 @@
 import 'package:cinemix_ui/core/res/color/color.dart';
 import 'package:cinemix_ui/src/seat/domain/entities/ticket_price.dart';
-import 'package:cinemix_ui/src/seat/presentation/cubit/seat_option_cubit.dart';
+import 'package:cinemix_ui/src/seat/presentation/cubit/seat_option/seat_option_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:input_quantity/input_quantity.dart';

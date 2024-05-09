@@ -13,7 +13,9 @@ import 'package:cinemix_ui/src/movie/presentation/cubit/movie_cubit.dart';
 import 'package:cinemix_ui/src/movie/presentation/views/movie_detail_screen.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/views/onboarding_screen.dart';
-import 'package:cinemix_ui/src/seat/presentation/cubit/seat_option_cubit.dart';
+import 'package:cinemix_ui/src/seat/domain/entities/seat.dart';
+import 'package:cinemix_ui/src/seat/presentation/cubit/seat/seat_cubit.dart';
+import 'package:cinemix_ui/src/seat/presentation/cubit/seat_option/seat_option_cubit.dart';
 import 'package:cinemix_ui/src/seat/presentation/views/seat_option_screen.dart';
 import 'package:cinemix_ui/src/seat/presentation/views/seat_selection_screen.dart';
 import 'package:cinemix_ui/src/showtime/domain/entities/showtime.dart';
@@ -112,6 +114,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
             BlocProvider(
               create: (_) => sl<SeatOptionCubit>(),
             ),
+            BlocProvider(
+              create: (_) => sl<SeatCubit>(),
+            ),
           ],
           child: SeatSelectionScreen(
             showtime: showtime,
@@ -121,8 +126,16 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         settings: settings,
       );
     case CheckoutScreen.routeName:
+      final arguments = settings.arguments! as DataMap;
+      final showtime = arguments['showtime'] as Showtime;
+      final selectedSeats = arguments['selectedSeats'] as List<Seat>;
+      final selectedOptions = arguments['selectedOptions'] as Map<int, int>;
       return _pageBuilder(
-        pageBuilder: (context) => const CheckoutScreen(),
+        pageBuilder: (context) => CheckoutScreen(
+          showtime: showtime,
+          selectedSeats: selectedSeats,
+          selectedOptions: selectedOptions,
+        ),
         settings: settings,
       );
     case SuccessfulPaymentScreen.routeName:

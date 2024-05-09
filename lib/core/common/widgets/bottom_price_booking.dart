@@ -1,4 +1,5 @@
 import 'package:cinemix_ui/core/res/color/color.dart';
+import 'package:cinemix_ui/src/seat/domain/entities/seat.dart';
 import 'package:cinemix_ui/src/seat/domain/entities/ticket_price.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -9,11 +10,13 @@ class BottomPriceBooking extends StatelessWidget {
     required this.selectedOptions,
     required this.title,
     required this.onPressed,
+    this.selectedSeats = const [],
     super.key,
   });
 
   final List<TicketPrice> ticketPrices;
   final Map<int, int> selectedOptions;
+  final List<Seat> selectedSeats;
   final String title;
   final VoidCallback onPressed;
 
@@ -39,14 +42,25 @@ class BottomPriceBooking extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          '$quantity ghế:',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        const SizedBox(width: 8),
-                      ],
+                    Text.rich(
+                      TextSpan(
+                        text: '$quantity ghế: ',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        children: [
+                          const WidgetSpan(child: SizedBox(width: 4)),
+                          TextSpan(
+                            text: seatNames,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: KAppColor.primaryColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                        ],
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
                     Row(
@@ -61,7 +75,7 @@ class BottomPriceBooking extends StatelessWidget {
                           NumberFormat.currency(
                             locale: 'vi',
                             symbol: 'VND',
-                          ).format(price),
+                          ).format(totalPrice),
                           style:
                               Theme.of(context).textTheme.titleMedium!.copyWith(
                                     color: KAppColor.primaryColor,
@@ -73,6 +87,7 @@ class BottomPriceBooking extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(width: 16),
               Expanded(
                 flex: 2,
                 child: TextButton(
@@ -103,11 +118,22 @@ class BottomPriceBooking extends StatelessWidget {
     );
   }
 
+  String get seatNames {
+    // Get the names of the seats
+    var names = selectedSeats.map((seat) => seat.name).toList();
+
+    // Remove duplicates by converting the list to a set and back to a list
+    names = names.toSet().toList()..sort(); // Sort the names
+
+    // Join the names with a comma and return the result
+    return names.join(', ');
+  }
+
   int get quantity {
     return selectedOptions.values.fold(0, (a, b) => a + b);
   }
 
-  int get price {
+  int get totalPrice {
     return selectedOptions.entries.fold(
       0,
       (previousValue, element) {
