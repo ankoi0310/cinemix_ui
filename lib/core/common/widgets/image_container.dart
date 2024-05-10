@@ -16,7 +16,7 @@ class ImageContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (orientation) {
       case ImageOrientation.portrait:
-        return Container(
+        return SizedBox(
           height: 244,
           width: 173,
           child: ClipRRect(

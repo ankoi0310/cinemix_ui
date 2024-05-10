@@ -11,6 +11,7 @@ import 'package:cinemix_ui/src/checkout/presentation/views/successful_payment_sc
 import 'package:cinemix_ui/src/home/presentation/views/home_screen.dart';
 import 'package:cinemix_ui/src/movie/presentation/cubit/movie_cubit.dart';
 import 'package:cinemix_ui/src/movie/presentation/views/movie_detail_screen.dart';
+import 'package:cinemix_ui/src/movie/presentation/views/movie_search_screen.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:cinemix_ui/src/seat/domain/entities/seat.dart';
@@ -65,6 +66,18 @@ Route<dynamic> generateRoute(RouteSettings settings) {
             ),
           ],
           child: const HomeScreen(),
+        ),
+        settings: settings,
+      );
+    case MovieSearchScreen.routeName:
+      return _pageBuilder(
+        pageBuilder: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) => sl<MovieCubit>(),
+            ),
+          ],
+          child: MovieSearchScreen(keyword: settings.arguments as String?),
         ),
         settings: settings,
       );
