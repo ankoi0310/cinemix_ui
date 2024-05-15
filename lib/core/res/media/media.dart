@@ -15,9 +15,7 @@ class KAppMedia {
   static const logo = '$baseImage/logo.png';
 
   // welcome banners
-  static const welcomeBanner1 = '$baseImage/welcome_banner_1.jpg';
-  static const welcomeBanner2 = '$baseImage/welcome_banner_2.jpg';
-  static const welcomeBanner3 = '$baseImage/welcome_banner_3.jpg';
+  static const welcome = '$baseImage/welcome.png';
 
   // movies
   static const comingSoon = '$baseImage/movies/coming_soon.jpg';
@@ -29,6 +27,8 @@ class KAppMedia {
   static const momo = '$baseImage/payments/momo.png';
   static const shopeePay = '$baseImage/payments/shopee_pay.png';
   static const zaloPay = '$baseImage/payments/zalo_pay.png';
+
+  static const splash = '$baseImage/splash/android12splash.png';
 
   static const loading = '$baseLottie/loading.json';
   static const loadingDots = '$baseLottie/loading_dots.json';

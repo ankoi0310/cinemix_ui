@@ -9,7 +9,10 @@ class FormBuilder {
     return TextFormField(
       controller: controller,
       focusNode: focusNode,
-      decoration: const InputDecoration(labelText: 'Họ tên'),
+      decoration: const InputDecoration(
+        labelText: 'Họ tên',
+        hintText: 'Họ và tên của bạn',
+      ),
       validator: (value) {
         if (value!.isEmpty) {
           return 'Hãy nhập họ tên của bạn';
@@ -26,7 +29,10 @@ class FormBuilder {
     return TextFormField(
       controller: controller,
       focusNode: focusNode,
-      decoration: const InputDecoration(labelText: 'Số điện thoại'),
+      decoration: const InputDecoration(
+        labelText: 'Số điện thoại',
+        hintText: 'Số điện thoại của bạn là...',
+      ),
       validator: (value) {
         if (value!.isEmpty) {
           return 'Hãy nhập số điện thoại của bạn';

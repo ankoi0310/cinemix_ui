@@ -62,3 +62,11 @@ final class GetSelectedShowtimeSuccess extends ShowtimeState {
   @override
   List<Object> get props => [showtime];
 }
+
+final class ClearingCachedShowtime extends ShowtimeState {
+  const ClearingCachedShowtime();
+}
+
+final class ClearCachedShowtimeSuccess extends ShowtimeState {
+  const ClearCachedShowtimeSuccess();
+}

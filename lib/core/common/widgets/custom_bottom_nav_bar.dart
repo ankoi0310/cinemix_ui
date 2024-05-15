@@ -1,5 +1,6 @@
 import 'package:cinemix_ui/core/common/widgets/custom_icon.dart';
 import 'package:cinemix_ui/core/common/widgets/custom_text.dart';
+import 'package:cinemix_ui/core/res/color/color.dart';
 import 'package:cinemix_ui/core/res/viewmodel/nav_item.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,11 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         highlightColor: Colors.transparent,
       ),
       child: BottomAppBar(
-        elevation: 0,
+        color: Color.lerp(
+          KAppColor.secondaryColor,
+          KAppColor.primaryColor,
+          0.05,
+        ),
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -1,9 +1,9 @@
 import 'package:cinemix_ui/core/errors/exceptions.dart';
 import 'package:cinemix_ui/core/errors/failures.dart';
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
-import 'package:cinemix_ui/src/seat/data/datasouce/ticket_price_local_data_source.dart';
+import 'package:cinemix_ui/src/seat/data/datasource/ticket_price_local_data_source.dart';
 import 'package:cinemix_ui/src/seat/domain/repositories/ticket_price_repository.dart';
-import 'package:cinemix_ui/src/seat/domain/usecases/cache_selected_options.dart';
+import 'package:cinemix_ui/src/seat/domain/usecases/seat_option/cache_selected_options.dart';
 import 'package:dartz/dartz.dart';
 
 class TicketPriceRepositoryImpl implements TicketPriceRepository {
@@ -37,9 +37,9 @@ class TicketPriceRepositoryImpl implements TicketPriceRepository {
   }
 
   @override
-  VoidFuture clearSelectedOptions() async {
+  VoidFuture clearCachedOptions() async {
     try {
-      await _localDataSource.clearSelectedOptions();
+      await _localDataSource.clearCachedOptions();
 
       return const Right(null);
     } on CacheException catch (e) {

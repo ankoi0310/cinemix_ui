@@ -1,7 +1,6 @@
 import 'package:cinemix_ui/core/common/widgets/button_builder.dart';
 import 'package:cinemix_ui/core/common/widgets/form_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -18,7 +17,6 @@ class _SignInFormState extends State<SignInForm> {
   final _usernameFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
 
-  FToast fToast = FToast();
   bool _isObscure = true;
   int currentStep = 0;
   int? errorStep;
@@ -27,35 +25,6 @@ class _SignInFormState extends State<SignInForm> {
     setState(() {
       _isObscure = !_isObscure;
     });
-  }
-
-  void _showToast(String message) {
-    final Widget toast = Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        color: Colors.greenAccent,
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.check),
-          const SizedBox(width: 12),
-          Text(message),
-        ],
-      ),
-    );
-
-    fToast.showToast(
-      child: toast,
-      gravity: ToastGravity.BOTTOM,
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fToast.init(context);
   }
 
   @override
@@ -118,8 +87,8 @@ class _SignInFormState extends State<SignInForm> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                ButtonBuilder.submitButton(
-                  context: context,
+                ButtonBuilder.fillButton(
+                  context,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {}
                   },

@@ -1,6 +1,5 @@
 import 'package:cinemix_ui/core/common/entity/base_entity.dart';
 import 'package:cinemix_ui/src/movie/domain/entities/genre.dart';
-import 'package:flutter/material.dart';
 
 class Movie extends BaseEntity {
   const Movie({
@@ -24,28 +23,24 @@ class Movie extends BaseEntity {
     super.modifiedDate,
   });
 
-  Movie.empty(int id)
+  Movie.empty(int? id)
       : this(
-          id: id,
-          name: 'The Shawshank Redemption',
-          description: 'Two imprisoned',
-          directors: 'Frank Darabont',
-          actors: 'Tim Robbins, Morgan Freeman',
-          genres: const [
-            Genre.demo1(),
-            Genre.demo2(),
-            Genre.demo3(),
-          ],
-          releasedDate: DateUtils.dateOnly(DateTime(1994, 9, 23)),
-          duration: 142,
-          country: 'Mỹ',
-          language: 'Tiếng Anh',
-          localizations: 'Phụ đề Tiếng Việt',
-          format: '2D',
-          rating: 'T18',
-          posterUrl: 'assets/images/movies/poster.jpg',
-          trailerUrl: 'https://www.youtube.com/watch?v=6hB3S9bIaco',
-          state: 'Showing',
+          id: id ?? 0,
+          name: '',
+          description: '',
+          directors: '',
+          actors: '',
+          genres: const [Genre.empty()],
+          releasedDate: DateTime.now(),
+          duration: 0,
+          country: '',
+          language: '',
+          localizations: '',
+          format: '',
+          rating: '',
+          posterUrl: '',
+          trailerUrl: '',
+          state: '',
         );
 
   final String name;
