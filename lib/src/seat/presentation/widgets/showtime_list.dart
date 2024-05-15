@@ -1,4 +1,4 @@
-import 'package:cinemix_ui/core/common/widgets/loading_widget.dart';
+import 'package:cinemix_ui/core/common/widgets/dots_loading_widget.dart';
 import 'package:cinemix_ui/core/common/widgets/showtime_item.dart';
 import 'package:cinemix_ui/src/showtime/domain/entities/showtime.dart';
 import 'package:cinemix_ui/src/showtime/presentation/cubit/showtime_cubit.dart';
@@ -48,7 +48,7 @@ class _ShowtimeListState extends State<ShowtimeList> {
         }
 
         if (state is ShowtimeLoading) {
-          return const LoadingWidget();
+          return const DotsLoadingWidget();
         }
 
         return showtimes.isEmpty

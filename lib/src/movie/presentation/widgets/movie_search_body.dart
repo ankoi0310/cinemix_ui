@@ -1,5 +1,5 @@
+import 'package:cinemix_ui/core/common/widgets/dots_loading_widget.dart';
 import 'package:cinemix_ui/core/common/widgets/floating_back_button.dart';
-import 'package:cinemix_ui/core/common/widgets/loading_widget.dart';
 import 'package:cinemix_ui/core/res/color/color.dart';
 import 'package:cinemix_ui/src/movie/presentation/cubit/movie_cubit.dart';
 import 'package:cinemix_ui/src/movie/presentation/widgets/movie_search_grid_view.dart';
@@ -61,7 +61,7 @@ class _MovieSearchBodyState extends State<MovieSearchBody>
             },
             builder: (context, state) {
               if (state is MovieLoading) {
-                return const LoadingWidget();
+                return const DotsLoadingWidget();
               }
 
               return Column(

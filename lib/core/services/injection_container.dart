@@ -1,8 +1,18 @@
+import 'package:cinemix_ui/src/authentication/data/data_sources/authentication_local_data_source.dart';
 import 'package:cinemix_ui/src/authentication/data/data_sources/authentication_remote_data_source.dart';
 import 'package:cinemix_ui/src/authentication/data/repositories/authentication_repository_impl.dart';
 import 'package:cinemix_ui/src/authentication/domain/repositories/authentication_repository.dart';
+import 'package:cinemix_ui/src/authentication/domain/usecases/get_saved_password.dart';
+import 'package:cinemix_ui/src/authentication/domain/usecases/is_save_password.dart';
+import 'package:cinemix_ui/src/authentication/domain/usecases/is_signed_in.dart';
+import 'package:cinemix_ui/src/authentication/domain/usecases/remove_saved_password.dart';
+import 'package:cinemix_ui/src/authentication/domain/usecases/save_password.dart';
+import 'package:cinemix_ui/src/authentication/domain/usecases/set_save_password.dart';
+import 'package:cinemix_ui/src/authentication/domain/usecases/set_sign_in.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/sign_in.dart';
+import 'package:cinemix_ui/src/authentication/domain/usecases/sign_out.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/sign_up.dart';
+import 'package:cinemix_ui/src/authentication/domain/usecases/verify.dart';
 import 'package:cinemix_ui/src/authentication/presentation/cubit/authentication_cubit.dart';
 import 'package:cinemix_ui/src/movie/data/datasource/movie_remote_data_source.dart';
 import 'package:cinemix_ui/src/movie/data/repositories/movie_repository_impl.dart';
@@ -62,6 +72,7 @@ Future<void> init() async {
     ..registerFactory(
       () => AuthenticationCubit(
         signUp: sl(),
+        verify: sl(),
         signIn: sl(),
       ),
     )
@@ -99,7 +110,16 @@ Future<void> init() async {
     ..registerLazySingleton(() => CacheFirstTime(sl()))
     ..registerLazySingleton(() => IsFirstTime(sl()))
     ..registerLazySingleton(() => SignUp(sl()))
+    ..registerLazySingleton(() => Verify(sl()))
     ..registerLazySingleton(() => SignIn(sl()))
+    ..registerLazySingleton(() => SetSignIn(sl()))
+    ..registerLazySingleton(() => IsSignedIn(sl()))
+    ..registerLazySingleton(() => SignOut(sl()))
+    ..registerLazySingleton(() => SetSavePassword(sl()))
+    ..registerLazySingleton(() => IsSavePassword(sl()))
+    ..registerLazySingleton(() => SavePassword(sl()))
+    ..registerLazySingleton(() => GetSavedPassword(sl()))
+    ..registerLazySingleton(() => RemoveSavedPassword(sl()))
     ..registerLazySingleton(() => GetMovieById(sl()))
     ..registerLazySingleton(() => SearchMovie(sl()))
     ..registerLazySingleton(() => SearchShowtime(sl()))
@@ -119,7 +139,7 @@ Future<void> init() async {
       () => OnboardingRepositoryImpl(sl()),
     )
     ..registerLazySingleton<AuthenticationRepository>(
-      () => AuthenticationRepositoryImpl(sl()),
+      () => AuthenticationRepositoryImpl(sl(), sl()),
     )
     ..registerLazySingleton<MovieRepository>(
       () => MovieRepositoryImpl(sl()),
@@ -140,6 +160,9 @@ Future<void> init() async {
     )
     ..registerLazySingleton<AuthenticationRemoteDataSource>(
       () => AuthenticationRemoteDataSourceImpl(client: sl()),
+    )
+    ..registerLazySingleton<AuthenticationLocalDataSource>(
+      () => AuthenticationLocalDataSourceImpl(sl()),
     )
     ..registerLazySingleton<MovieRemoteDataSource>(
       () => MovieRemoteDataSourceImpl(client: sl()),

@@ -25,7 +25,8 @@ class ShowtimeRemoteDataSourceImpl extends ShowtimeRemoteDataSource {
     try {
       final query = params.toQueryString();
       final response = await client.get(
-        Uri.parse('$kBaseUrl/showtime${query.isNotEmpty ? '?$query' : ''}'),
+        Uri.parse(
+            '${AppConstant.kBaseUrl}/showtime${query.isNotEmpty ? '?$query' : ''}'),
       );
 
       if (response.statusCode != 200) {

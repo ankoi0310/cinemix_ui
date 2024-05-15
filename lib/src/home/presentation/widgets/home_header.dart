@@ -1,8 +1,9 @@
+import 'package:cinemix_ui/core/res/color/color.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
-class WelcomeHeader extends StatelessWidget {
-  const WelcomeHeader({super.key});
+class HomeHeader extends StatelessWidget {
+  const HomeHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,30 +17,27 @@ class WelcomeHeader extends StatelessWidget {
             children: [
               Text.rich(
                 TextSpan(
-                  text: 'Hi, ',
-                  style: Theme.of(context).textTheme.titleMedium,
+                  text: 'Xin chào, ',
+                  style: Theme.of(context).textTheme.titleSmall,
                   children: const [
                     TextSpan(
-                      text: 'Koi ',
+                      text: 'Koi',
                       style: TextStyle(
+                        color: KAppColor.primaryColor,
                         fontWeight: FontWeight.bold,
                       ),
                       children: [
-                        TextSpan(
-                          text: '👋',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
+                        WidgetSpan(child: SizedBox(width: 4)),
+                        TextSpan(text: '👋'),
                       ],
                     ),
                   ],
                 ),
               ),
               Text(
-                'Welcome back',
-                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                      fontWeight: FontWeight.w900,
+                'Chào mừng trở lại!',
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
               ),
             ],

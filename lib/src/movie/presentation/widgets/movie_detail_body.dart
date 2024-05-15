@@ -1,10 +1,8 @@
-import 'package:cinemix_ui/core/common/views/loading_view.dart';
+import 'package:cinemix_ui/core/common/views/circle_loading_view.dart';
 import 'package:cinemix_ui/core/common/widgets/floating_back_button.dart';
 import 'package:cinemix_ui/src/movie/presentation/cubit/movie_cubit.dart';
 import 'package:cinemix_ui/src/movie/presentation/widgets/movie_background_image.dart';
 import 'package:cinemix_ui/src/movie/presentation/widgets/movie_detail_info.dart';
-import 'package:cinemix_ui/src/seat/presentation/cubit/seat_option/seat_option_cubit.dart';
-import 'package:cinemix_ui/src/showtime/presentation/cubit/showtime_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,8 +14,6 @@ class MovieDetailBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<MovieCubit>().getMovieById(id);
-    context.read<ShowtimeCubit>().clearCachedShowtime();
-    context.read<SeatOptionCubit>().clearCachedOptions();
 
     return BlocConsumer<MovieCubit, MovieState>(
       listener: (context, state) {
@@ -37,7 +33,7 @@ class MovieDetailBody extends StatelessWidget {
         }
 
         if (state is MovieLoading) {
-          return const LoadingView();
+          return const CircleLoading();
         }
 
         final movie = (state as MovieDetailLoaded).movie;

@@ -11,7 +11,7 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
   final OnboardingLocalDataSource _localDataSource;
 
   @override
-  ResultFuture<void> cacheFirstTime() async {
+  VoidFuture cacheFirstTime() async {
     try {
       await _localDataSource.cacheFirstTime();
 

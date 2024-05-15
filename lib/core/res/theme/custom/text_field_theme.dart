@@ -10,12 +10,14 @@ class KTextFormFieldTheme {
     prefixIconColor: Colors.grey,
     suffixIconColor: Colors.grey,
     labelStyle: KTextTheme.textTheme.bodyMedium,
-    hintStyle: KTextTheme.textTheme.bodyMedium,
-    errorStyle: KTextTheme.textTheme.bodyMedium,
+    hintStyle: KTextTheme.textTheme.bodyMedium!.copyWith(color: Colors.grey),
+    errorStyle: KTextTheme.textTheme.bodyMedium!.copyWith(
+      color: KAppColor.errorColor,
+    ),
     floatingLabelStyle: const TextStyle().copyWith(
-      fontSize: KTextTheme.titleSmall,
+      fontSize: KTextTheme.titleMedium,
       fontWeight: FontWeight.bold,
-      color: KAppColor.primaryColor.withOpacity(0.8),
+      color: KAppColor.textColor,
     ),
     border: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(14),
@@ -38,8 +40,8 @@ class KTextFormFieldTheme {
     ),
     focusedErrorBorder: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(14),
-      borderSide: BorderSide(
-        color: KAppColor.errorColor.withOpacity(0.8),
+      borderSide: const BorderSide(
+        color: KAppColor.errorColor,
         width: 2,
       ),
     ),

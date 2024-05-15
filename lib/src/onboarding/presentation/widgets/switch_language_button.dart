@@ -1,7 +1,7 @@
+import 'package:cinemix_ui/core/res/color/color.dart';
 import 'package:cinemix_ui/core/shared/enums/language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
 
 class SwitchLanguageButton extends StatefulWidget {
   const SwitchLanguageButton({super.key});
@@ -32,24 +32,13 @@ class _SwitchLanguageButtonState extends State<SwitchLanguageButton> {
           vertical: 9,
         ),
         decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.2),
+          color: KAppColor.secondaryColor,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              currentFlag,
-              package: 'country_icons',
-              width: 24,
-            ),
-            const SizedBox(width: 4),
-            const Icon(
-              IconsaxPlusBold.arrow_right,
-              size: 16,
-              color: Colors.white,
-            ),
-          ],
+        child: SvgPicture.asset(
+          currentFlag,
+          package: 'country_icons',
+          width: 24,
         ),
       ),
     );

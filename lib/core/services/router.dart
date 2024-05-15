@@ -4,7 +4,7 @@ import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
 import 'package:cinemix_ui/src/authentication/presentation/cubit/authentication_cubit.dart';
 import 'package:cinemix_ui/src/authentication/presentation/views/sign_in_screen.dart';
 import 'package:cinemix_ui/src/authentication/presentation/views/sign_up_screen.dart';
-import 'package:cinemix_ui/src/authentication/presentation/views/welcome_screen.dart';
+import 'package:cinemix_ui/src/authentication/presentation/views/sign_up_success_screen.dart';
 import 'package:cinemix_ui/src/checkout/presentation/views/checkout_screen.dart';
 import 'package:cinemix_ui/src/checkout/presentation/views/failed_payment_screen.dart';
 import 'package:cinemix_ui/src/checkout/presentation/views/successful_payment_screen.dart';
@@ -14,6 +14,7 @@ import 'package:cinemix_ui/src/movie/presentation/views/movie_detail_screen.dart
 import 'package:cinemix_ui/src/movie/presentation/views/movie_search_screen.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/views/onboarding_screen.dart';
+import 'package:cinemix_ui/src/onboarding/presentation/views/welcome_screen.dart';
 import 'package:cinemix_ui/src/seat/domain/entities/seat.dart';
 import 'package:cinemix_ui/src/seat/presentation/cubit/seat/seat_cubit.dart';
 import 'package:cinemix_ui/src/seat/presentation/cubit/seat_option/seat_option_cubit.dart';
@@ -49,6 +50,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         ),
         settings: settings,
       );
+    case SignUpSuccessScreen.routeName:
+      return _pageBuilder(
+        pageBuilder: (context) => const SignUpSuccessScreen(),
+        settings: settings,
+      );
     case SignInScreen.routeName:
       return _pageBuilder(
         pageBuilder: (context) => BlocProvider(
@@ -63,6 +69,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           providers: [
             BlocProvider(
               create: (_) => sl<MovieCubit>(),
+            ),
+            BlocProvider(
+              create: (_) => sl<ShowtimeCubit>(),
+            ),
+            BlocProvider(
+              create: (_) => sl<SeatOptionCubit>(),
+            ),
+            BlocProvider(
+              create: (_) => sl<SeatCubit>(),
             ),
           ],
           child: const HomeScreen(),
