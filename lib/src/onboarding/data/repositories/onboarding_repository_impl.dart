@@ -11,7 +11,7 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
   final OnboardingLocalDataSource _localDataSource;
 
   @override
-  ResultFuture<void> cacheFirstTime() async {
+  VoidFuture cacheFirstTime() async {
     try {
       await _localDataSource.cacheFirstTime();
 
@@ -22,7 +22,13 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
   }
 
   @override
-  ResultFuture<bool> isFirstTime() {
-    throw UnimplementedError();
+  ResultFuture<bool> isFirstTime() async {
+    try {
+      final isFirstTime = await _localDataSource.isFirstTime();
+
+      return Right(isFirstTime);
+    } on CacheException catch (e) {
+      return Left(CacheFailure(message: e.message, statusCode: e.statusCode));
+    }
   }
 }
