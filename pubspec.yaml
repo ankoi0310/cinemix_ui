@@ -16,11 +16,15 @@ dependencies:
   country_icons: ^3.0.0
   cupertino_icons: ^1.0.6
   dartz: ^0.10.1
+  device_info_plus: ^10.1.0
   dotted_border: ^2.1.0
+  encrypt: ^5.0.3
   equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.0
   flutter_pw_validator: ^1.6.0
   flutter_rating_bar: ^4.0.1
   flutter_secure_storage: ^9.0.0
@@ -65,4 +69,18 @@ flutter:
     - assets/images/directors/
     - assets/images/movies/
     - assets/images/payments/
+    - assets/images/splash/
     - assets/lottie/
+
+flutter_native_splash:
+  color: "#000000"
+  android_12:
+    image: assets/images/splash/android12splash.png
+  ios: false
+  web: false
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/icons/ic_launcher.png"
+  min_sdk_android: 21
