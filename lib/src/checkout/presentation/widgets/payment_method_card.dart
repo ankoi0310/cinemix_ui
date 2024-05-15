@@ -19,8 +19,10 @@ class PaymentMethodCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
       margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: isSelected
             ? Theme.of(context).colorScheme.surface
@@ -30,45 +32,39 @@ class PaymentMethodCard extends StatelessWidget {
               ? Theme.of(context).colorScheme.primary
               : Colors.transparent,
         ),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Row(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(right: 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Image.asset(imagePath, height: 48),
-            ),
-            Expanded(
-              child: Wrap(
-                children: [
+      child: Row(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(right: 16),
+            child: Image.asset(imagePath, height: 48),
+          ),
+          Expanded(
+            child: Wrap(
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                if (subtitle != null)
                   Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                    subtitle!,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  if (subtitle != null)
-                    Text(
-                      subtitle!,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                ],
-              ),
+              ],
             ),
-            GestureDetector(
-              onTap: onTap,
-              child: const Icon(
-                IconsaxPlusLinear.arrow_right_3,
-                size: 24,
-              ),
+          ),
+          GestureDetector(
+            onTap: onTap,
+            child: const Icon(
+              IconsaxPlusLinear.arrow_right_3,
+              size: 24,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

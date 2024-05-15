@@ -99,8 +99,10 @@ class _TheaterAccordionState extends State<TheaterAccordion> {
                             .read<ShowtimeCubit>()
                             .cacheSelectedShowtime(showtime)
                             .then((_) {
-                          Navigator.of(context)
-                              .pushNamed(SeatOptionScreen.routeName);
+                          return Navigator.of(context).pushNamed(
+                            SeatOptionScreen.routeName,
+                            arguments: showtime,
+                          );
                         });
                       },
                     ),

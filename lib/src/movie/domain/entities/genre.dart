@@ -6,11 +6,7 @@ class Genre extends BaseEntity {
     super.id,
   });
 
-  const Genre.demo1() : this(name: 'Action');
-
-  const Genre.demo2() : this(name: 'Adventure');
-
-  const Genre.demo3() : this(name: 'Comedy');
+  const Genre.empty() : this(name: '');
 
   final String name;
 

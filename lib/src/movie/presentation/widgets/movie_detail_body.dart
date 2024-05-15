@@ -1,4 +1,4 @@
-import 'package:cinemix_ui/core/common/views/loading_view.dart';
+import 'package:cinemix_ui/core/common/views/circle_loading_view.dart';
 import 'package:cinemix_ui/core/common/widgets/floating_back_button.dart';
 import 'package:cinemix_ui/src/movie/presentation/cubit/movie_cubit.dart';
 import 'package:cinemix_ui/src/movie/presentation/widgets/movie_background_image.dart';
@@ -33,7 +33,7 @@ class MovieDetailBody extends StatelessWidget {
         }
 
         if (state is MovieLoading) {
-          return const LoadingView();
+          return const CircleLoading();
         }
 
         final movie = (state as MovieDetailLoaded).movie;

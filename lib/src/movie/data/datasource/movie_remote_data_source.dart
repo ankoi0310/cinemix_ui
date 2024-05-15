@@ -24,9 +24,10 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   @override
   Future<List<MovieModel>> search(MovieSearchParams params) async {
     try {
-      final query = 'name=${params.name ?? ''}&state=${params.state ?? ''}';
+      print(AppConstant.kBaseUrl);
+      final query = params.toQueryString();
       final response = await _client.get(
-        Uri.parse('$kBaseUrl/movie/search?$query'),
+        Uri.parse('${AppConstant.kBaseUrl}/movie/search?$query'),
       );
 
       if (response.statusCode != 200) {
@@ -55,7 +56,8 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   @override
   Future<MovieModel> getMovieById(int id) async {
     try {
-      final response = await _client.get(Uri.parse('$kBaseUrl/movie/$id'));
+      final response =
+          await _client.get(Uri.parse('${AppConstant.kBaseUrl}/movie/$id'));
 
       if (response.statusCode != 200) {
         throw ServerException(

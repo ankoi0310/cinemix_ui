@@ -10,4 +10,6 @@ abstract class ShowtimeRepository {
   VoidFuture cacheSelectedShowtime(Showtime params);
 
   ResultFuture<Showtime?> getSelectedShowtime();
+
+  VoidFuture clearCachedShowtime();
 }

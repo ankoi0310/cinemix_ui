@@ -9,5 +9,23 @@ abstract class AuthenticationRepository {
 
   ResultFuture<SignUpResponse> signUp(SignUpParams params);
 
+  VoidFuture verify(String code);
+
   ResultFuture<SignInResponse> signIn(SignInParams params);
+
+  VoidFuture setSignIn();
+
+  ResultFuture<bool> isSignedIn();
+
+  VoidFuture signOut();
+
+  VoidFuture setSavePassword({required bool value});
+
+  ResultFuture<bool> isSavePassword();
+
+  VoidFuture savePassword(String password);
+
+  ResultFuture<String> getSavedPassword();
+
+  VoidFuture removeSavedPassword();
 }

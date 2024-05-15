@@ -44,4 +44,14 @@ class ShowtimeRepositoryImpl implements ShowtimeRepository {
       return Left(CacheFailure(message: e.message, statusCode: e.statusCode));
     }
   }
+
+  @override
+  VoidFuture clearCachedShowtime() async {
+    try {
+      await _localDataSource.clearCachedShowtime();
+      return const Right(null);
+    } on CacheException catch (e) {
+      return Left(CacheFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
 }

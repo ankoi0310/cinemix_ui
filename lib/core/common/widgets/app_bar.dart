@@ -3,22 +3,23 @@ import 'package:flutter/material.dart';
 
 class KAppBar extends StatelessWidget implements PreferredSizeWidget {
   const KAppBar({
-    required this.title,
+    this.title,
     super.key,
   });
 
-  final String title;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(
-        title,
-        style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-      ),
       leading: const KBackButton(),
+      title: Text(
+        title ?? '',
+        style: Theme.of(context)
+            .textTheme
+            .headlineMedium!
+            .copyWith(fontWeight: FontWeight.bold),
+      ),
     );
   }
 

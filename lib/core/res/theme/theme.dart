@@ -13,7 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 class KAppTheme {
   KAppTheme._();
 
-  static final ralewayTextTheme = GoogleFonts.ralewayTextTheme();
+  static final textTheme = GoogleFonts.robotoTextTheme();
 
   static ThemeData theme = ThemeData(
     useMaterial3: true,
@@ -31,7 +31,7 @@ class KAppTheme {
       error: KAppColor.errorColor,
       onError: KAppColor.onErrorColor,
     ),
-    textTheme: ralewayTextTheme.merge(KTextTheme.textTheme),
+    textTheme: textTheme.merge(KTextTheme.textTheme),
     appBarTheme: KAppBarTheme.appBarTheme,
     iconTheme: KIconTheme.iconTheme,
     bottomNavigationBarTheme: KBottomNavigationBarTheme.bottomNavigationBar,

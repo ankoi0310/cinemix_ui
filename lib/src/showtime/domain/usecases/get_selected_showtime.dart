@@ -9,7 +9,7 @@ class GetSelectedShowtime extends UsecaseWithoutParams<void> {
   final ShowtimeRepository _repository;
 
   @override
-  ResultFuture<Showtime?> call() async {
+  ResultFuture<Showtime?> call() {
     return _repository.getSelectedShowtime();
   }
 }

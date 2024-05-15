@@ -21,6 +21,20 @@ class SignUpSuccess extends AuthenticationState {
   final SignUpResponse signUpResponse;
 }
 
+class VerifyingAccount extends AuthenticationState {
+  const VerifyingAccount();
+}
+
+class AccountVerified extends AuthenticationState {
+  const AccountVerified();
+}
+
+class AccountVerificationError extends AuthenticationState {
+  const AccountVerificationError(this.message);
+
+  final String message;
+}
+
 class SignUpError extends AuthenticationState {
   const SignUpError(this.message);
 

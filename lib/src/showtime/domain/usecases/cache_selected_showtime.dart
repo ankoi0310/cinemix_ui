@@ -9,7 +9,7 @@ class CacheSelectedShowtime extends UsecaseWithParams<void, Showtime> {
   final ShowtimeRepository _repository;
 
   @override
-  VoidFuture call(Showtime params) async {
+  VoidFuture call(Showtime params) {
     return _repository.cacheSelectedShowtime(params);
   }
 }

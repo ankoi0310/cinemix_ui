@@ -13,7 +13,7 @@ class _KBackButtonState extends State<KBackButton> {
   Widget build(BuildContext context) {
     return IconButton(
       icon: const Icon(
-        IconsaxPlusBold.arrow_circle_left,
+        IconsaxPlusLinear.arrow_circle_left,
         color: Colors.white,
       ),
       onPressed: () {
