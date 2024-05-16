@@ -2,6 +2,7 @@ import 'package:cinemix_ui/core/common/views/page_under_construction.dart';
 import 'package:cinemix_ui/core/services/injection_container.dart';
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
 import 'package:cinemix_ui/src/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:cinemix_ui/src/authentication/presentation/views/otp_verify_screen.dart';
 import 'package:cinemix_ui/src/authentication/presentation/views/sign_in_screen.dart';
 import 'package:cinemix_ui/src/authentication/presentation/views/sign_up_screen.dart';
 import 'package:cinemix_ui/src/authentication/presentation/views/sign_up_success_screen.dart';
@@ -28,6 +29,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
+  print('Route: ${settings.name}');
   switch (settings.name) {
     case OnboardingScreen.routeName:
       return _pageBuilder(
@@ -47,6 +49,16 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         pageBuilder: (context) => BlocProvider(
           create: (_) => sl<AuthenticationCubit>(),
           child: const SignUpScreen(),
+        ),
+        settings: settings,
+      );
+    case OTPVerifyScreen.routeName:
+      return _pageBuilder(
+        pageBuilder: (context) => BlocProvider(
+          create: (_) => sl<AuthenticationCubit>(),
+          child: OTPVerifyScreen(
+            navigatorScreen: settings.arguments! as String,
+          ),
         ),
         settings: settings,
       );

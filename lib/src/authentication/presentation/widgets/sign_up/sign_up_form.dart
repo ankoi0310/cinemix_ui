@@ -1,4 +1,4 @@
-import 'package:cinemix_ui/src/authentication/domain/usecases/sign_up.dart';
+import 'package:cinemix_ui/src/authentication/data/models/sign_up_model.dart';
 import 'package:cinemix_ui/src/authentication/presentation/cubit/authentication_cubit.dart';
 import 'package:cinemix_ui/src/authentication/presentation/widgets/sign_up/account_form.dart';
 import 'package:cinemix_ui/src/authentication/presentation/widgets/sign_up/info_form.dart';
@@ -14,7 +14,7 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
-  SignUpParams signUpParams = const SignUpParams.empty();
+  SignUpRequest signUpParams = const SignUpRequest.empty();
 
   bool _switchToInfoForm = false;
 

@@ -3,11 +3,9 @@ import 'package:cinemix_ui/core/errors/failures.dart';
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
 import 'package:cinemix_ui/src/authentication/data/data_sources/authentication_local_data_source.dart';
 import 'package:cinemix_ui/src/authentication/data/data_sources/authentication_remote_data_source.dart';
-import 'package:cinemix_ui/src/authentication/data/models/sign_in_response.dart';
-import 'package:cinemix_ui/src/authentication/data/models/sign_up_response.dart';
+import 'package:cinemix_ui/src/authentication/data/models/sign_in_model.dart';
+import 'package:cinemix_ui/src/authentication/data/models/sign_up_model.dart';
 import 'package:cinemix_ui/src/authentication/domain/repositories/authentication_repository.dart';
-import 'package:cinemix_ui/src/authentication/domain/usecases/sign_in.dart';
-import 'package:cinemix_ui/src/authentication/domain/usecases/sign_up.dart';
 import 'package:dartz/dartz.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
@@ -20,7 +18,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   final AuthenticationLocalDataSource _localDataSource;
 
   @override
-  ResultFuture<SignUpResponse> signUp(SignUpParams params) async {
+  ResultFuture<SignUpResponse> signUp(SignUpRequest params) async {
     try {
       final result = await _remoteDataSource.signUp(params);
       return Right(result);
@@ -40,7 +38,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
-  ResultFuture<SignInResponse> signIn(SignInParams params) async {
+  ResultFuture<SignInInfo> signIn(SignInRequest params) async {
     try {
       final result = await _remoteDataSource.signIn(params);
       return Right(result);
@@ -50,9 +48,9 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
-  VoidFuture setSignIn() async {
+  VoidFuture setSignInInfo(SignInInfo signInResponse) async {
     try {
-      await _localDataSource.setSignIn();
+      await _localDataSource.setSignInInfo(signInResponse);
 
       return const Right(null);
     } on CacheException catch (e) {
@@ -88,6 +86,17 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       final isSignedIn = await _localDataSource.isSignedIn();
 
       return Right(isSignedIn);
+    } on CacheException catch (e) {
+      return Left(CacheFailure(message: e.message, statusCode: e.statusCode));
+    }
+  }
+
+  @override
+  ResultFuture<SignInInfo> getSignInInfo() async {
+    try {
+      final signInInfo = await _localDataSource.getSignInInfo();
+
+      return Right(signInInfo);
     } on CacheException catch (e) {
       return Left(CacheFailure(message: e.message, statusCode: e.statusCode));
     }

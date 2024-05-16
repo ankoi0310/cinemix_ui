@@ -3,12 +3,13 @@ import 'package:cinemix_ui/src/authentication/data/data_sources/authentication_r
 import 'package:cinemix_ui/src/authentication/data/repositories/authentication_repository_impl.dart';
 import 'package:cinemix_ui/src/authentication/domain/repositories/authentication_repository.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/get_saved_password.dart';
+import 'package:cinemix_ui/src/authentication/domain/usecases/get_sign_in_info.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/is_save_password.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/is_signed_in.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/remove_saved_password.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/save_password.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/set_save_password.dart';
-import 'package:cinemix_ui/src/authentication/domain/usecases/set_sign_in.dart';
+import 'package:cinemix_ui/src/authentication/domain/usecases/set_sign_in_info.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/sign_in.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/sign_out.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/sign_up.dart';
@@ -50,6 +51,12 @@ import 'package:cinemix_ui/src/showtime/domain/usecases/clear_selected_showtime.
 import 'package:cinemix_ui/src/showtime/domain/usecases/get_selected_showtime.dart';
 import 'package:cinemix_ui/src/showtime/domain/usecases/search_showtime.dart';
 import 'package:cinemix_ui/src/showtime/presentation/cubit/showtime_cubit.dart';
+import 'package:cinemix_ui/src/user/data/datasource/user_remote_data_source.dart';
+import 'package:cinemix_ui/src/user/data/repositories/user_repository_impl.dart';
+import 'package:cinemix_ui/src/user/domain/repositories/user_repository.dart';
+import 'package:cinemix_ui/src/user/domain/usecases/get_user_profile.dart';
+import 'package:cinemix_ui/src/user/domain/usecases/update_user_profile.dart';
+import 'package:cinemix_ui/src/user/presentation/cubit/user_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -74,6 +81,15 @@ Future<void> init() async {
         signUp: sl(),
         verify: sl(),
         signIn: sl(),
+        getSavedPassword: sl(),
+        removeSavedPassword: sl(),
+        setSavePassword: sl(),
+        isSavePassword: sl(),
+        savePassword: sl(),
+        setSignIn: sl(),
+        isSignedIn: sl(),
+        getSignInInfo: sl(),
+        signOut: sl(),
       ),
     )
     ..registerFactory(
@@ -105,6 +121,12 @@ Future<void> init() async {
         clearCachedSeats: sl(),
       ),
     )
+    ..registerFactory(
+      () => UserCubit(
+        getUserProfile: sl(),
+        updateUserProfile: sl(),
+      ),
+    )
 
     // Use cases
     ..registerLazySingleton(() => CacheFirstTime(sl()))
@@ -112,8 +134,9 @@ Future<void> init() async {
     ..registerLazySingleton(() => SignUp(sl()))
     ..registerLazySingleton(() => Verify(sl()))
     ..registerLazySingleton(() => SignIn(sl()))
-    ..registerLazySingleton(() => SetSignIn(sl()))
+    ..registerLazySingleton(() => SetSignInInfo(sl()))
     ..registerLazySingleton(() => IsSignedIn(sl()))
+    ..registerLazySingleton(() => GetSignInInfo(sl()))
     ..registerLazySingleton(() => SignOut(sl()))
     ..registerLazySingleton(() => SetSavePassword(sl()))
     ..registerLazySingleton(() => IsSavePassword(sl()))
@@ -133,6 +156,8 @@ Future<void> init() async {
     ..registerLazySingleton(() => RemoveSelectedSeats(sl()))
     ..registerLazySingleton(() => GetSelectedSeats(sl()))
     ..registerLazySingleton(() => ClearCachedSeats(sl()))
+    ..registerLazySingleton(() => GetUserProfile(sl()))
+    ..registerLazySingleton(() => UpdateUserProfile(sl()))
 
     // Repository
     ..registerLazySingleton<OnboardingRepository>(
@@ -152,6 +177,9 @@ Future<void> init() async {
     )
     ..registerLazySingleton<SeatRepository>(
       () => SeatRepositoryImpl(sl()),
+    )
+    ..registerLazySingleton<UserRepository>(
+      () => UserRepositoryImpl(sl()),
     )
 
     // Data sources
@@ -178,6 +206,9 @@ Future<void> init() async {
     )
     ..registerLazySingleton<SeatLocalDataSource>(
       () => SeatLocalDataSourceImpl(sl()),
+    )
+    ..registerLazySingleton<UserRemoteDataSource>(
+      () => UserRemoteDataSourceImpl(client: sl()),
     )
 
     // External

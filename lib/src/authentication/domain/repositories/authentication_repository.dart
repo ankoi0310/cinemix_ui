@@ -1,21 +1,21 @@
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
-import 'package:cinemix_ui/src/authentication/data/models/sign_in_response.dart';
-import 'package:cinemix_ui/src/authentication/data/models/sign_up_response.dart';
-import 'package:cinemix_ui/src/authentication/domain/usecases/sign_in.dart';
-import 'package:cinemix_ui/src/authentication/domain/usecases/sign_up.dart';
+import 'package:cinemix_ui/src/authentication/data/models/sign_in_model.dart';
+import 'package:cinemix_ui/src/authentication/data/models/sign_up_model.dart';
 
 abstract class AuthenticationRepository {
   const AuthenticationRepository();
 
-  ResultFuture<SignUpResponse> signUp(SignUpParams params);
+  ResultFuture<SignUpResponse> signUp(SignUpRequest params);
 
   VoidFuture verify(String code);
 
-  ResultFuture<SignInResponse> signIn(SignInParams params);
+  ResultFuture<SignInInfo> signIn(SignInRequest params);
 
-  VoidFuture setSignIn();
+  VoidFuture setSignInInfo(SignInInfo signInResponse);
 
   ResultFuture<bool> isSignedIn();
+
+  ResultFuture<SignInInfo> getSignInInfo();
 
   VoidFuture signOut();
 

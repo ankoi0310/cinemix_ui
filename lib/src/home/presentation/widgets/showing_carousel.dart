@@ -5,7 +5,6 @@ import 'package:cinemix_ui/src/movie/presentation/cubit/movie_cubit.dart';
 import 'package:cinemix_ui/src/movie/presentation/views/movie_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class ShowingCarousel extends StatefulWidget {
   const ShowingCarousel({super.key});
@@ -62,14 +61,9 @@ class _ShowingCarouselState extends State<ShowingCarousel> {
                       arguments: movie.id,
                     );
                   },
-                  child: Skeletonizer(
-                    enabled: state is MovieLoading,
-                    child: Skeleton.leaf(
-                      child: Image.network(
-                        movie.posterUrl,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                  child: Image.network(
+                    movie.posterUrl,
+                    fit: BoxFit.cover,
                   ),
                 );
               }).toList(),
