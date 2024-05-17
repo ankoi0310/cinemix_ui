@@ -16,7 +16,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SafeArea(child: HomeBody()),
-      bottomNavigationBar: CustomBottomNavBar(),
+      bottomNavigationBar: CustomBottomNavBar(
+        currentRoute: HomeScreen.routeName,
+      ),
     );
   }
 }

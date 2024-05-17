@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cinemix_ui/core/errors/exceptions.dart';
+import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class TicketPriceLocalDataSource {
@@ -53,7 +54,7 @@ class TicketPriceLocalDataSourceImpl implements TicketPriceLocalDataSource {
     try {
       final optionsString = _prefs.getString('selected_options');
       if (optionsString != null) {
-        final options = jsonDecode(optionsString) as Map<String, dynamic>;
+        final options = jsonDecode(optionsString) as DataMap;
         return options
             .map((key, value) => MapEntry(int.parse(key), value as int));
       } else {

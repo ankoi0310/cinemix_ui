@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
-class KBackButton extends StatefulWidget {
-  const KBackButton({super.key});
+class KBackButton extends StatelessWidget {
+  const KBackButton({this.onPressed, super.key});
 
-  @override
-  State<KBackButton> createState() => _KBackButtonState();
-}
+  final VoidCallback? onPressed;
 
-class _KBackButtonState extends State<KBackButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -16,9 +13,7 @@ class _KBackButtonState extends State<KBackButton> {
         IconsaxPlusLinear.arrow_circle_left,
         color: Colors.white,
       ),
-      onPressed: () {
-        Navigator.pop(context);
-      },
+      onPressed: onPressed ?? () => Navigator.of(context).pop(),
     );
   }
 }

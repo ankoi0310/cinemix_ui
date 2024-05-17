@@ -64,6 +64,7 @@ class _AccountFormState extends State<AccountForm> {
             FormBuilder.email(
               controller: _emailController,
               focusNode: _emailFocusNode,
+              onFieldSubmitted: _passwordFocusNode.requestFocus,
             ),
             const SizedBox(height: 16),
             FormBuilder.password(
@@ -71,6 +72,12 @@ class _AccountFormState extends State<AccountForm> {
               focusNode: _passwordFocusNode,
               isObscure: _isObscure,
               toggleObscure: _toggleObscure,
+              onFieldSubmitted: () {
+                widget.onPressed(
+                  email: _emailController.text,
+                  password: _passwordController.text,
+                );
+              },
             ),
             const SizedBox(height: 16),
             ButtonBuilder.fillButton(

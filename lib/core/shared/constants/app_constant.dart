@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 
-const kAccessTokenKey = 'access_token';
+const kAccessTokenKey = 'accessToken';
+const kBaseAvatarUrl = 'https://robohash.org';
 
 class AppConstant {
   static const String appName = 'Cinemix';
@@ -10,7 +11,7 @@ class AppConstant {
   static const String appDescription = 'Cinemix is a movie ticket booking app';
   static String kBaseUrl = 'http://10.0.2.2:8080/api';
 
-  static Future<void> setBaseUrl() async {
+  static Future<void> setBaseApiUrl() async {
     final deviceInfo = DeviceInfoPlugin();
 
     if (Platform.isAndroid) {

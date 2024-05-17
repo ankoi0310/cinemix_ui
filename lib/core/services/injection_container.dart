@@ -1,19 +1,31 @@
+import 'package:cinemix_ui/core/handler/domain/http_request_filter.dart';
 import 'package:cinemix_ui/src/authentication/data/data_sources/authentication_local_data_source.dart';
 import 'package:cinemix_ui/src/authentication/data/data_sources/authentication_remote_data_source.dart';
 import 'package:cinemix_ui/src/authentication/data/repositories/authentication_repository_impl.dart';
 import 'package:cinemix_ui/src/authentication/domain/repositories/authentication_repository.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/get_saved_password.dart';
+import 'package:cinemix_ui/src/authentication/domain/usecases/get_sign_in_info.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/is_save_password.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/is_signed_in.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/remove_saved_password.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/save_password.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/set_save_password.dart';
-import 'package:cinemix_ui/src/authentication/domain/usecases/set_sign_in.dart';
+import 'package:cinemix_ui/src/authentication/domain/usecases/set_sign_in_info.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/sign_in.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/sign_out.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/sign_up.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/verify.dart';
 import 'package:cinemix_ui/src/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:cinemix_ui/src/booking/data/datasource/booking_remote_data_source.dart';
+import 'package:cinemix_ui/src/booking/data/repositories/booking_repository_impl.dart';
+import 'package:cinemix_ui/src/booking/domain/repositories/booking_repository.dart';
+import 'package:cinemix_ui/src/booking/domain/usecases/create_booking.dart';
+import 'package:cinemix_ui/src/booking/presentation/cubit/booking_cubit.dart';
+import 'package:cinemix_ui/src/invoice/data/datasource/invoice_remote_data_source.dart';
+import 'package:cinemix_ui/src/invoice/data/repositories/invoice_repository_impl.dart';
+import 'package:cinemix_ui/src/invoice/domain/repositories/invoice_repository.dart';
+import 'package:cinemix_ui/src/invoice/domain/usecases/get_invoice_by_id.dart';
+import 'package:cinemix_ui/src/invoice/presentation/cubit/invoice_cubit.dart';
 import 'package:cinemix_ui/src/movie/data/datasource/movie_remote_data_source.dart';
 import 'package:cinemix_ui/src/movie/data/repositories/movie_repository_impl.dart';
 import 'package:cinemix_ui/src/movie/domain/repositories/movie_repository.dart';
@@ -50,6 +62,13 @@ import 'package:cinemix_ui/src/showtime/domain/usecases/clear_selected_showtime.
 import 'package:cinemix_ui/src/showtime/domain/usecases/get_selected_showtime.dart';
 import 'package:cinemix_ui/src/showtime/domain/usecases/search_showtime.dart';
 import 'package:cinemix_ui/src/showtime/presentation/cubit/showtime_cubit.dart';
+import 'package:cinemix_ui/src/user/data/datasource/user_remote_data_source.dart';
+import 'package:cinemix_ui/src/user/data/repositories/user_repository_impl.dart';
+import 'package:cinemix_ui/src/user/domain/repositories/user_repository.dart';
+import 'package:cinemix_ui/src/user/domain/usecases/get_booking_history.dart';
+import 'package:cinemix_ui/src/user/domain/usecases/get_user_profile.dart';
+import 'package:cinemix_ui/src/user/domain/usecases/update_user_profile.dart';
+import 'package:cinemix_ui/src/user/presentation/cubit/user_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -74,6 +93,15 @@ Future<void> init() async {
         signUp: sl(),
         verify: sl(),
         signIn: sl(),
+        getSavedPassword: sl(),
+        removeSavedPassword: sl(),
+        setSavePassword: sl(),
+        isSavePassword: sl(),
+        savePassword: sl(),
+        setSignIn: sl(),
+        isSignedIn: sl(),
+        getSignInInfo: sl(),
+        signOut: sl(),
       ),
     )
     ..registerFactory(
@@ -105,6 +133,23 @@ Future<void> init() async {
         clearCachedSeats: sl(),
       ),
     )
+    ..registerFactory(
+      () => UserCubit(
+        getUserProfile: sl(),
+        updateUserProfile: sl(),
+        getBookingHistory: sl(),
+      ),
+    )
+    ..registerFactory(
+      () => InvoiceCubit(
+        getInvoiceById: sl(),
+      ),
+    )
+    ..registerFactory(
+      () => BookingCubit(
+        createBooking: sl(),
+      ),
+    )
 
     // Use cases
     ..registerLazySingleton(() => CacheFirstTime(sl()))
@@ -112,8 +157,9 @@ Future<void> init() async {
     ..registerLazySingleton(() => SignUp(sl()))
     ..registerLazySingleton(() => Verify(sl()))
     ..registerLazySingleton(() => SignIn(sl()))
-    ..registerLazySingleton(() => SetSignIn(sl()))
+    ..registerLazySingleton(() => SetSignInInfo(sl()))
     ..registerLazySingleton(() => IsSignedIn(sl()))
+    ..registerLazySingleton(() => GetSignInInfo(sl()))
     ..registerLazySingleton(() => SignOut(sl()))
     ..registerLazySingleton(() => SetSavePassword(sl()))
     ..registerLazySingleton(() => IsSavePassword(sl()))
@@ -133,6 +179,11 @@ Future<void> init() async {
     ..registerLazySingleton(() => RemoveSelectedSeats(sl()))
     ..registerLazySingleton(() => GetSelectedSeats(sl()))
     ..registerLazySingleton(() => ClearCachedSeats(sl()))
+    ..registerLazySingleton(() => GetUserProfile(sl()))
+    ..registerLazySingleton(() => UpdateUserProfile(sl()))
+    ..registerLazySingleton(() => GetBookingHistory(sl()))
+    ..registerLazySingleton(() => GetInvoiceById(sl()))
+    ..registerLazySingleton(() => CreateBooking(sl()))
 
     // Repository
     ..registerLazySingleton<OnboardingRepository>(
@@ -153,13 +204,25 @@ Future<void> init() async {
     ..registerLazySingleton<SeatRepository>(
       () => SeatRepositoryImpl(sl()),
     )
+    ..registerLazySingleton<UserRepository>(
+      () => UserRepositoryImpl(sl()),
+    )
+    ..registerLazySingleton<InvoiceRepository>(
+      () => InvoiceRepositoryImpl(sl()),
+    )
+    ..registerLazySingleton<BookingRepository>(
+      () => BookingRepositoryImpl(sl()),
+    )
 
     // Data sources
     ..registerLazySingleton<OnboardingLocalDataSource>(
       () => OnboardingLocalDataSourceImpl(sl()),
     )
     ..registerLazySingleton<AuthenticationRemoteDataSource>(
-      () => AuthenticationRemoteDataSourceImpl(client: sl()),
+      () => AuthenticationRemoteDataSourceImpl(
+        client: sl(),
+        localDataSource: sl(),
+      ),
     )
     ..registerLazySingleton<AuthenticationLocalDataSource>(
       () => AuthenticationLocalDataSourceImpl(sl()),
@@ -179,11 +242,35 @@ Future<void> init() async {
     ..registerLazySingleton<SeatLocalDataSource>(
       () => SeatLocalDataSourceImpl(sl()),
     )
+    ..registerLazySingleton<UserRemoteDataSource>(
+      () => UserRemoteDataSourceImpl(
+        localDataSource: sl(),
+        filter: sl(),
+      ),
+    )
+    ..registerLazySingleton<InvoiceRemoteDataSource>(
+      () => InvoiceRemoteDataSourceImpl(
+        localDataSource: sl(),
+        filter: sl(),
+      ),
+    )
+    ..registerLazySingleton<BookingRemoteDataSource>(
+      () => BookingRemoteDataSourceImpl(
+        localDataSource: sl(),
+        filter: sl(),
+      ),
+    )
 
     // External
     ..registerLazySingleton<GlobalKey<NavigatorState>>(
       GlobalKey<NavigatorState>.new,
     )
     ..registerLazySingleton<SharedPreferences>(() => prefs)
-    ..registerLazySingleton(http.Client.new);
+    ..registerLazySingleton(http.Client.new)
+    ..registerLazySingleton(
+      () => HttpRequestFilter(
+        client: sl(),
+        remoteDataSource: sl(),
+      ),
+    );
 }

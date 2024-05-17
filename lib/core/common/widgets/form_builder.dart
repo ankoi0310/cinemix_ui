@@ -5,13 +5,13 @@ class FormBuilder {
   static TextFormField fullName({
     required TextEditingController controller,
     required FocusNode focusNode,
+    required void Function() onFieldSubmitted,
   }) {
     return TextFormField(
       controller: controller,
       focusNode: focusNode,
       decoration: const InputDecoration(
         labelText: 'Họ tên',
-        hintText: 'Họ và tên của bạn',
       ),
       validator: (value) {
         if (value!.isEmpty) {
@@ -19,19 +19,20 @@ class FormBuilder {
         }
         return null;
       },
+      onFieldSubmitted: (_) => onFieldSubmitted(),
     );
   }
 
   static TextFormField phoneNumber({
     required TextEditingController controller,
     required FocusNode focusNode,
+    required void Function() onFieldSubmitted,
   }) {
     return TextFormField(
       controller: controller,
       focusNode: focusNode,
       decoration: const InputDecoration(
         labelText: 'Số điện thoại',
-        hintText: 'Số điện thoại của bạn là...',
       ),
       validator: (value) {
         if (value!.isEmpty) {
@@ -43,12 +44,14 @@ class FormBuilder {
         }
         return null;
       },
+      onFieldSubmitted: (_) => onFieldSubmitted(),
     );
   }
 
   static TextFormField email({
     required TextEditingController controller,
     required FocusNode focusNode,
+    required void Function() onFieldSubmitted,
   }) {
     return TextFormField(
       controller: controller,
@@ -64,6 +67,7 @@ class FormBuilder {
         }
         return null;
       },
+      onFieldSubmitted: (_) => onFieldSubmitted(),
     );
   }
 
@@ -72,6 +76,7 @@ class FormBuilder {
     required FocusNode focusNode,
     required bool isObscure,
     required void Function() toggleObscure,
+    required void Function() onFieldSubmitted,
   }) {
     return TextFormField(
       controller: controller,
@@ -90,33 +95,14 @@ class FormBuilder {
         }
         return null;
       },
-    );
-  }
-
-  static TextFormField confirmPassword({
-    required TextEditingController passwordController,
-    required TextEditingController confirmPasswordController,
-    required FocusNode focusNode,
-  }) {
-    return TextFormField(
-      controller: confirmPasswordController,
-      focusNode: focusNode,
-      decoration: const InputDecoration(labelText: 'Xác nhận mật khẩu'),
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'Vui lòng nhập lại mật khẩu';
-        }
-        if (value != passwordController.text) {
-          return 'Mật khẩu không khớp';
-        }
-        return null;
-      },
+      onFieldSubmitted: (_) => onFieldSubmitted(),
     );
   }
 
   static TextFormField username({
     required TextEditingController controller,
     required FocusNode focusNode,
+    required void Function() onFieldSubmitted,
   }) {
     return TextFormField(
       controller: controller,
@@ -132,6 +118,7 @@ class FormBuilder {
         }
         return null;
       },
+      onFieldSubmitted: (_) => onFieldSubmitted(),
     );
   }
 }
