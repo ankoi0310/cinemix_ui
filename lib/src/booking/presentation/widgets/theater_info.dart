@@ -1,5 +1,5 @@
 import 'package:cinemix_ui/core/res/color/color.dart';
-import 'package:cinemix_ui/src/checkout/presentation/widgets/discount_form.dart';
+import 'package:cinemix_ui/src/booking/presentation/widgets/discount_form.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

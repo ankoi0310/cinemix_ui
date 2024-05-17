@@ -1,4 +1,4 @@
-import 'package:cinemix_ui/src/checkout/presentation/widgets/barcode_widget.dart';
+import 'package:cinemix_ui/src/booking/presentation/widgets/barcode_widget.dart';
 import 'package:flutter/material.dart';
 
 class TicketWidget extends StatelessWidget {

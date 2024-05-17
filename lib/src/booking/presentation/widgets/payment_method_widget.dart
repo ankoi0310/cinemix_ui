@@ -1,6 +1,6 @@
 import 'package:cinemix_ui/core/shared/utils/app_util.dart';
-import 'package:cinemix_ui/src/checkout/domain/entities/payment_method.dart';
-import 'package:cinemix_ui/src/checkout/presentation/widgets/payment_method_card.dart';
+import 'package:cinemix_ui/src/booking/domain/entities/payment_method.dart';
+import 'package:cinemix_ui/src/booking/presentation/widgets/payment_method_card.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';

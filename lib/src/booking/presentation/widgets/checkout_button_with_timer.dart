@@ -1,10 +1,18 @@
 import 'package:cinemix_ui/core/res/color/color.dart';
+import 'package:cinemix_ui/src/booking/data/models/booking_request.dart';
+import 'package:cinemix_ui/src/booking/presentation/cubit/booking_cubit.dart';
 import 'package:cinemix_ui/src/home/presentation/views/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 
 class CheckoutButtonWithTimer extends StatelessWidget {
-  const CheckoutButtonWithTimer({super.key});
+  const CheckoutButtonWithTimer({
+    required this.bookingRequest,
+    super.key,
+  });
+
+  final BookingRequest bookingRequest;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +83,9 @@ class CheckoutButtonWithTimer extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              context.read<BookingCubit>().createBooking(bookingRequest);
+            },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(
                 horizontal: 24,

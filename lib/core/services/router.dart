@@ -6,9 +6,10 @@ import 'package:cinemix_ui/src/authentication/presentation/views/otp_verify_scre
 import 'package:cinemix_ui/src/authentication/presentation/views/sign_in_screen.dart';
 import 'package:cinemix_ui/src/authentication/presentation/views/sign_up_screen.dart';
 import 'package:cinemix_ui/src/authentication/presentation/views/sign_up_success_screen.dart';
-import 'package:cinemix_ui/src/checkout/presentation/views/checkout_screen.dart';
-import 'package:cinemix_ui/src/checkout/presentation/views/failed_payment_screen.dart';
-import 'package:cinemix_ui/src/checkout/presentation/views/successful_payment_screen.dart';
+import 'package:cinemix_ui/src/booking/presentation/cubit/booking_cubit.dart';
+import 'package:cinemix_ui/src/booking/presentation/views/booking_failed_screen.dart';
+import 'package:cinemix_ui/src/booking/presentation/views/booking_success_screen.dart';
+import 'package:cinemix_ui/src/booking/presentation/views/checkout_screen.dart';
 import 'package:cinemix_ui/src/home/presentation/views/home_screen.dart';
 import 'package:cinemix_ui/src/movie/presentation/cubit/movie_cubit.dart';
 import 'package:cinemix_ui/src/movie/presentation/views/movie_detail_screen.dart';
@@ -27,6 +28,7 @@ import 'package:cinemix_ui/src/ticket/presentation/views/ticket_detail_screen.da
 import 'package:cinemix_ui/src/ticket/presentation/views/ticket_screen.dart';
 import 'package:cinemix_ui/src/user/data/models/user_profile.dart';
 import 'package:cinemix_ui/src/user/presentation/cubit/user_cubit.dart';
+import 'package:cinemix_ui/src/user/presentation/views/booking_history_screen.dart';
 import 'package:cinemix_ui/src/user/presentation/views/profile_detail_screen.dart';
 import 'package:cinemix_ui/src/user/presentation/views/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -175,21 +177,28 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       final selectedSeats = arguments['selectedSeats'] as List<Seat>;
       final selectedOptions = arguments['selectedOptions'] as Map<int, int>;
       return _pageBuilder(
-        pageBuilder: (context) => CheckoutScreen(
-          showtime: showtime,
-          selectedSeats: selectedSeats,
-          selectedOptions: selectedOptions,
+        pageBuilder: (context) => BlocProvider(
+          create: (context) => sl<BookingCubit>(),
+          child: CheckoutScreen(
+            showtime: showtime,
+            selectedSeats: selectedSeats,
+            selectedOptions: selectedOptions,
+          ),
         ),
         settings: settings,
       );
-    case SuccessfulPaymentScreen.routeName:
+    case BookingSuccessScreen.routeName:
+      final bookingCubit = settings.arguments! as BookingCubit;
       return _pageBuilder(
-        pageBuilder: (context) => const SuccessfulPaymentScreen(),
+        pageBuilder: (context) => BlocProvider(
+          create: (_) => bookingCubit,
+          child: const BookingSuccessScreen(),
+        ),
         settings: settings,
       );
-    case FailedPaymentScreen.routeName:
+    case BookingFailedScreen.routeName:
       return _pageBuilder(
-        pageBuilder: (context) => const FailedPaymentScreen(),
+        pageBuilder: (context) => const BookingFailedScreen(),
         settings: settings,
       );
     case TicketScreen.routeName:
@@ -226,6 +235,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         pageBuilder: (context) => BlocProvider(
           create: (context) => userCubit,
           child: ProfileDetailScreen(userProfile: userProfile),
+        ),
+        settings: settings,
+      );
+    case BookingHistoryScreen.routeName:
+      return _pageBuilder(
+        pageBuilder: (context) => BlocProvider(
+          create: (_) => sl<UserCubit>(),
+          child: const BookingHistoryScreen(),
         ),
         settings: settings,
       );

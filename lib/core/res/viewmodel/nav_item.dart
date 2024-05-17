@@ -1,4 +1,5 @@
 import 'package:cinemix_ui/src/home/presentation/views/home_screen.dart';
+import 'package:cinemix_ui/src/user/presentation/views/booking_history_screen.dart';
 import 'package:cinemix_ui/src/user/presentation/views/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
@@ -24,7 +25,7 @@ final List<NavItem> bottomNavItems = [
   NavItem(
     label: 'Lịch sử',
     icon: IconsaxPlusLinear.clock_1,
-    route: '/history',
+    route: BookingHistoryScreen.routeName,
   ),
   NavItem(
     label: 'Hồ sơ',

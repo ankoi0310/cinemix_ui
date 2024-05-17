@@ -16,6 +16,16 @@ import 'package:cinemix_ui/src/authentication/domain/usecases/sign_out.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/sign_up.dart';
 import 'package:cinemix_ui/src/authentication/domain/usecases/verify.dart';
 import 'package:cinemix_ui/src/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:cinemix_ui/src/booking/data/datasource/booking_remote_data_source.dart';
+import 'package:cinemix_ui/src/booking/data/repositories/booking_repository_impl.dart';
+import 'package:cinemix_ui/src/booking/domain/repositories/booking_repository.dart';
+import 'package:cinemix_ui/src/booking/domain/usecases/create_booking.dart';
+import 'package:cinemix_ui/src/booking/presentation/cubit/booking_cubit.dart';
+import 'package:cinemix_ui/src/invoice/data/datasource/invoice_remote_data_source.dart';
+import 'package:cinemix_ui/src/invoice/data/repositories/invoice_repository_impl.dart';
+import 'package:cinemix_ui/src/invoice/domain/repositories/invoice_repository.dart';
+import 'package:cinemix_ui/src/invoice/domain/usecases/get_invoice_by_id.dart';
+import 'package:cinemix_ui/src/invoice/presentation/cubit/invoice_cubit.dart';
 import 'package:cinemix_ui/src/movie/data/datasource/movie_remote_data_source.dart';
 import 'package:cinemix_ui/src/movie/data/repositories/movie_repository_impl.dart';
 import 'package:cinemix_ui/src/movie/domain/repositories/movie_repository.dart';
@@ -55,6 +65,7 @@ import 'package:cinemix_ui/src/showtime/presentation/cubit/showtime_cubit.dart';
 import 'package:cinemix_ui/src/user/data/datasource/user_remote_data_source.dart';
 import 'package:cinemix_ui/src/user/data/repositories/user_repository_impl.dart';
 import 'package:cinemix_ui/src/user/domain/repositories/user_repository.dart';
+import 'package:cinemix_ui/src/user/domain/usecases/get_booking_history.dart';
 import 'package:cinemix_ui/src/user/domain/usecases/get_user_profile.dart';
 import 'package:cinemix_ui/src/user/domain/usecases/update_user_profile.dart';
 import 'package:cinemix_ui/src/user/presentation/cubit/user_cubit.dart';
@@ -126,6 +137,17 @@ Future<void> init() async {
       () => UserCubit(
         getUserProfile: sl(),
         updateUserProfile: sl(),
+        getBookingHistory: sl(),
+      ),
+    )
+    ..registerFactory(
+      () => InvoiceCubit(
+        getInvoiceById: sl(),
+      ),
+    )
+    ..registerFactory(
+      () => BookingCubit(
+        createBooking: sl(),
       ),
     )
 
@@ -159,6 +181,9 @@ Future<void> init() async {
     ..registerLazySingleton(() => ClearCachedSeats(sl()))
     ..registerLazySingleton(() => GetUserProfile(sl()))
     ..registerLazySingleton(() => UpdateUserProfile(sl()))
+    ..registerLazySingleton(() => GetBookingHistory(sl()))
+    ..registerLazySingleton(() => GetInvoiceById(sl()))
+    ..registerLazySingleton(() => CreateBooking(sl()))
 
     // Repository
     ..registerLazySingleton<OnboardingRepository>(
@@ -181,6 +206,12 @@ Future<void> init() async {
     )
     ..registerLazySingleton<UserRepository>(
       () => UserRepositoryImpl(sl()),
+    )
+    ..registerLazySingleton<InvoiceRepository>(
+      () => InvoiceRepositoryImpl(sl()),
+    )
+    ..registerLazySingleton<BookingRepository>(
+      () => BookingRepositoryImpl(sl()),
     )
 
     // Data sources
@@ -217,6 +248,18 @@ Future<void> init() async {
         filter: sl(),
       ),
     )
+    ..registerLazySingleton<InvoiceRemoteDataSource>(
+      () => InvoiceRemoteDataSourceImpl(
+        localDataSource: sl(),
+        filter: sl(),
+      ),
+    )
+    ..registerLazySingleton<BookingRemoteDataSource>(
+      () => BookingRemoteDataSourceImpl(
+        localDataSource: sl(),
+        filter: sl(),
+      ),
+    )
 
     // External
     ..registerLazySingleton<GlobalKey<NavigatorState>>(
@@ -224,8 +267,10 @@ Future<void> init() async {
     )
     ..registerLazySingleton<SharedPreferences>(() => prefs)
     ..registerLazySingleton(http.Client.new)
-    ..registerLazySingleton(() => HttpRequestFilter(
-          client: sl(),
-          remoteDataSource: sl(),
-        ));
+    ..registerLazySingleton(
+      () => HttpRequestFilter(
+        client: sl(),
+        remoteDataSource: sl(),
+      ),
+    );
 }

@@ -54,3 +54,25 @@ final class UpdateUserProfileFailed extends UserState {
   @override
   List<Object> get props => [message];
 }
+
+final class LoadingBookingHistory extends UserState {
+  const LoadingBookingHistory();
+}
+
+final class BookingHistoryLoaded extends UserState {
+  const BookingHistoryLoaded(this.bookingHistory);
+
+  final List<Invoice> bookingHistory;
+
+  @override
+  List<Object> get props => [bookingHistory];
+}
+
+final class GetBookingHistoryFailed extends UserState {
+  const GetBookingHistoryFailed(this.message);
+
+  final String message;
+
+  @override
+  List<Object> get props => [message];
+}
