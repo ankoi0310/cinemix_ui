@@ -11,7 +11,7 @@ class AppConstant {
   static const String appDescription = 'Cinemix is a movie ticket booking app';
   static String kBaseUrl = 'http://10.0.2.2:8080/api';
 
-  static Future<void> setBaseUrl() async {
+  static Future<void> setBaseApiUrl() async {
     final deviceInfo = DeviceInfoPlugin();
 
     if (Platform.isAndroid) {
