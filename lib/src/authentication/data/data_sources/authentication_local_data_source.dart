@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
+import 'package:cinemix_ui/src/authentication/data/models/sign_in_model.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -5,8 +9,11 @@ final key = encrypt.Key.fromUtf8('my32lengthsupersecretnooneknows1');
 final iv = encrypt.IV.fromLength(16);
 
 abstract class AuthenticationLocalDataSource {
-  Future<void> setSignIn();
+  const AuthenticationLocalDataSource();
+
+  Future<void> setSignInInfo(SignInInfo signInResponse);
   Future<bool> isSignedIn();
+  Future<SignInInfo> getSignInInfo();
   Future<void> signOut();
   Future<void> setSavePassword({required bool value});
   Future<bool> isSavePassword();
@@ -22,8 +29,15 @@ class AuthenticationLocalDataSourceImpl
   final SharedPreferences _sharedPreferences;
 
   @override
-  Future<void> setSignIn() async {
+  Future<void> setSignInInfo(SignInInfo signInResponse) async {
     await _sharedPreferences.setBool('isSignedIn', true);
+
+    // encode the SignInInfo object to a json string
+    final map = signInResponse.toMap();
+    final jsonString = utf8.encode(jsonEncode(map));
+
+    // save the json string to shared preferences
+    await _sharedPreferences.setString('signInInfo', base64Encode(jsonString));
   }
 
   @override
@@ -32,8 +46,19 @@ class AuthenticationLocalDataSourceImpl
   }
 
   @override
+  Future<SignInInfo> getSignInInfo() async {
+    final jsonString = _sharedPreferences.getString('signInInfo');
+    final decodedJson = base64Decode(jsonString!);
+    final decodedString = utf8.decode(decodedJson);
+    final map = jsonDecode(decodedString) as DataMap;
+
+    return SignInInfo.fromMap(map);
+  }
+
+  @override
   Future<void> signOut() async {
     await _sharedPreferences.remove('isSignedIn');
+    await _sharedPreferences.remove('signInInfo');
   }
 
   @override
@@ -71,6 +96,8 @@ class AuthenticationLocalDataSourceImpl
 
   @override
   Future<void> removeSavedPassword() async {
-    await _sharedPreferences.remove('password');
+    if (_sharedPreferences.containsKey('password')) {
+      await _sharedPreferences.remove('password');
+    }
   }
 }

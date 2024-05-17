@@ -17,19 +17,10 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthenticationCubit, AuthenticationState>(
-      listener: (context, state) {
-        if (state is SignInSuccess) {
-          Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-        }
-      },
-      builder: (context, state) {
-        return const Scaffold(
-          appBar: KAppBar(title: 'Đăng nhập'),
-          resizeToAvoidBottomInset: false,
-          body: SignInBody(),
-        );
-      },
+    return const Scaffold(
+      appBar: KAppBar(title: 'Đăng nhập'),
+      resizeToAvoidBottomInset: false,
+      body: SignInBody(),
     );
   }
 }

@@ -21,22 +21,22 @@ class SignUpSuccess extends AuthenticationState {
   final SignUpResponse signUpResponse;
 }
 
-class VerifyingAccount extends AuthenticationState {
-  const VerifyingAccount();
-}
-
-class AccountVerified extends AuthenticationState {
-  const AccountVerified();
-}
-
-class AccountVerificationError extends AuthenticationState {
-  const AccountVerificationError(this.message);
+class SignUpFailed extends AuthenticationState {
+  const SignUpFailed(this.message);
 
   final String message;
 }
 
-class SignUpError extends AuthenticationState {
-  const SignUpError(this.message);
+class VerifyingOTP extends AuthenticationState {
+  const VerifyingOTP();
+}
+
+class OTPVerified extends AuthenticationState {
+  const OTPVerified();
+}
+
+class OTPVerifyFailed extends AuthenticationState {
+  const OTPVerifyFailed(this.message);
 
   final String message;
 }
@@ -46,13 +46,50 @@ class SigningIn extends AuthenticationState {
 }
 
 class SignInSuccess extends AuthenticationState {
-  const SignInSuccess({required this.signInResponse});
-
-  final SignInResponse signInResponse;
+  const SignInSuccess();
 }
 
-class SignInError extends AuthenticationState {
-  const SignInError(this.message);
+class SignInFailed extends AuthenticationState {
+  const SignInFailed(this.message);
 
   final String message;
+}
+
+class CheckingSignedIn extends AuthenticationState {
+  const CheckingSignedIn();
+}
+
+class SignedInStatus extends AuthenticationState {
+  const SignedInStatus({required this.isSignedIn});
+
+  final bool isSignedIn;
+
+  @override
+  List<Object> get props => [isSignedIn];
+}
+
+class GettingSignInInfo extends AuthenticationState {
+  const GettingSignInInfo();
+}
+
+class GetSignInInfoSuccess extends AuthenticationState {
+  const GetSignInInfoSuccess({required this.signInInfo});
+
+  final SignInInfo signInInfo;
+}
+
+class GetSignInInfoFailed extends AuthenticationState {
+  const GetSignInInfoFailed(this.message);
+
+  final String message;
+}
+
+class SavePasswordStatus extends AuthenticationState {
+  const SavePasswordStatus({
+    required this.isSave,
+    required this.savedPassword,
+  });
+
+  final bool isSave;
+  final String savedPassword;
 }
