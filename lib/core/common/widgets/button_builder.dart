@@ -3,19 +3,26 @@ import 'package:flutter/material.dart';
 class ButtonBuilder {
   static ElevatedButton fillButton(
     BuildContext context, {
-    required VoidCallback? onPressed,
     required Widget child,
+    BorderRadius? borderRadius,
+    VoidCallback? onPressed,
   }) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        shape: RoundedRectangleBorder(
+          borderRadius: borderRadius ?? BorderRadius.circular(8),
+        ),
         textStyle: Theme.of(context)
             .textTheme
-            .titleSmall!
+            .titleLarge!
             .copyWith(fontWeight: FontWeight.bold, letterSpacing: 1.2),
       ),
-      child: child,
+      child: SizedBox(
+        height: 35,
+        child: Center(child: child),
+      ),
     );
   }
 

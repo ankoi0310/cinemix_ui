@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:cinemix_ui/core/errors/exceptions.dart';
+import 'package:cinemix_ui/core/handler/domain/http_request_filter.dart';
+import 'package:cinemix_ui/core/handler/domain/http_response.dart';
 import 'package:cinemix_ui/core/shared/constants/app_constant.dart';
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
+import 'package:cinemix_ui/src/authentication/data/data_sources/authentication_local_data_source.dart';
 import 'package:cinemix_ui/src/user/data/models/user_profile.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart' as http;
 
 abstract class UserRemoteDataSource {
   const UserRemoteDataSource();
@@ -16,16 +18,24 @@ abstract class UserRemoteDataSource {
 
 class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   const UserRemoteDataSourceImpl({
-    required http.Client client,
-  }) : _client = client;
+    required AuthenticationLocalDataSource localDataSource,
+    required HttpRequestFilter filter,
+  })  : _localDataSource = localDataSource,
+        _filter = filter;
 
-  final http.Client _client;
+  final AuthenticationLocalDataSource _localDataSource;
+  final HttpRequestFilter _filter;
 
   @override
   Future<UserProfile> getUserProfile() async {
     try {
-      final response = await _client.get(
-        Uri.parse('${AppConstant.kBaseUrl}/user/profile'),
+      final signInInfo = await _localDataSource.getSignInInfo();
+      final response = await _filter.makeRequest(
+        '${AppConstant.kBaseUrl}/user/profile',
+        'GET',
+        headers: {
+          'Authorization': 'Bearer ${signInInfo.accessToken}',
+        },
       );
 
       if (response.statusCode != 200) {
@@ -35,9 +45,11 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
         );
       }
 
-      final map = jsonDecode(utf8.decode(response.bodyBytes)) as DataMap;
+      final httpResponse = HttpResponse.fromMap(
+        jsonDecode(utf8.decode(response.bodyBytes)) as DataMap,
+      );
 
-      final userProfile = UserProfile.fromMap(map);
+      final userProfile = UserProfile.fromMap(httpResponse.data as DataMap);
 
       return userProfile;
     } on ServerException {
@@ -54,10 +66,13 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   @override
   Future<UserProfile> updateUserProfile(UserProfileRequest request) async {
     try {
-      final response = await _client.put(
-        Uri.parse('${AppConstant.kBaseUrl}/user/profile'),
+      final signInInfo = await _localDataSource.getSignInInfo();
+      final response = await _filter.makeRequest(
+        '${AppConstant.kBaseUrl}/user/profile',
+        'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${signInInfo.accessToken}',
         },
         body: jsonEncode(request.toMap()),
       );
@@ -69,9 +84,11 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
         );
       }
 
-      final map = jsonDecode(utf8.decode(response.bodyBytes)) as DataMap;
+      final httpResponse = HttpResponse.fromMap(
+        jsonDecode(utf8.decode(response.bodyBytes)) as DataMap,
+      );
 
-      final userProfile = UserProfile.fromMap(map);
+      final userProfile = UserProfile.fromMap(httpResponse.data as DataMap);
 
       return userProfile;
     } on ServerException {

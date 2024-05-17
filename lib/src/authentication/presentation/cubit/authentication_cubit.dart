@@ -128,12 +128,14 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     emit(SavePasswordStatus(isSave: isSave, savedPassword: savedPassword));
   }
 
-  Future<bool> isSignedIn() async {
+  Future<void> isSignedIn() async {
+    emit(const CheckingSignedIn());
+
     final result = await _isSignedIn();
 
     return result.fold(
-      (l) => false,
-      (r) => r,
+      (l) => emit(const SignedInStatus(isSignedIn: false)),
+      (r) => emit(SignedInStatus(isSignedIn: r)),
     );
   }
 

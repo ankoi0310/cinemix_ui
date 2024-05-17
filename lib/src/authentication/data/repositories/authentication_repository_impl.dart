@@ -48,6 +48,16 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
+  ResultFuture<String> refreshToken() async {
+    try {
+      final result = await _remoteDataSource.refreshToken();
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
+
+  @override
   VoidFuture setSignInInfo(SignInInfo signInResponse) async {
     try {
       await _localDataSource.setSignInInfo(signInResponse);

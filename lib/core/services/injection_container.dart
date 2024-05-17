@@ -1,3 +1,4 @@
+import 'package:cinemix_ui/core/handler/domain/http_request_filter.dart';
 import 'package:cinemix_ui/src/authentication/data/data_sources/authentication_local_data_source.dart';
 import 'package:cinemix_ui/src/authentication/data/data_sources/authentication_remote_data_source.dart';
 import 'package:cinemix_ui/src/authentication/data/repositories/authentication_repository_impl.dart';
@@ -187,7 +188,10 @@ Future<void> init() async {
       () => OnboardingLocalDataSourceImpl(sl()),
     )
     ..registerLazySingleton<AuthenticationRemoteDataSource>(
-      () => AuthenticationRemoteDataSourceImpl(client: sl()),
+      () => AuthenticationRemoteDataSourceImpl(
+        client: sl(),
+        localDataSource: sl(),
+      ),
     )
     ..registerLazySingleton<AuthenticationLocalDataSource>(
       () => AuthenticationLocalDataSourceImpl(sl()),
@@ -208,7 +212,10 @@ Future<void> init() async {
       () => SeatLocalDataSourceImpl(sl()),
     )
     ..registerLazySingleton<UserRemoteDataSource>(
-      () => UserRemoteDataSourceImpl(client: sl()),
+      () => UserRemoteDataSourceImpl(
+        localDataSource: sl(),
+        filter: sl(),
+      ),
     )
 
     // External
@@ -216,5 +223,9 @@ Future<void> init() async {
       GlobalKey<NavigatorState>.new,
     )
     ..registerLazySingleton<SharedPreferences>(() => prefs)
-    ..registerLazySingleton(http.Client.new);
+    ..registerLazySingleton(http.Client.new)
+    ..registerLazySingleton(() => HttpRequestFilter(
+          client: sl(),
+          remoteDataSource: sl(),
+        ));
 }

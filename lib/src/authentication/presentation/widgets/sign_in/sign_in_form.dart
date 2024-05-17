@@ -95,81 +95,85 @@ class _SignInFormState extends State<SignInForm> {
           });
         }
       },
-      child: Flex(
-        direction: Axis.vertical,
-        children: [
-          Expanded(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  FormBuilder.username(
-                    controller: _usernameController,
-                    focusNode: _usernameFocusNode,
-                    onFieldSubmitted: _passwordFocusNode.requestFocus,
-                  ),
-                  const SizedBox(height: 20),
-                  FormBuilder.password(
-                    controller: _passwordController,
-                    focusNode: _passwordFocusNode,
-                    isObscure: _isObscure,
-                    toggleObscure: _toggleObscure,
-                    onFieldSubmitted: handleSignIn,
-                  ),
-                  Row(
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Spacer(),
+            Text(
+              'Chào mừng bạn trở lại 👋',
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Hãy nhập thông tin đăng nhập của bạn để tiếp tục!',
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+            const SizedBox(height: 24),
+            FormBuilder.username(
+              controller: _usernameController,
+              focusNode: _usernameFocusNode,
+              onFieldSubmitted: _passwordFocusNode.requestFocus,
+            ),
+            const SizedBox(height: 20),
+            FormBuilder.password(
+              controller: _passwordController,
+              focusNode: _passwordFocusNode,
+              isObscure: _isObscure,
+              toggleObscure: _toggleObscure,
+              onFieldSubmitted: handleSignIn,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Row(
                     children: [
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Checkbox(
-                              value: _isSavePassword,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              onChanged: (value) {
-                                if (_isSavePassword) {
-                                  context
-                                      .read<AuthenticationCubit>()
-                                      .removeSavedPassword();
-                                }
-                                context
-                                    .read<AuthenticationCubit>()
-                                    .setSavePassword(value: value ?? false);
-                                setState(() {
-                                  _isSavePassword = value ?? false;
-                                });
-                              },
-                            ),
-                            const Text('Lưu mật khẩu'),
-                          ],
+                      Checkbox(
+                        value: _isSavePassword,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
                         ),
+                        onChanged: (value) {
+                          if (_isSavePassword) {
+                            context
+                                .read<AuthenticationCubit>()
+                                .removeSavedPassword();
+                          }
+                          context
+                              .read<AuthenticationCubit>()
+                              .setSavePassword(value: value ?? false);
+                          setState(() {
+                            _isSavePassword = value ?? false;
+                          });
+                        },
                       ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Quên mật khẩu?',
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.error,
-                          ),
-                        ),
-                      ),
+                      const Text('Lưu mật khẩu'),
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  ButtonBuilder.fillButton(
-                    context,
-                    onPressed: _isLoading ? null : handleSignIn,
-                    child: _isLoading
-                        ? const CircleLoading()
-                        : const Text('Đăng nhập'),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Quên mật khẩu?',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ),
-        ],
+            const SizedBox(height: 10),
+            ButtonBuilder.fillButton(
+              context,
+              onPressed: _isLoading ? null : handleSignIn,
+              child: _isLoading
+                  ? const CircleLoading(color: Colors.white)
+                  : const Text('Đăng nhập'),
+            ),
+            const Spacer(flex: 2),
+          ],
+        ),
       ),
     );
   }

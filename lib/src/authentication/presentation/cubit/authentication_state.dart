@@ -55,6 +55,19 @@ class SignInFailed extends AuthenticationState {
   final String message;
 }
 
+class CheckingSignedIn extends AuthenticationState {
+  const CheckingSignedIn();
+}
+
+class SignedInStatus extends AuthenticationState {
+  const SignedInStatus({required this.isSignedIn});
+
+  final bool isSignedIn;
+
+  @override
+  List<Object> get props => [isSignedIn];
+}
+
 class GettingSignInInfo extends AuthenticationState {
   const GettingSignInInfo();
 }

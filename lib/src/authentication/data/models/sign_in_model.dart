@@ -10,6 +10,13 @@ class SignInRequest extends Equatable {
   final String username;
   final String password;
 
+  DataMap toMap() {
+    return {
+      'username': username,
+      'password': password,
+    };
+  }
+
   @override
   List<Object?> get props => [username, password];
 }
@@ -39,5 +46,17 @@ class SignInInfo {
       'accessToken': accessToken,
       'refreshToken': refreshToken,
     };
+  }
+
+  SignInInfo copyWith({
+    String? welcomeName,
+    String? accessToken,
+    String? refreshToken,
+  }) {
+    return SignInInfo(
+      welcomeName: welcomeName ?? this.welcomeName,
+      accessToken: accessToken ?? this.accessToken,
+      refreshToken: refreshToken ?? this.refreshToken,
+    );
   }
 }

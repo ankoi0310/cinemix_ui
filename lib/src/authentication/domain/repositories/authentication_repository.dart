@@ -11,6 +11,8 @@ abstract class AuthenticationRepository {
 
   ResultFuture<SignInInfo> signIn(SignInRequest params);
 
+  ResultFuture<String> refreshToken();
+
   VoidFuture setSignInInfo(SignInInfo signInResponse);
 
   ResultFuture<bool> isSignedIn();

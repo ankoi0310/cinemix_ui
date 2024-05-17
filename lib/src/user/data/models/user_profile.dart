@@ -6,19 +6,28 @@ class UserProfile extends Equatable {
     required this.email,
     required this.phone,
     required this.fullName,
+    required this.emailVerified,
+    required this.phoneVerified,
+    required this.role,
   });
 
-  factory UserProfile.fromMap(Map<String, dynamic> map) {
+  factory UserProfile.fromMap(DataMap map) {
     return UserProfile(
       email: map['email'] as String,
       phone: map['phone'] as String,
       fullName: map['fullName'] as String,
+      emailVerified: map['emailVerified'] as bool,
+      phoneVerified: map['phoneVerified'] as bool,
+      role: map['role'] as String,
     );
   }
 
   final String email;
   final String phone;
   final String fullName;
+  final bool emailVerified;
+  final bool phoneVerified;
+  final String role;
 
   @override
   List<Object?> get props => [email, phone, fullName];

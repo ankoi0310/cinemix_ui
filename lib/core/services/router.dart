@@ -25,6 +25,10 @@ import 'package:cinemix_ui/src/showtime/domain/entities/showtime.dart';
 import 'package:cinemix_ui/src/showtime/presentation/cubit/showtime_cubit.dart';
 import 'package:cinemix_ui/src/ticket/presentation/views/ticket_detail_screen.dart';
 import 'package:cinemix_ui/src/ticket/presentation/views/ticket_screen.dart';
+import 'package:cinemix_ui/src/user/data/models/user_profile.dart';
+import 'package:cinemix_ui/src/user/presentation/cubit/user_cubit.dart';
+import 'package:cinemix_ui/src/user/presentation/views/profile_detail_screen.dart';
+import 'package:cinemix_ui/src/user/presentation/views/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -198,9 +202,39 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         pageBuilder: (context) => const TicketDetailScreen(),
         settings: settings,
       );
+    case ProfileScreen.routeName:
+      return _pageBuilder(
+        pageBuilder: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) => sl<AuthenticationCubit>(),
+            ),
+            BlocProvider(
+              create: (_) => sl<UserCubit>(),
+            ),
+          ],
+          child: const ProfileScreen(),
+        ),
+        settings: settings,
+      );
+    case ProfileDetailScreen.routeName:
+      final arguments = settings.arguments! as DataMap;
+      final userProfile = arguments['userProfile'] as UserProfile;
+      final userCubit = arguments['userCubit'] as UserCubit;
+
+      return _pageBuilder(
+        pageBuilder: (context) => BlocProvider(
+          create: (context) => userCubit,
+          child: ProfileDetailScreen(userProfile: userProfile),
+        ),
+        settings: settings,
+      );
     default:
       return _pageBuilder(
-        pageBuilder: (context) => const PageUnderConstruction(),
+        pageBuilder: (context) => BlocProvider(
+          create: (_) => sl<AuthenticationCubit>(),
+          child: const PageUnderConstruction(),
+        ),
         settings: settings,
       );
   }

@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 
-const kAccessTokenKey = 'access_token';
+const kAccessTokenKey = 'accessToken';
+const kBaseAvatarUrl = 'https://robohash.org';
 
 class AppConstant {
   static const String appName = 'Cinemix';

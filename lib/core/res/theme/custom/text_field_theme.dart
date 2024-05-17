@@ -14,6 +14,10 @@ class KTextFormFieldTheme {
     errorStyle: KTextTheme.textTheme.bodyMedium!.copyWith(
       color: KAppColor.errorColor,
     ),
+    contentPadding: const EdgeInsets.symmetric(
+      horizontal: 16,
+      vertical: 12,
+    ),
     floatingLabelStyle: const TextStyle().copyWith(
       fontSize: KTextTheme.titleMedium,
       fontWeight: FontWeight.bold,
@@ -24,6 +28,10 @@ class KTextFormFieldTheme {
       borderSide: const BorderSide(color: Colors.grey),
     ),
     enabledBorder: const OutlineInputBorder().copyWith(
+      borderRadius: BorderRadius.circular(14),
+      borderSide: const BorderSide(color: Colors.grey),
+    ),
+    disabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
       borderSide: const BorderSide(color: Colors.grey),
     ),
