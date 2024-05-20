@@ -2,16 +2,16 @@ import 'package:cinemix_ui/src/movie/presentation/views/movie_search_screen.dart
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 
-class CustomSearchBar extends StatefulWidget {
-  const CustomSearchBar({
+class MovieSearchForm extends StatefulWidget {
+  const MovieSearchForm({
     super.key,
   });
 
   @override
-  State<CustomSearchBar> createState() => _CustomSearchBarState();
+  State<MovieSearchForm> createState() => _MovieSearchFormState();
 }
 
-class _CustomSearchBarState extends State<CustomSearchBar> {
+class _MovieSearchFormState extends State<MovieSearchForm> {
   final TextEditingController _searchController = TextEditingController();
 
   @override
