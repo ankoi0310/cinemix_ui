@@ -1,6 +1,6 @@
 import 'package:cinemix_ui/src/home/presentation/widgets/coming_soon_widget.dart';
-import 'package:cinemix_ui/src/home/presentation/widgets/custom_search_bar.dart';
 import 'package:cinemix_ui/src/home/presentation/widgets/home_header.dart';
+import 'package:cinemix_ui/src/home/presentation/widgets/movie_search_form.dart';
 import 'package:cinemix_ui/src/home/presentation/widgets/showing_widget.dart';
 import 'package:cinemix_ui/src/movie/presentation/cubit/movie_cubit.dart';
 import 'package:cinemix_ui/src/seat/presentation/cubit/seat/seat_cubit.dart';
@@ -29,7 +29,7 @@ class HomeBody extends StatelessWidget {
           children: [
             HomeHeader(),
             SizedBox(height: 12),
-            CustomSearchBar(),
+            MovieSearchForm(),
             SizedBox(height: 24),
             ShowingWidget(),
             SizedBox(height: 24),
