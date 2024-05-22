@@ -12,7 +12,7 @@ class Invoice extends BaseEntity {
     super.modifiedDate,
   });
 
-  final String code;
+  final int code;
   final int total;
   final List<Ticket> tickets;
   // final PaymentMethod paymentMethod;

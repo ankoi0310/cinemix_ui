@@ -11,21 +11,21 @@ final class BookingInitial extends BookingState {
   const BookingInitial();
 }
 
-final class BookingTicket extends BookingState {
-  const BookingTicket();
+final class CreatingInvoice extends BookingState {
+  const CreatingInvoice();
 }
 
-final class BookTicketSuccess extends BookingState {
-  const BookTicketSuccess(this.invoice);
+final class InvoiceCreated extends BookingState {
+  const InvoiceCreated(this.linkCreationResponse);
 
-  final Invoice invoice;
+  final LinkCreationResponse linkCreationResponse;
 
   @override
-  List<Object> get props => [invoice];
+  List<Object> get props => [linkCreationResponse];
 }
 
-final class BookTicketFailed extends BookingState {
-  const BookTicketFailed(this.message);
+final class CreateInvoiceFail extends BookingState {
+  const CreateInvoiceFail(this.message);
 
   final String message;
 

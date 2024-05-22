@@ -7,10 +7,11 @@ import 'package:cinemix_ui/src/authentication/presentation/views/sign_in_screen.
 import 'package:cinemix_ui/src/authentication/presentation/views/sign_up_screen.dart';
 import 'package:cinemix_ui/src/authentication/presentation/views/sign_up_success_screen.dart';
 import 'package:cinemix_ui/src/booking/presentation/cubit/booking_cubit.dart';
-import 'package:cinemix_ui/src/booking/presentation/views/booking_failed_screen.dart';
-import 'package:cinemix_ui/src/booking/presentation/views/booking_success_screen.dart';
+import 'package:cinemix_ui/src/booking/presentation/views/checkout_failed_screen.dart';
 import 'package:cinemix_ui/src/booking/presentation/views/checkout_screen.dart';
+import 'package:cinemix_ui/src/booking/presentation/views/checkout_success_screen.dart';
 import 'package:cinemix_ui/src/home/presentation/views/home_screen.dart';
+import 'package:cinemix_ui/src/invoice/presentation/cubit/invoice_cubit.dart';
 import 'package:cinemix_ui/src/movie/presentation/cubit/movie_cubit.dart';
 import 'package:cinemix_ui/src/movie/presentation/views/movie_detail_screen.dart';
 import 'package:cinemix_ui/src/movie/presentation/views/movie_search_screen.dart';
@@ -35,12 +36,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
-  print('Route: ${settings.name}');
   switch (settings.name) {
     case OnboardingScreen.routeName:
       return _pageBuilder(
-        pageBuilder: (context) => BlocProvider(
-          create: (_) => sl<OnboardingCubit>(),
+        pageBuilder: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) => sl<OnboardingCubit>(),
+            ),
+            BlocProvider(
+              create: (_) => sl<AuthenticationCubit>(),
+            )
+          ],
           child: const OnboardingScreen(),
         ),
         settings: settings,
@@ -187,18 +194,18 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         ),
         settings: settings,
       );
-    case BookingSuccessScreen.routeName:
-      final bookingCubit = settings.arguments! as BookingCubit;
+    case CheckoutSuccessScreen.routeName:
+      final orderCode = int.parse(settings.arguments! as String);
       return _pageBuilder(
         pageBuilder: (context) => BlocProvider(
-          create: (_) => bookingCubit,
-          child: const BookingSuccessScreen(),
+          create: (_) => sl<InvoiceCubit>(),
+          child: CheckoutSuccessScreen(orderCode: orderCode),
         ),
         settings: settings,
       );
-    case BookingFailedScreen.routeName:
+    case CheckoutFailedScreen.routeName:
       return _pageBuilder(
-        pageBuilder: (context) => const BookingFailedScreen(),
+        pageBuilder: (context) => const CheckoutFailedScreen(),
         settings: settings,
       );
     case TicketScreen.routeName:

@@ -36,4 +36,8 @@ class AppUtil {
       },
     );
   }
+
+  static int getCurrentUnixTimestamp() {
+    return DateTime.now().millisecondsSinceEpoch ~/ 1000;
+  }
 }

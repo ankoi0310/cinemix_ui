@@ -24,7 +24,6 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   @override
   Future<List<MovieModel>> search(MovieSearchParams params) async {
     try {
-      print(AppConstant.kBaseUrl);
       final query = params.toQueryString();
       final response = await _client.get(
         Uri.parse('${AppConstant.kBaseUrl}/movie/search?$query'),

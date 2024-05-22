@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class BookingFailedScreen extends StatelessWidget {
-  const BookingFailedScreen({super.key});
+class CheckoutFailedScreen extends StatelessWidget {
+  const CheckoutFailedScreen({super.key});
 
-  static const routeName = '/failed-payment';
+  static const routeName = '/checkout-failed';
 
   @override
   Widget build(BuildContext context) {

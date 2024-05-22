@@ -65,6 +65,7 @@ class CheckoutBody extends StatelessWidget {
           right: 0,
           child: CheckoutButtonWithTimer(
             bookingRequest: BookingRequest(
+              code: AppUtil.getCurrentUnixTimestamp(),
               showtime: showtime as ShowtimeModel,
               seats: selectedSeats as List<SeatModel>,
               total: total,

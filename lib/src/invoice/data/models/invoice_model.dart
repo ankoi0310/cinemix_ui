@@ -16,7 +16,7 @@ class InvoiceModel extends Invoice {
   factory InvoiceModel.fromMap(DataMap map) {
     return InvoiceModel(
       id: map['id'] as int,
-      code: map['code'] as String,
+      code: map['code'] as int,
       total: map['total'] as int,
       tickets: (map['tickets'] as List)
           .map((e) => TicketModel.fromMap(e as DataMap))
