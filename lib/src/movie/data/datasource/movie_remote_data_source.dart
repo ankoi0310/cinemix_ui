@@ -25,10 +25,10 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   @override
   Future<List<MovieModel>> searchMovie(MovieSearchParams params) async {
     try {
-      // 12. The application converts param to a query string
+      // 13. The application converts param to a query string
       final query = params.toQueryString();
 
-      // 13. The application sends a request to the server with the query string
+      // 14. The application sends a request to the server with the query string
       final response = await _filter.makeRequest(
         '${AppConstant.kBaseUrl}/movie/search?$query',
         'GET',
@@ -41,7 +41,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
         );
       }
 
-      // 14. The server response the result: success, statusCode, message, data
+      // 15. The server response the result: success, statusCode, message, data
       final httpResponse = HttpResponse.fromMap(
         jsonDecode(utf8.decode(response.bodyBytes)) as DataMap,
       );

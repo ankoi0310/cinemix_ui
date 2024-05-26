@@ -35,6 +35,7 @@ class MovieCubit extends Cubit<MovieState> {
   }) async {
     // 9. The application emits the SearchingMovie state
     emit(const SearchingMovie());
+    // 12. The application creates request search movie with the params
     final result = await _searchMovie(
       // 11. The application creates the MovieSearchParams object
       MovieSearchParams(
@@ -45,7 +46,7 @@ class MovieCubit extends Cubit<MovieState> {
 
     result.fold(
       (l) => emit(MovieError(l.message)),
-      // 15. The application emits the SearchMovieSuccess state with the result
+      // 16. The application emits the SearchMovieSuccess state with the result
       // is the list of movies
       (r) => emit(SearchMovieSuccess(r)),
     );
