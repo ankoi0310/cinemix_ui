@@ -28,17 +28,19 @@ class MovieSearchParams extends Equatable {
 
   DataMap toMap() {
     return {
-      'name': keyword,
+      'keyword': keyword,
       'state': state,
     };
   }
 
   String toQueryString() {
     final map = toMap();
-    return map.entries
-        .where((element) => element.value != null)
-        .map((e) =>
-            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}')
-        .join('&');
+    return map.entries.where((element) => element.value != null).map(
+      (e) {
+        final encodedKey = Uri.encodeComponent(e.key);
+        final encodedValue = Uri.encodeComponent(e.value.toString());
+        return '$encodedKey=$encodedValue';
+      },
+    ).join('&');
   }
 }
