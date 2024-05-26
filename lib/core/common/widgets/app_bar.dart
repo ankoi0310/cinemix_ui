@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class KAppBar extends StatelessWidget implements PreferredSizeWidget {
   const KAppBar({
     this.title,
+    this.centerTitle = false,
     this.hasBackButton = true,
     this.onBackPressed,
     this.hasCloseButton = false,
@@ -12,6 +13,7 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   final String? title;
+  final bool centerTitle;
   final bool hasBackButton;
   final VoidCallback? onBackPressed;
   final bool hasCloseButton;
@@ -21,13 +23,12 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: hasBackButton ? KBackButton(onPressed: onBackPressed) : null,
+      automaticallyImplyLeading: hasBackButton,
       title: Text(
         title ?? '',
-        style: Theme.of(context)
-            .textTheme
-            .headlineMedium!
-            .copyWith(fontWeight: FontWeight.bold),
+        style: Theme.of(context).textTheme.titleSmall,
       ),
+      centerTitle: centerTitle,
       actions: hasCloseButton
           ? [
               IconButton(

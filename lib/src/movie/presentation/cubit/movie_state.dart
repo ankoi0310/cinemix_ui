@@ -11,19 +11,19 @@ final class MovieInitial extends MovieState {
   const MovieInitial();
 }
 
-final class MovieLoading extends MovieState {
-  const MovieLoading();
+final class SearchingMovie extends MovieState {
+  const SearchingMovie();
 }
 
-final class MovieListLoaded extends MovieState {
-  const MovieListLoaded(this.movies);
+final class SearchMovieSuccess extends MovieState {
+  const SearchMovieSuccess(this.movies);
 
   final List<Movie> movies;
 
+  // 16. The application filters out the showing movies and coming soon movies
   List<Movie> get showingMovies => movies
       .where((movie) => movie.state == movie_enum.MovieState.showing.value)
       .toList();
-
   List<Movie> get comingSoonMovies => movies
       .where((movie) => movie.state == movie_enum.MovieState.comingSoon.value)
       .toList();

@@ -8,11 +8,7 @@ class ShowingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.lerp(
-        KAppColor.secondaryColor,
-        KAppColor.primaryColor,
-        0.05,
-      ),
+      color: KAppColor.secondaryColor,
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: const ShowingCarousel(),
     );

@@ -7,14 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetailBody extends StatelessWidget {
-  const MovieDetailBody({required this.id, super.key});
-
-  final int id;
+  const MovieDetailBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    context.read<MovieCubit>().getMovieById(id);
-
     return BlocConsumer<MovieCubit, MovieState>(
       listener: (context, state) {
         if (state is MovieError) {
@@ -32,7 +28,7 @@ class MovieDetailBody extends StatelessWidget {
           );
         }
 
-        if (state is MovieLoading) {
+        if (state is SearchingMovie) {
           return const CircleLoading();
         }
 

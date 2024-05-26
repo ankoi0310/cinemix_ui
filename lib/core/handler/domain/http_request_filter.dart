@@ -18,7 +18,7 @@ class HttpRequestFilter {
     dynamic body,
   }) async {
     late http.Response response;
-    switch (method) {
+    switch (method.toUpperCase()) {
       case 'POST':
         response = await _client.post(
           Uri.parse(url),

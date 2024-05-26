@@ -27,11 +27,11 @@ class ComingSoonWidget extends StatelessWidget {
                 );
               }
 
-              if (state is MovieLoading) {
+              if (state is SearchingMovie) {
                 return const DotsLoadingWidget();
               }
 
-              final movies = (state as MovieListLoaded).comingSoonMovies;
+              final movies = (state as SearchMovieSuccess).comingSoonMovies;
               return SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(

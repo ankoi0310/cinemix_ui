@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BarcodeWidget extends StatelessWidget {
-  const BarcodeWidget({super.key});
+  const BarcodeWidget({required this.code, super.key});
+
+  final int code;
 
   @override
   Widget build(BuildContext context) {
-    // Create a DataMatrix barcode
-    final bc = Barcode.gs128();
+    final bc = Barcode.code39();
 
-    // Generate a SVG with "Hello World!"
     final svg = bc.toSvg(
-      'Hello World!',
+      code.toString(),
       drawText: false,
     );
 
@@ -33,10 +33,10 @@ class BarcodeWidget extends StatelessWidget {
               fit: BoxFit.fitWidth,
             ),
             Text(
-              'Ticket Code: 123456',
+              'Invoice Code: $code',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.surface,
                     fontWeight: FontWeight.bold,
                   ),
             ),

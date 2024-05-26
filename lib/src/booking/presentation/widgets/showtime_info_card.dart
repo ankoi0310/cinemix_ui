@@ -13,6 +13,7 @@ class ShowtimeInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 130,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(16),
@@ -27,7 +28,10 @@ class ShowtimeInfoCard extends StatelessWidget {
                 topLeft: Radius.circular(16),
                 bottomLeft: Radius.circular(16),
               ),
-              child: Image.network(showtime.movie.posterUrl),
+              child: Image.network(
+                showtime.movie.posterUrl,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Expanded(
@@ -42,7 +46,7 @@ class ShowtimeInfoCard extends StatelessWidget {
                 children: [
                   Text(
                     showtime.movie.name,
-                    maxLines: 2,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           color: Theme.of(context).colorScheme.primary,
@@ -62,7 +66,7 @@ class ShowtimeInfoCard extends StatelessWidget {
                               showtime.movie.genres
                                   .map((e) => e.name)
                                   .join(', '),
-                              maxLines: 2,
+                              maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
@@ -96,7 +100,6 @@ class ShowtimeInfoCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
                     ],
                   ),
                 ],

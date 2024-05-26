@@ -26,14 +26,14 @@ class _ShowingCarouselState extends State<ShowingCarousel> {
           );
         }
 
-        if (state is MovieLoading) {
+        if (state is SearchingMovie) {
           return const SizedBox(
             height: 400,
             child: CircleLoading(),
           );
         }
 
-        final movies = (state as MovieListLoaded).showingMovies;
+        final movies = (state as SearchMovieSuccess).showingMovies;
         return Column(
           children: [
             CarouselSlider(
@@ -119,16 +119,15 @@ class _ShowingCarouselState extends State<ShowingCarousel> {
                         Row(
                           children: [
                             Container(
-                              width: 40,
+                              width: 50,
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 8,
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onBackground,
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
                                 ),
                                 borderRadius: BorderRadius.circular(4),
                               ),
@@ -140,7 +139,7 @@ class _ShowingCarouselState extends State<ShowingCarousel> {
                             ),
                             const SizedBox(width: 8),
                             Container(
-                              width: 40,
+                              width: 50,
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 8,
                                 vertical: 4,

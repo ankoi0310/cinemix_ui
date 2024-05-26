@@ -2,7 +2,6 @@ import 'package:cinemix_ui/core/common/widgets/floating_back_button.dart';
 import 'package:cinemix_ui/core/shared/utils/app_util.dart';
 import 'package:cinemix_ui/src/booking/data/models/booking_request.dart';
 import 'package:cinemix_ui/src/booking/presentation/widgets/checkout_button_with_timer.dart';
-import 'package:cinemix_ui/src/booking/presentation/widgets/payment_method_widget.dart';
 import 'package:cinemix_ui/src/booking/presentation/widgets/showtime_info_card.dart';
 import 'package:cinemix_ui/src/booking/presentation/widgets/theater_info.dart';
 import 'package:cinemix_ui/src/seat/data/models/seat_model.dart';
@@ -54,7 +53,6 @@ class CheckoutBody extends StatelessWidget {
                   totalPrice: total,
                 ),
                 const SizedBox(height: 32),
-                const PaymentMethodWidget(),
               ],
             ),
           ),
@@ -65,6 +63,7 @@ class CheckoutBody extends StatelessWidget {
           right: 0,
           child: CheckoutButtonWithTimer(
             bookingRequest: BookingRequest(
+              code: AppUtil.getCurrentUnixTimestamp(),
               showtime: showtime as ShowtimeModel,
               seats: selectedSeats as List<SeatModel>,
               total: total,

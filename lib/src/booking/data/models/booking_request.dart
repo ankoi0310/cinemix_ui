@@ -5,17 +5,20 @@ import 'package:equatable/equatable.dart';
 
 class BookingRequest extends Equatable {
   const BookingRequest({
+    required this.code,
     required this.showtime,
     required this.seats,
     required this.total,
   });
 
+  final int code;
   final ShowtimeModel showtime;
   final List<SeatModel> seats;
   final int total;
 
   DataMap toMap() {
     return {
+      'code': code,
       'showtime': showtime.toMap(),
       'seats': seats.map((e) => e.toMap()).toList(),
       'total': total,
@@ -23,5 +26,5 @@ class BookingRequest extends Equatable {
   }
 
   @override
-  List<Object?> get props => [showtime, seats, total];
+  List<Object?> get props => [code, showtime, seats, total];
 }

@@ -1,4 +1,8 @@
+import 'package:cinemix_ui/src/authentication/presentation/cubit/authentication_cubit.dart';
+import 'package:cinemix_ui/src/home/presentation/views/home_screen.dart';
 import 'package:cinemix_ui/src/onboarding/presentation/cubit/onboarding_cubit.dart';
+import 'package:cinemix_ui/src/onboarding/presentation/views/welcome_screen.dart';
+import 'package:cinemix_ui/src/onboarding/presentation/widgets/splash_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,37 +35,61 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocConsumer<OnboardingCubit, OnboardingState>(
-        listener: (context, state) {
-          if (state is OnboardingError) {
-            // retry
-            context.read<OnboardingCubit>().cacheFirstTime();
-          }
-
-          if (state is OnboardingStatus) {
-            if (state.isFirstTime) {
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<OnboardingCubit, OnboardingState>(
+          listener: (context, state) {
+            if (state is OnboardingError) {
+              // retry
               context.read<OnboardingCubit>().cacheFirstTime();
-            } else {
-              // Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
             }
-          }
 
-          if (state is FirstTimeCached) {
-            /*
-            TODO: Implement the logic to navigate to the next screen
-                  Navigate to the welcome screen
-            */
-            // Navigator.of(context).pushReplacementNamed(WelcomeScreen.routeName);
-          }
-        },
-        builder: (context, state) {
-          // if (state is CheckingFirstTime || state is CachingFirstTime) {
-          //   return const SplashScreen();
-          // }
+            if (state is OnboardingStatus) {
+              if (state.isFirstTime) {
+                context.read<OnboardingCubit>().cacheFirstTime();
+              } else {
+                context.read<AuthenticationCubit>().isSignedIn();
+              }
+            }
 
-          return SizedBox();
-        },
+            if (state is FirstTimeCached) {
+              Navigator.of(context)
+                  .pushReplacementNamed(WelcomeScreen.routeName);
+            }
+          },
+        ),
+        BlocListener<AuthenticationCubit, AuthenticationState>(
+          listener: (context, state) {
+            if (state is SignedInStatus) {
+              if (state.isSignedIn) {
+                Navigator.of(context)
+                    .pushReplacementNamed(HomeScreen.routeName);
+              } else {
+                Navigator.of(context)
+                    .pushReplacementNamed(WelcomeScreen.routeName);
+              }
+            }
+          },
+        ),
+      ],
+      child: Scaffold(
+        body: BlocBuilder<OnboardingCubit, OnboardingState>(
+          builder: (context, state) {
+            if (state is CheckingFirstTime || state is CachingFirstTime) {
+              return const SplashScreen();
+            }
+
+            return BlocBuilder<AuthenticationCubit, AuthenticationState>(
+              builder: (context, state) {
+                if (state is CheckingSignedIn) {
+                  return const SplashScreen();
+                }
+
+                return const SizedBox();
+              },
+            );
+          },
+        ),
       ),
     );
   }

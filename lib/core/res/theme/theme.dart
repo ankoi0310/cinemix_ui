@@ -18,7 +18,7 @@ class KAppTheme {
   static ThemeData theme = ThemeData(
     useMaterial3: true,
     primaryColor: KAppColor.primaryColor,
-    scaffoldBackgroundColor: KAppColor.backgroundColor,
+    scaffoldBackgroundColor: KAppColor.surfaceColor,
     colorScheme: ColorScheme.fromSeed(
       seedColor: KAppColor.primaryColor,
       primary: KAppColor.primaryColor,
@@ -26,10 +26,9 @@ class KAppTheme {
       secondary: KAppColor.secondaryColor,
       onSecondary: KAppColor.onSecondaryColor,
       surface: KAppColor.surfaceColor,
-      background: KAppColor.backgroundColor,
-      onBackground: KAppColor.onBackgroundColor,
       error: KAppColor.errorColor,
       onError: KAppColor.onErrorColor,
+      brightness: Brightness.dark,
     ),
     textTheme: textTheme.merge(KTextTheme.textTheme),
     appBarTheme: KAppBarTheme.appBarTheme,
