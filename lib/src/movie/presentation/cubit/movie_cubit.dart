@@ -19,7 +19,7 @@ class MovieCubit extends Cubit<MovieState> {
   final SearchMovie _searchMovie;
 
   Future<void> getMovieById(int id) async {
-    emit(const MovieLoading());
+    emit(const SearchingMovie());
     final result = await _getMovieById(id);
 
     result.fold(
@@ -28,21 +28,26 @@ class MovieCubit extends Cubit<MovieState> {
     );
   }
 
+  // 8. The application calls the searchMovie event with the keyword
   Future<void> searchMovie({
-    String? name,
+    String? keyword,
     String? state,
   }) async {
-    emit(const MovieLoading());
+    // 9. The application emits the SearchingMovie state
+    emit(const SearchingMovie());
     final result = await _searchMovie(
+      // 11. The application creates the MovieSearchParams object
       MovieSearchParams(
-        name: name,
+        keyword: keyword,
         state: state,
       ),
     );
 
     result.fold(
       (l) => emit(MovieError(l.message)),
-      (r) => emit(MovieListLoaded(r)),
+      // 15. The application emits the SearchMovieSuccess state with the result
+      // is the list of movies
+      (r) => emit(SearchMovieSuccess(r)),
     );
   }
 }

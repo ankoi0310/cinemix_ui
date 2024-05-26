@@ -19,13 +19,10 @@ import 'package:cinemix_ui/src/authentication/presentation/cubit/authentication_
 import 'package:cinemix_ui/src/booking/data/datasource/booking_remote_data_source.dart';
 import 'package:cinemix_ui/src/booking/data/repositories/booking_repository_impl.dart';
 import 'package:cinemix_ui/src/booking/domain/repositories/booking_repository.dart';
+import 'package:cinemix_ui/src/booking/domain/usecases/cancel_booking.dart';
+import 'package:cinemix_ui/src/booking/domain/usecases/complete_payment.dart';
 import 'package:cinemix_ui/src/booking/domain/usecases/create_booking.dart';
 import 'package:cinemix_ui/src/booking/presentation/cubit/booking_cubit.dart';
-import 'package:cinemix_ui/src/invoice/data/datasource/invoice_remote_data_source.dart';
-import 'package:cinemix_ui/src/invoice/data/repositories/invoice_repository_impl.dart';
-import 'package:cinemix_ui/src/invoice/domain/repositories/invoice_repository.dart';
-import 'package:cinemix_ui/src/invoice/domain/usecases/get_invoice_by_id.dart';
-import 'package:cinemix_ui/src/invoice/presentation/cubit/invoice_cubit.dart';
 import 'package:cinemix_ui/src/movie/data/datasource/movie_remote_data_source.dart';
 import 'package:cinemix_ui/src/movie/data/repositories/movie_repository_impl.dart';
 import 'package:cinemix_ui/src/movie/domain/repositories/movie_repository.dart';
@@ -141,13 +138,10 @@ Future<void> init() async {
       ),
     )
     ..registerFactory(
-      () => InvoiceCubit(
-        getInvoiceById: sl(),
-      ),
-    )
-    ..registerFactory(
       () => BookingCubit(
         createBooking: sl(),
+        cancelBooking: sl(),
+        completePayment: sl(),
       ),
     )
 
@@ -182,8 +176,9 @@ Future<void> init() async {
     ..registerLazySingleton(() => GetUserProfile(sl()))
     ..registerLazySingleton(() => UpdateUserProfile(sl()))
     ..registerLazySingleton(() => GetBookingHistory(sl()))
-    ..registerLazySingleton(() => GetInvoiceById(sl()))
     ..registerLazySingleton(() => CreateBooking(sl()))
+    ..registerLazySingleton(() => CancelBooking(sl()))
+    ..registerLazySingleton(() => CompletePayment(sl()))
 
     // Repository
     ..registerLazySingleton<OnboardingRepository>(
@@ -207,9 +202,6 @@ Future<void> init() async {
     ..registerLazySingleton<UserRepository>(
       () => UserRepositoryImpl(sl()),
     )
-    ..registerLazySingleton<InvoiceRepository>(
-      () => InvoiceRepositoryImpl(sl()),
-    )
     ..registerLazySingleton<BookingRepository>(
       () => BookingRepositoryImpl(sl()),
     )
@@ -228,10 +220,10 @@ Future<void> init() async {
       () => AuthenticationLocalDataSourceImpl(sl()),
     )
     ..registerLazySingleton<MovieRemoteDataSource>(
-      () => MovieRemoteDataSourceImpl(client: sl()),
+      () => MovieRemoteDataSourceImpl(filter: sl()),
     )
     ..registerLazySingleton<ShowtimeRemoteDataSource>(
-      () => ShowtimeRemoteDataSourceImpl(client: sl()),
+      () => ShowtimeRemoteDataSourceImpl(filter: sl()),
     )
     ..registerLazySingleton<ShowtimeLocalDataSource>(
       () => ShowtimeLocalDataSourceImpl(sl()),
@@ -244,12 +236,6 @@ Future<void> init() async {
     )
     ..registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(
-        localDataSource: sl(),
-        filter: sl(),
-      ),
-    )
-    ..registerLazySingleton<InvoiceRemoteDataSource>(
-      () => InvoiceRemoteDataSourceImpl(
         localDataSource: sl(),
         filter: sl(),
       ),

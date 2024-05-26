@@ -13,7 +13,12 @@ class KBackButton extends StatelessWidget {
         IconsaxPlusLinear.arrow_circle_left,
         color: Colors.white,
       ),
-      onPressed: onPressed ?? () => Navigator.of(context).pop(),
+      onPressed: onPressed ??
+          () {
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            }
+          },
     );
   }
 }

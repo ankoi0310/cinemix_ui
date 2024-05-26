@@ -6,7 +6,8 @@ class Invoice extends BaseEntity {
     required this.code,
     required this.total,
     required this.tickets,
-    // required this.paymentMethod,
+    required this.paid,
+    required this.canceled,
     super.id,
     super.createdDate,
     super.modifiedDate,
@@ -15,7 +16,8 @@ class Invoice extends BaseEntity {
   final int code;
   final int total;
   final List<Ticket> tickets;
-  // final PaymentMethod paymentMethod;
+  final bool paid;
+  final bool canceled;
 
   @override
   List<Object?> get props => [
@@ -23,6 +25,7 @@ class Invoice extends BaseEntity {
         code,
         total,
         tickets,
-        // paymentMethod,
+        paid,
+        canceled,
       ];
 }

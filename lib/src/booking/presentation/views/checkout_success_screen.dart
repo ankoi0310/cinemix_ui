@@ -1,18 +1,32 @@
+import 'package:cinemix_ui/core/common/widgets/app_bar.dart';
 import 'package:cinemix_ui/src/booking/presentation/widgets'
-    '/booking_success_body.dart';
+    '/checkout_success_body.dart';
+import 'package:cinemix_ui/src/home/presentation/views/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutSuccessScreen extends StatelessWidget {
-  const CheckoutSuccessScreen({required this.orderCode, super.key});
+  const CheckoutSuccessScreen({super.key});
 
   static const routeName = '/checkout-success';
 
-  final int orderCode;
-
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: BookingSuccessBody(),
+    return SafeArea(
+      child: Scaffold(
+        appBar: KAppBar(
+          title: 'Chi tiết giao dịch',
+          centerTitle: true,
+          hasBackButton: false,
+          hasCloseButton: true,
+          onClosePressed: () {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              HomeScreen.routeName,
+              (route) => false,
+            );
+          },
+        ),
+        body: const CheckoutSuccessBody(),
+      ),
     );
   }
 }

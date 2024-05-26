@@ -1,3 +1,6 @@
+import 'package:cinemix_ui/core/common/widgets/app_bar.dart';
+import 'package:cinemix_ui/src/booking/presentation/widgets/checkout_failed_body.dart';
+import 'package:cinemix_ui/src/home/presentation/views/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutFailedScreen extends StatelessWidget {
@@ -7,26 +10,21 @@ class CheckoutFailedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(
-              Icons.error,
-              color: Colors.red,
-              size: 64,
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Thanh toán thất bại',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: KAppBar(
+          title: 'Chi tiết giao dịch',
+          centerTitle: true,
+          hasBackButton: false,
+          hasCloseButton: true,
+          onClosePressed: () {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              HomeScreen.routeName,
+              (route) => false,
+            );
+          },
         ),
+        body: const CheckoutFailedBody(),
       ),
     );
   }

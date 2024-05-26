@@ -11,7 +11,8 @@ import 'package:cinemix_ui/src/booking/presentation/views/checkout_failed_screen
 import 'package:cinemix_ui/src/booking/presentation/views/checkout_screen.dart';
 import 'package:cinemix_ui/src/booking/presentation/views/checkout_success_screen.dart';
 import 'package:cinemix_ui/src/home/presentation/views/home_screen.dart';
-import 'package:cinemix_ui/src/invoice/presentation/cubit/invoice_cubit.dart';
+import 'package:cinemix_ui/src/invoice/domain/entities/invoice.dart';
+import 'package:cinemix_ui/src/invoice/presentation/views/invoice_detail_screen.dart';
 import 'package:cinemix_ui/src/movie/presentation/cubit/movie_cubit.dart';
 import 'package:cinemix_ui/src/movie/presentation/views/movie_detail_screen.dart';
 import 'package:cinemix_ui/src/movie/presentation/views/movie_search_screen.dart';
@@ -93,40 +94,43 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         pageBuilder: (context) => MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (_) => sl<MovieCubit>(),
+              create: (_) => sl<AuthenticationCubit>()..getSignInInfo(),
             ),
             BlocProvider(
-              create: (_) => sl<ShowtimeCubit>(),
+              create: (_) => sl<MovieCubit>()..searchMovie(),
             ),
             BlocProvider(
-              create: (_) => sl<SeatOptionCubit>(),
+              create: (_) => sl<ShowtimeCubit>()..clearCachedShowtime(),
             ),
             BlocProvider(
-              create: (_) => sl<SeatCubit>(),
+              create: (_) => sl<SeatOptionCubit>()..clearCachedOptions(),
+            ),
+            BlocProvider(
+              create: (_) => sl<SeatCubit>()..clearCachedSeats(),
             ),
           ],
           child: const HomeScreen(),
         ),
         settings: settings,
       );
+    // 7. The application navigates to the movie search screen with the keyword
     case MovieSearchScreen.routeName:
+      final keyword = settings.arguments as String?;
       return _pageBuilder(
-        pageBuilder: (context) => MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (_) => sl<MovieCubit>(),
-            ),
-          ],
-          child: MovieSearchScreen(keyword: settings.arguments as String?),
+        pageBuilder: (context) => BlocProvider(
+          // 8. The application calls the searchMovie event with the keyword
+          create: (_) => sl<MovieCubit>()..searchMovie(keyword: keyword),
+          child: const MovieSearchScreen(),
         ),
         settings: settings,
       );
     case MovieDetailScreen.routeName:
+      final movieId = settings.arguments! as int;
       return _pageBuilder(
         pageBuilder: (context) => MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (_) => sl<MovieCubit>(),
+              create: (_) => sl<MovieCubit>()..getMovieById(movieId),
             ),
             BlocProvider(
               create: (_) => sl<ShowtimeCubit>(),
@@ -135,7 +139,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
               create: (_) => sl<SeatOptionCubit>(),
             ),
           ],
-          child: MovieDetailScreen(movieId: settings.arguments! as int),
+          child: const MovieDetailScreen(),
         ),
         settings: settings,
       );
@@ -195,17 +199,21 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         settings: settings,
       );
     case CheckoutSuccessScreen.routeName:
-      final orderCode = int.parse(settings.arguments! as String);
+      // final orderCode = int.parse(settings.arguments! as String);
       return _pageBuilder(
         pageBuilder: (context) => BlocProvider(
-          create: (_) => sl<InvoiceCubit>(),
-          child: CheckoutSuccessScreen(orderCode: orderCode),
+          create: (_) => sl<BookingCubit>()..cancelBooking(1716402385),
+          child: const CheckoutSuccessScreen(),
         ),
         settings: settings,
       );
     case CheckoutFailedScreen.routeName:
+      // final orderCode = int.parse(settings.arguments! as String);
       return _pageBuilder(
-        pageBuilder: (context) => const CheckoutFailedScreen(),
+        pageBuilder: (context) => BlocProvider(
+          create: (_) => sl<BookingCubit>()..completePayment(1716402498),
+          child: const CheckoutFailedScreen(),
+        ),
         settings: settings,
       );
     case TicketScreen.routeName:
@@ -248,9 +256,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case BookingHistoryScreen.routeName:
       return _pageBuilder(
         pageBuilder: (context) => BlocProvider(
-          create: (_) => sl<UserCubit>(),
+          create: (_) => sl<UserCubit>()..getBookingHistory(),
           child: const BookingHistoryScreen(),
         ),
+        settings: settings,
+      );
+    case InvoiceDetailScreen.routeName:
+      final invoice = settings.arguments! as Invoice;
+      return _pageBuilder(
+        pageBuilder: (context) => InvoiceDetailScreen(invoice: invoice),
         settings: settings,
       );
     default:

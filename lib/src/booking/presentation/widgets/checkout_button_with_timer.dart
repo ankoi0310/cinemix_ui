@@ -37,11 +37,7 @@ class CheckoutButtonWithTimer extends StatelessWidget {
       builder: (context, state) {
         return Container(
           height: 144,
-          padding: const EdgeInsets.only(
-            top: 16,
-            left: 16,
-            right: 16,
-          ),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
             border: Border(

@@ -44,7 +44,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           blurRadius: 10,
         ),
       ],
-      backgroundColor: KAppColor.backgroundColor,
+      backgroundColor: KAppColor.surfaceColor,
       items: bottomNavItems.asMap().entries.map((entry) {
         final index = entry.key;
         final item = entry.value;

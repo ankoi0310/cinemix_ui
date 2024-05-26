@@ -15,16 +15,16 @@ class SearchMovie extends UsecaseWithParams<List<Movie>, MovieSearchParams> {
 
 class MovieSearchParams {
   const MovieSearchParams({
-    this.name,
+    this.keyword,
     this.state,
   });
 
-  final String? name;
+  final String? keyword;
   final String? state;
 
   DataMap toMap() {
     return {
-      'name': name,
+      'name': keyword,
       'state': state,
     };
   }

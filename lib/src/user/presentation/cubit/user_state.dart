@@ -60,12 +60,12 @@ final class LoadingBookingHistory extends UserState {
 }
 
 final class BookingHistoryLoaded extends UserState {
-  const BookingHistoryLoaded(this.bookingHistory);
+  const BookingHistoryLoaded(this.invoices);
 
-  final List<Invoice> bookingHistory;
+  final List<Invoice> invoices;
 
   @override
-  List<Object> get props => [bookingHistory];
+  List<Object> get props => [invoices];
 }
 
 final class GetBookingHistoryFailed extends UserState {

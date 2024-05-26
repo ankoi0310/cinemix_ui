@@ -15,7 +15,7 @@ class MovieSearchGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (movies.isEmpty) {
       return const Center(
-        child: Text('Không tìm thấy phim'),
+        child: Text('Không tìm thấy kết quả phù hợp!'),
       );
     }
 

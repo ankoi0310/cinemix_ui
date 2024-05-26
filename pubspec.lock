@@ -97,14 +97,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.1.7"
-  board_datetime_picker:
-    dependency: "direct main"
-    description:
-      name: board_datetime_picker
-      sha256: "90e578ac808500c540ad49e74d910d7179158a07f7b70fd1a60c124dc1740a2f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.6.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -568,14 +560,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.19.0"
-  intl_phone_field:
-    dependency: "direct main"
-    description:
-      name: intl_phone_field
-      sha256: "73819d3dfcb68d2c85663606f6842597c3ddf6688ac777f051b17814fe767bbf"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.2.0"
   io:
     dependency: transitive
     description:
@@ -1053,14 +1037,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  swipe_to:
-    dependency: "direct main"
-    description:
-      name: swipe_to
-      sha256: "58f61031803ece9b0efe09006809e78904c640c6d42d48715d1d1c3c28f8499a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.6"
   term_glyph:
     dependency: transitive
     description:

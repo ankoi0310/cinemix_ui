@@ -32,3 +32,47 @@ final class CreateInvoiceFail extends BookingState {
   @override
   List<Object> get props => [message];
 }
+
+final class CancellingBooking extends BookingState {
+  const CancellingBooking();
+}
+
+final class BookingCancelled extends BookingState {
+  const BookingCancelled(this.invoice);
+
+  final Invoice invoice;
+
+  @override
+  List<Object> get props => [invoice];
+}
+
+final class CancelBookingFail extends BookingState {
+  const CancelBookingFail(this.message);
+
+  final String message;
+
+  @override
+  List<Object> get props => [message];
+}
+
+final class CompletingPayment extends BookingState {
+  const CompletingPayment();
+}
+
+final class PaymentCompleted extends BookingState {
+  const PaymentCompleted(this.invoice);
+
+  final Invoice invoice;
+
+  @override
+  List<Object> get props => [invoice];
+}
+
+final class CompletePaymentFail extends BookingState {
+  const CompletePaymentFail(this.message);
+
+  final String message;
+
+  @override
+  List<Object> get props => [message];
+}
