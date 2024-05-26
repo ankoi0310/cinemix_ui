@@ -35,12 +35,10 @@ class MovieSearchParams extends Equatable {
 
   String toQueryString() {
     final map = toMap();
-    return map.entries.where((element) => element.value != null).map(
-      (e) {
-        final encodedKey = Uri.encodeComponent(e.key);
-        final encodedValue = Uri.encodeComponent(e.value.toString());
-        return '$encodedKey=$encodedValue';
-      },
-    ).join('&');
+    return map.entries.where((element) => element.value != null).map((e) {
+      final encodedKey = Uri.encodeComponent(e.key);
+      final encodedValue = Uri.encodeComponent(e.value.toString());
+      return '$encodedKey=$encodedValue';
+    }).join('&');
   }
 }
