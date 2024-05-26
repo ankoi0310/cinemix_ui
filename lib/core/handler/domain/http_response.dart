@@ -21,4 +21,13 @@ class HttpResponse {
   final int statusCode;
   final String message;
   final dynamic data;
+
+  DataMap toMap() {
+    return {
+      'success': success,
+      'statusCode': statusCode,
+      'message': message,
+      'data': data,
+    };
+  }
 }

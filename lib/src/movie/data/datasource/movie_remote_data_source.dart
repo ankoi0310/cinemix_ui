@@ -7,6 +7,7 @@ import 'package:cinemix_ui/core/shared/constants/app_constant.dart';
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
 import 'package:cinemix_ui/src/movie/data/models/movie_model.dart';
 import 'package:cinemix_ui/src/movie/domain/usecases/search_movie.dart';
+import 'package:flutter/material.dart';
 
 abstract class MovieRemoteDataSource {
   const MovieRemoteDataSource();
@@ -51,7 +52,8 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
           .toList();
     } on ServerException {
       rethrow;
-    } catch (e) {
+    } catch (e, s) {
+      debugPrintStack(stackTrace: s);
       throw ServerException(
         message: e.toString(),
         statusCode: 500,

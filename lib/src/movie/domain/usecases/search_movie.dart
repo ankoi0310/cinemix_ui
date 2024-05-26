@@ -2,6 +2,7 @@ import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
 import 'package:cinemix_ui/core/usecases/usecases.dart';
 import 'package:cinemix_ui/src/movie/domain/entities/movie.dart';
 import 'package:cinemix_ui/src/movie/domain/repositories/movie_repository.dart';
+import 'package:equatable/equatable.dart';
 
 class SearchMovie extends UsecaseWithParams<List<Movie>, MovieSearchParams> {
   const SearchMovie(this._repository);
@@ -13,7 +14,7 @@ class SearchMovie extends UsecaseWithParams<List<Movie>, MovieSearchParams> {
       _repository.searchMovie(params);
 }
 
-class MovieSearchParams {
+class MovieSearchParams extends Equatable {
   const MovieSearchParams({
     this.keyword,
     this.state,
@@ -21,6 +22,9 @@ class MovieSearchParams {
 
   final String? keyword;
   final String? state;
+
+  @override
+  List<Object?> get props => [keyword, state];
 
   DataMap toMap() {
     return {
