@@ -23,26 +23,6 @@ class Movie extends BaseEntity {
     super.modifiedDate,
   });
 
-  Movie.empty(int? id)
-      : this(
-          id: id ?? 0,
-          name: '',
-          description: '',
-          directors: '',
-          actors: '',
-          genres: const [Genre.empty()],
-          releasedDate: DateTime.now(),
-          duration: 0,
-          country: '',
-          language: '',
-          localizations: '',
-          format: '',
-          rating: '',
-          posterUrl: '',
-          trailerUrl: '',
-          state: '',
-        );
-
   final String name;
   final String description;
   final String directors;

@@ -7,6 +7,7 @@ import 'package:cinemix_ui/core/shared/constants/app_constant.dart';
 import 'package:cinemix_ui/core/shared/utils/typedefs.dart';
 import 'package:cinemix_ui/src/movie/data/models/movie_model.dart';
 import 'package:cinemix_ui/src/movie/domain/usecases/search_movie.dart';
+import 'package:flutter/material.dart';
 
 abstract class MovieRemoteDataSource {
   const MovieRemoteDataSource();
@@ -25,10 +26,10 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   @override
   Future<List<MovieModel>> searchMovie(MovieSearchParams params) async {
     try {
-      // 12. The application converts param to a query string
+      // 13. The application converts param to a query string
       final query = params.toQueryString();
 
-      // 13. The application sends a request to the server with the query string
+      // 14. The application sends a request to the server with the query string
       final response = await _filter.makeRequest(
         '${AppConstant.kBaseUrl}/movie/search?$query',
         'GET',
@@ -41,7 +42,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
         );
       }
 
-      // 14. The server response the result: success, statusCode, message, data
+      // 15. The server response the result: success, statusCode, message, data
       final httpResponse = HttpResponse.fromMap(
         jsonDecode(utf8.decode(response.bodyBytes)) as DataMap,
       );
@@ -51,7 +52,8 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
           .toList();
     } on ServerException {
       rethrow;
-    } catch (e) {
+    } catch (e, s) {
+      debugPrintStack(stackTrace: s);
       throw ServerException(
         message: e.toString(),
         statusCode: 500,

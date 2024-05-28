@@ -26,6 +26,48 @@ class MovieModel extends Movie {
     super.modifiedDate,
   });
 
+  MovieModel.demo()
+      : this(
+          id: 1,
+          name: 'Lật mặt 7: Một điều ước',
+          description: 'Một câu chuyện lần đầu được kể bằng tất cả tình yêu, '
+              'và từ tất cả những hồi ức xao xuyến nhất của đấng sinh thành.',
+          directors: 'Lý Hải',
+          actors: 'Thanh Hiền, Trương Minh Cường, Đinh Y Nhung, Quách Ngọc '
+              'Tuyên, Trâm Anh, Trần Kim Hải',
+          genres: [
+            GenreModel(
+              id: 4,
+              name: 'Phim hài',
+              description: 'Phim có mục đích chính là làm cho khán giả cười '
+                  'thông qua các tình huống hài hước và lời nói hóm hỉnh',
+              createdDate: '26/05/2024 18:09:33'.toDateTime(),
+              modifiedDate: '26/05/2024 18:09:33'.toDateTime(),
+            ),
+            GenreModel(
+              id: 25,
+              name: 'Tình cảm',
+              description: 'Tập trung vào các mối quan hệ tình cảm giữa các '
+                  'nhân vật chính, thường có yếu tố lãng mạn và tình yêu.',
+              createdDate: '26/05/2024 18:09:33'.toDateTime(),
+              modifiedDate: '26/05/2024 18:09:33'.toDateTime(),
+            ),
+          ],
+          releasedDate: '26/04/2024'.toDateTime(format: 'dd/MM/yyyy'),
+          duration: 138,
+          country: '',
+          language: '',
+          localizations: '',
+          format: '2D',
+          rating: 'K',
+          posterUrl:
+              'https://firebasestorage.googleapis.com/v0/b/cinemix-7dffb.appspot.com/o/images%2Fmovies%2Fposter-lat-mat-7.jpg?alt=media&token=2949e81e-e5d5-4851-8440-53eac7c98780',
+          trailerUrl: '',
+          state: 'SHOWING',
+          createdDate: '26/05/2024 18:09:34'.toDateTime(),
+          modifiedDate: '26/05/2024 18:09:34'.toDateTime(),
+        );
+
   factory MovieModel.fromMap(DataMap map) {
     return MovieModel(
       id: map['id'] as int,
@@ -71,7 +113,7 @@ class MovieModel extends Movie {
       'trailerUrl': trailerUrl,
       'state': state,
       'createdDate': createdDate?.format(),
-      'modifiedDate': modifiedDate?.format(),
+      'modifiedDate': modifiedDate?.format()
     };
   }
 

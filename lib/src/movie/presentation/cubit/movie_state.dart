@@ -20,7 +20,7 @@ final class SearchMovieSuccess extends MovieState {
 
   final List<Movie> movies;
 
-  // 16. The application filters out the showing movies and coming soon movies
+  // 17. The application filters out the showing movies and coming soon movies
   List<Movie> get showingMovies => movies
       .where((movie) => movie.state == movie_enum.MovieState.showing.value)
       .toList();

@@ -130,7 +130,6 @@ class _MovieSearchBodyState extends State<MovieSearchBody>
                           }
 
                           if (state is SearchMovieSuccess) {
-                            // 16. The application displays the coming soon movies
                             return MovieSearchGridView(
                               movies: state.comingSoonMovies,
                             );
