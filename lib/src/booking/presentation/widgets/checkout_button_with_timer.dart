@@ -36,7 +36,6 @@ class CheckoutButtonWithTimer extends StatelessWidget {
       },
       builder: (context, state) {
         return Container(
-          height: 144,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
@@ -51,10 +50,6 @@ class CheckoutButtonWithTimer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(12),
@@ -62,12 +57,14 @@ class CheckoutButtonWithTimer extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Hoàn tất thanh toán của bạn trong',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleSmall!
-                          .copyWith(fontWeight: FontWeight.w500),
+                    Flexible(
+                      child: Text(
+                        'Hoàn tất thanh toán của bạn trong: ',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall!
+                            .copyWith(fontWeight: FontWeight.w500),
+                      ),
                     ),
                     TimerCountdown(
                       format: CountDownTimerFormat.minutesSeconds,

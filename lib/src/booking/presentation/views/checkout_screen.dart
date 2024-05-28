@@ -1,3 +1,4 @@
+import 'package:cinemix_ui/core/common/widgets/app_bar.dart';
 import 'package:cinemix_ui/src/booking/presentation/widgets/checkout_body.dart';
 import 'package:cinemix_ui/src/seat/domain/entities/seat.dart';
 import 'package:cinemix_ui/src/showtime/domain/entities/showtime.dart';
@@ -21,6 +22,8 @@ class CheckoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: const KAppBar(title: 'Thanh toán'),
+        resizeToAvoidBottomInset: false,
         body: CheckoutBody(
           showtime: showtime,
           selectedSeats: selectedSeats,

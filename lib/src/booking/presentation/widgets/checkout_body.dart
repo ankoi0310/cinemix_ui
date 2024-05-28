@@ -1,4 +1,3 @@
-import 'package:cinemix_ui/core/common/widgets/floating_back_button.dart';
 import 'package:cinemix_ui/core/shared/utils/app_util.dart';
 import 'package:cinemix_ui/src/booking/data/models/booking_request.dart';
 import 'package:cinemix_ui/src/booking/presentation/widgets/checkout_button_with_timer.dart';
@@ -24,23 +23,18 @@ class CheckoutBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     final total = AppUtil.getTotalPrice(
       selectedOptions: selectedOptions,
       ticketPrices: showtime.room.theater!.ticketPrices,
     );
 
-    return Stack(
-      children: [
-        Positioned.fill(
-          bottom: 144,
-          left: 16,
-          right: 16,
-          child: SingleChildScrollView(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: size.height * 0.12),
                 ShowtimeInfoCard(showtime: showtime),
                 const SizedBox(height: 32),
                 TheaterInfo(
@@ -56,12 +50,8 @@ class CheckoutBody extends StatelessWidget {
               ],
             ),
           ),
-        ),
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: CheckoutButtonWithTimer(
+          const Spacer(),
+          CheckoutButtonWithTimer(
             bookingRequest: BookingRequest(
               code: AppUtil.getCurrentUnixTimestamp(),
               showtime: showtime as ShowtimeModel,
@@ -69,9 +59,8 @@ class CheckoutBody extends StatelessWidget {
               total: total,
             ),
           ),
-        ),
-        const FloatingBackButton(),
-      ],
+        ],
+      ),
     );
   }
 }
